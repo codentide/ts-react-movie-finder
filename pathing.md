@@ -11,8 +11,8 @@
 #### Producto Mínimo Viable
 
 - **Listado inicial de Películas**
-  - [ ] Crear datos simulados de películas (mock)
-  - [ ] Listar películas
+  - [x] Crear datos simulados de películas (mock)
+  - [x] Listar películas
 - **Integración de la API**
   - [ ] Conectar aplicación con **TMDB**
   - [ ] Absorber data de la API
