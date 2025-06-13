@@ -23,7 +23,7 @@ export const Hero = ({
 
   useEffect(() => {
     if (!featuredMovie) return
-    if (featuredMovie.backdrop === null) return
+    // if (featuredMovie.backdrop === null) return
     if (featuredMovie.backdrop === backdrop) return
 
     setIsActive(false)
