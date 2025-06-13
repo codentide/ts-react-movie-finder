@@ -1,0 +1,30 @@
+.sort-list {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  width: fit-content;
+  // padding: 0.4rem;
+  // border-radius: 0.2rem;
+
+  // background-color: hsl(216, 24%, 8%, 1);
+
+  .sort-button {
+    padding: 0.2rem 0.4rem 0.15rem;
+    border-radius: 0.2rem;
+
+    border: none;
+
+    font-family: inherit;
+    text-transform: lowercase;
+
+    background-color: hsl(216, 16%, 8%, 1);
+    cursor: pointer;
+
+    transition: background-color 0.4s ease;
+
+    &.active {
+      background-color: hsl(216, 100%, 64%, 1);
+    }
+  }
+}

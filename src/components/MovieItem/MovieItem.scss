@@ -12,6 +12,8 @@
 
     object-fit: cover;
     overflow: hidden;
+
+    user-select: none;
   }
 
   &__info {
@@ -23,6 +25,7 @@
 
     h3 {
       font-size: 1rem;
+      text-transform: capitalize;
 
       color: hsl(0, 0%, 100%, 1);
     }

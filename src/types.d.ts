@@ -1,9 +1,11 @@
+import type { SORTS } from './constants'
+
 interface Movie {
   id: number
   title: string
   releaseDate: string
   poster: string
-  backdrop?: string
+  backdrop: string | null
 }
 
 // API
@@ -23,3 +25,7 @@ interface MovieFromAPI {
   vote_average: number
   vote_count: number
 }
+
+//
+
+type SortValue = (typeof SORTS)[keyof typeof SORTS]

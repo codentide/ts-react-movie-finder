@@ -8,7 +8,29 @@
   padding: 4rem 16%;
 
   list-style: none;
+
   &__item {
     width: 100%;
+  }
+
+  .message_no-movies {
+    margin: 0 auto;
+
+    font-size: 2rem;
+    font-weight: 600;
+
+    color: hsl(216, 100%, 98%, 0.2);
+
+    opacity: 0;
+    animation: appear 0.8s 1s ease forwards;
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

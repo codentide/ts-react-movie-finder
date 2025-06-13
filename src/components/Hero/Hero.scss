@@ -2,13 +2,12 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  // align-items: center;
   gap: 1rem;
 
   width: 100%;
   padding: 4rem 16%;
 
-  background-color: hsl(216, 24%, 12%, 0.8);
+  background-color: hsl(216, 40%, 16%, 0.8);
   overflow: hidden;
 
   &__title-box {
@@ -29,38 +28,6 @@
     }
   }
 
-  &__input-box {
-    display: flex;
-    flex-direction: column;
-
-    input[type='text'] {
-      width: 400px;
-      height: auto;
-
-      padding: 0.6rem 0.8rem;
-      border-radius: 0.32rem;
-      border: none;
-      outline-color: transparent;
-
-      font-family: inherit;
-      font-size: 1rem;
-
-      color: hsl(216, 80%, 96%, 0.6);
-      background-color: hsl(216, 16%, 8%, 1);
-
-      transition: outline 0.4s ease;
-
-      &:focus {
-        outline: 1px solid hsl(216, 100%, 64%, 0.2);
-        caret-color: hsl(216, 100%, 64%, 0.6);
-      }
-
-      &::placeholder {
-        color: hsl(216, 80%, 96%, 0.2);
-      }
-    }
-  }
-
   &__backdrop {
     position: absolute;
     z-index: -10;
@@ -71,8 +38,9 @@
 
     object-fit: cover;
     object-position: center;
+    transform: scale(1.2);
 
-    filter: grayscale(50%) blur(0.4rem) brightness(1.2);
+    filter: grayscale(50%) blur(0.3rem) brightness(1.2);
 
     opacity: 0;
 
@@ -101,5 +69,36 @@
   }
   to {
     opacity: 0;
+  }
+}
+
+@media (width <= 768px) {
+  .hero__title-box {
+    h2 {
+      font-size: 1.8rem;
+      color: hsl(216, 100%, 64%, 1);
+    }
+
+    p {
+      font-size: 1rem;
+      color: hsl(216, 80%, 96%, 0.4);
+    }
+  }
+}
+
+@media (width <= 480px) {
+  .hero__title-box {
+    align-items: center;
+    text-align: center;
+
+    h2 {
+      font-size: calc(1rem + 2vw);
+      color: hsl(216, 100%, 64%, 1);
+    }
+
+    p {
+      font-size: 0.8rem;
+      color: hsl(216, 80%, 96%, 0.4);
+    }
   }
 }

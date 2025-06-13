@@ -1,3 +1,5 @@
+import type { Movie, MovieFromAPI } from '../types'
+
 const posterUrl = import.meta.env.VITE_IMG_BASE_URL
 
 export function mapMovies(unmappedMovies: MovieFromAPI[]): Movie[] {
@@ -7,12 +9,14 @@ export function mapMovies(unmappedMovies: MovieFromAPI[]): Movie[] {
         ? posterUrl + poster_path
         : `https://placehold.co/300x500/1a2637/3b567d?font=roboto&text=${title}`
 
+      const backdrop = backdrop_path ? posterUrl + backdrop_path : null
+
       return {
         id,
-        title,
+        title: title.toLocaleLowerCase(),
         releaseDate: release_date,
         poster,
-        backdrop: posterUrl + backdrop_path,
+        backdrop,
       }
     }
   )

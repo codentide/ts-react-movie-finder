@@ -20,8 +20,8 @@
 - **Búsqueda de Películas**
   - [x] Buscar películas por medio de una barra de búsqueda
 - **Filtrado de Películas**
-  - [ ] Filtrar películas por género
-  - [ ] Filtrar películas por año
+  - [x] Filtrar películas por titulo (AZ | ZA)
+  - [x] Filtrar películas por fecha de lanzamiento (Ascendent, Descendent)
 - **Visualización de Detalles Básicos**
   - [ ] Al hacer clic en una película, mostrar una modal o un pequeño panel con información básica como el título, la descripción, la fecha de lanzamiento y la puntuación.
 

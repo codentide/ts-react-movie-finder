@@ -18,7 +18,11 @@ export const MovieList: React.FunctionComponent<Props> = ({ movies }) => {
 
   return (
     <ul className='movie-list'>
-      {hasMovies ? renderMovies() : <span>No hay nada</span>}
+      {hasMovies ? (
+        renderMovies()
+      ) : (
+        <span className='message_no-movies'>Theres is no movies...</span>
+      )}
     </ul>
   )
 }

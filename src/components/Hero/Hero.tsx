@@ -1,43 +1,45 @@
 import { useEffect, useState } from 'react'
+import { SortList } from '../SortList/SortList'
+import type { Movie, SortValue } from '../../types'
 import './Hero.scss'
+import { SearchInput } from '../SearchInput/SearchInput'
 
 interface Props {
   children?: React.ReactNode
-  onQueryChange: (value: string) => void
   featuredMovie?: Movie
-  // backdropPath: string | undefined
+  currentSort: SortValue
+  onQueryChange: (value: string) => void
+  onSortChange: (sortValue: SortValue) => void
 }
 
-export const Hero = ({ onQueryChange, featuredMovie }: Props) => {
-  const [searchValue, setSearchValue] = useState<string>('')
-  const [backdrop, setBackdrop] = useState<string | undefined>('')
-  const [isActive, setIsActive] = useState<boolean>(false)
+export const Hero = ({
+  featuredMovie,
+  currentSort,
+  onQueryChange,
+  onSortChange,
+}: Props) => {
+  const [backdrop, setBackdrop] = useState<string>('')
+  const [isActive, setIsActive] = useState<boolean>(true)
 
   useEffect(() => {
     if (!featuredMovie) return
+    if (featuredMovie.backdrop === null) return
+    if (featuredMovie.backdrop === backdrop) return
 
     setIsActive(false)
-    // setBackdrop(undefined)
     const debouncer = setTimeout(() => {
-      setBackdrop(featuredMovie.backdrop)
+      setBackdrop(featuredMovie.backdrop as string)
       setIsActive(true)
     }, 1000)
 
     return () => {
       clearTimeout(debouncer)
     }
-  }, [featuredMovie])
-
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const input = event.target
-    const { value } = input
-    setSearchValue(value)
-    onQueryChange(value)
-  }
+  }, [featuredMovie, backdrop])
 
   function handleImageError(event: React.SyntheticEvent<HTMLImageElement>) {
-    event.currentTarget.src =
-      'https://image.tmdb.org/t/p/original/mDfJG3LC3Dqb67AZ52x3Z0jU0uB.jpg'
+    const imageWrapper = event.currentTarget
+    imageWrapper.src = '/img/default-banner.jpg'
   }
 
   return (
@@ -46,19 +48,16 @@ export const Hero = ({ onQueryChange, featuredMovie }: Props) => {
         <h2>React/TS Movie Finder</h2>
         <p>Look for the first movie that comes to mind!</p>
       </div>
-      <div className='hero__input-box'>
-        <input
-          type='text'
-          name='movieSearch'
-          placeholder='Search a movie...'
-          value={searchValue}
-          onChange={handleChange}
-        />
-      </div>
-
+      {/* <div className='hero__input-box'> */}
+      <SearchInput
+        onInputChange={onQueryChange}
+        placeholder='Search a movie...'
+      />
+      <SortList onSortChange={onSortChange} currentSort={currentSort} />
+      {/* </div> */}
       <img
         className={`hero__backdrop ${isActive ? 'active' : 'unactive'}`}
-        src={backdrop && backdrop}
+        src={backdrop || '#'}
         alt='Featured Movie Image'
         onError={handleImageError}
       />

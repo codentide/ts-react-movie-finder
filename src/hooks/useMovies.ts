@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { mapMovies } from '../utils/mapMovies'
+import { sortMovies } from '../utils/sortMovies'
+import type { Movie, MovieFromAPI, SortValue } from '../types'
 
 const baseUrl = import.meta.env.VITE_BASE_URL
 const apiKey = import.meta.env.VITE_API_KEY
@@ -8,24 +10,31 @@ export function useMovies(): {
   movies: Movie[]
   isLoading: boolean
   error: string | null
+  sort: SortValue
   updateQuery: (query: string) => void
+  updateSort: (sortValue: SortValue) => void
 } {
   const [movies, setMovies] = useState<Movie[]>([])
   const [query, setQuery] = useState<string>('')
+  const [sort, setSort] = useState<SortValue>('all')
   const [debouncedQuery, setDebouncedQuery] = useState<string>('')
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    const debouncer = setTimeout(() => setQuery(debouncedQuery), 500)
+    return () => {
+      clearTimeout(debouncer)
+    }
+  }, [debouncedQuery])
 
   function updateQuery(query: string) {
     setDebouncedQuery(query)
   }
 
-  useEffect(() => {
-    const debouncer = setTimeout(() => setQuery(debouncedQuery), 300)
-    return () => {
-      clearTimeout(debouncer)
-    }
-  }, [debouncedQuery])
+  function updateSort(sortValue: SortValue) {
+    setSort(sortValue)
+  }
 
   // Transformar las movies que llegan al tipo que usamos
   async function fetchMovies(url: string): Promise<MovieFromAPI[] | null> {
@@ -42,7 +51,7 @@ export function useMovies(): {
       const data = await response.json()
       // Controlar existencia y formato de data
       if (data && Array.isArray(data.results)) {
-        console.log(data.results)
+        // console.log(data.results)
         return data.results as MovieFromAPI[]
       } else {
         throw new Error('La respuesta de la API no tiene el formato esperado')
@@ -61,7 +70,8 @@ export function useMovies(): {
       const unmappedMovies = await fetchMovies(url)
       if (unmappedMovies !== null) {
         const mappedMovies = mapMovies(unmappedMovies)
-        setMovies(mappedMovies)
+        const sortedMovies = sortMovies(mappedMovies, sort)
+        setMovies(sortedMovies)
       }
     }
 
@@ -70,7 +80,7 @@ export function useMovies(): {
     } else {
       getMovies(`${baseUrl}/search/movie?api_key=${apiKey}&query=${query}`)
     }
-  }, [query])
+  }, [query, sort])
 
-  return { movies, isLoading, error, updateQuery }
+  return { movies, isLoading, error, sort, updateQuery, updateSort }
 }
