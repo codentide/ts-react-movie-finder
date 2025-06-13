@@ -72,6 +72,34 @@
     object-fit: cover;
     object-position: center;
 
-    filter: grayscale(60%) blur(0.4rem) contrast(120%);
+    filter: grayscale(50%) blur(0.4rem) brightness(1.2);
+
+    opacity: 0;
+
+    &.active {
+      animation: appear 1.2s ease forwards;
+    }
+
+    &.unactive {
+      animation: disappear 0.8s ease forwards;
+    }
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes disappear {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }

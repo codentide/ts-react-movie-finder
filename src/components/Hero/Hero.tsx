@@ -1,20 +1,32 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './Hero.scss'
 
 interface Props {
   children?: React.ReactNode
   onQueryChange: (value: string) => void
   featuredMovie?: Movie
+  // backdropPath: string | undefined
 }
 
 export const Hero = ({ onQueryChange, featuredMovie }: Props) => {
   const [searchValue, setSearchValue] = useState<string>('')
+  const [backdrop, setBackdrop] = useState<string | undefined>('')
+  const [isActive, setIsActive] = useState<boolean>(false)
 
-  // useEffect(() => {
-  //   console.log(backdrop)
-  // }, [backdrop])
+  useEffect(() => {
+    if (!featuredMovie) return
 
-  // const backdrop = featuredMovie.backdrop || ''
+    setIsActive(false)
+    // setBackdrop(undefined)
+    const debouncer = setTimeout(() => {
+      setBackdrop(featuredMovie.backdrop)
+      setIsActive(true)
+    }, 1000)
+
+    return () => {
+      clearTimeout(debouncer)
+    }
+  }, [featuredMovie])
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const input = event.target
@@ -43,14 +55,13 @@ export const Hero = ({ onQueryChange, featuredMovie }: Props) => {
           onChange={handleChange}
         />
       </div>
-      {featuredMovie && (
-        <img
-          className='hero__backdrop'
-          src={featuredMovie.backdrop}
-          alt='Featured Movie Image'
-          onError={handleImageError}
-        />
-      )}
+
+      <img
+        className={`hero__backdrop ${isActive ? 'active' : 'unactive'}`}
+        src={backdrop && backdrop}
+        alt='Featured Movie Image'
+        onError={handleImageError}
+      />
     </section>
   )
 }
