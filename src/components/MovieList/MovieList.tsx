@@ -1,3 +1,4 @@
+import type { Movie } from '../../types'
 import { MovieItem } from '../MovieItem/MovieItem'
 import './MovieList.scss'
 
