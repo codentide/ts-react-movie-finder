@@ -14,11 +14,11 @@
   - [x] Crear datos simulados de películas (mock)
   - [x] Listar películas
 - **Integración de la API**
-  - [ ] Conectar aplicación con **TMDB**
-  - [ ] Absorber data de la API
-  - [ ] Cambiar mock por películas reales
+  - [x] Conectar aplicación con **TMDB**
+  - [x] Absorber data de la API
+  - [x] Cambiar mock por películas reales
 - **Búsqueda de Películas**
-  - [ ] Buscar películas por medio de una barra de búsqueda
+  - [x] Buscar películas por medio de una barra de búsqueda
 - **Filtrado de Películas**
   - [ ] Filtrar películas por género
   - [ ] Filtrar películas por año

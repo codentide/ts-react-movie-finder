@@ -6,13 +6,19 @@ interface Props {
 }
 
 export const MovieList: React.FunctionComponent<Props> = ({ movies }) => {
+  const hasMovies: boolean = !(movies.length === 0)
+
+  function renderMovies() {
+    return movies.map((movie) => (
+      <li key={movie.id} className='movie-list__item'>
+        <MovieItem {...movie} />
+      </li>
+    ))
+  }
+
   return (
     <ul className='movie-list'>
-      {movies.map((movie, index) => (
-        <li key={index} className='movie-list__item'>
-          <MovieItem {...movie} />
-        </li>
-      ))}
+      {hasMovies ? renderMovies() : <span>No hay nada</span>}
     </ul>
   )
 }
