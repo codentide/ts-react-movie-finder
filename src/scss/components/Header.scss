@@ -1,0 +1,23 @@
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  padding: 1rem 16%;
+
+  &__logo-box {
+    display: flex;
+    align-items: center;
+
+    svg {
+      width: 2.8rem;
+      height: 2.8rem;
+    }
+  }
+}

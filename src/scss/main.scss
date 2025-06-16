@@ -1,3 +1,11 @@
+@use './base/colors' as *;
+@use './base/typography' as *;
+
+@use './components/Header.scss' as *;
+@use './components/AuthorInfo.scss' as *;
+@use './components/Hero.scss' as *;
+@use './components/SearchInput.scss' as *;
+
 * {
   padding: 0;
   margin: 0;
@@ -10,7 +18,7 @@ body {
   width: 100%;
   min-height: 100vh;
 
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: $font-primary, monospace;
   color-scheme: dark;
   accent-color: hsl(216, 80%, 50%);
 }

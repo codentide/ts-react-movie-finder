@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
-import { SortList } from '../SortList/SortList'
-import type { Movie, SortValue } from '../../types'
-import './Hero.scss'
-import { SearchInput } from '../SearchInput/SearchInput'
+import { SortList } from './SortList/SortList'
+import type { Movie, SortValue } from '../types'
+import { SearchInput } from './SearchInput'
 
 interface Props {
   children?: React.ReactNode
@@ -23,7 +22,7 @@ export const Hero = ({
 
   useEffect(() => {
     if (!featuredMovie) return
-    // if (featuredMovie.backdrop === null) return
+    if (featuredMovie.backdrop === null) return
     if (featuredMovie.backdrop === backdrop) return
 
     setIsActive(false)
@@ -37,10 +36,10 @@ export const Hero = ({
     }
   }, [featuredMovie, backdrop])
 
-  function handleImageError(event: React.SyntheticEvent<HTMLImageElement>) {
-    const imageWrapper = event.currentTarget
-    imageWrapper.src = '/img/default-banner.jpg'
-  }
+  // function handleImageError(event: React.SyntheticEvent<HTMLImageElement>) {
+  //   const imageWrapper = event.currentTarget
+  //   imageWrapper.src = '/img/default-banner.jpg'
+  // }
 
   return (
     <section className='hero'>
@@ -48,18 +47,18 @@ export const Hero = ({
         <h2>React/TS Movie Finder</h2>
         <p>Look for the first movie that comes to mind!</p>
       </div>
-      {/* <div className='hero__input-box'> */}
-      <SearchInput
-        onInputChange={onQueryChange}
-        placeholder='Search a movie...'
-      />
-      <SortList onSortChange={onSortChange} currentSort={currentSort} />
-      {/* </div> */}
+      <div className='hero__search-box'>
+        <SearchInput
+          onInputChange={onQueryChange}
+          placeholder='Search a movie...'
+        />
+        <SortList onSortChange={onSortChange} currentSort={currentSort} />
+      </div>
       <img
         className={`hero__backdrop ${isActive ? 'active' : 'unactive'}`}
         src={backdrop || '#'}
         alt='Featured Movie Image'
-        onError={handleImageError}
+        // onError={handleImageError}
       />
     </section>
   )

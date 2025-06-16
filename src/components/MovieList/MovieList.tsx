@@ -6,6 +6,8 @@ interface Props {
   movies: Movie[]
 }
 
+// [ ]: Cuando hay pocas cards crecen demasiado
+
 export const MovieList: React.FunctionComponent<Props> = ({ movies }) => {
   const hasMovies: boolean = !(movies.length === 0)
 

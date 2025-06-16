@@ -1,0 +1,44 @@
+@use '../base/colors' as *;
+@use '../base/typography' as *;
+
+.author-info {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+
+  &__name {
+    font-size: 1rem;
+    text-transform: capitalize;
+    font-weight: 600;
+
+    color: $color-neutral-900;
+  }
+
+  .link-list {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    width: fit-content;
+    height: fit-content;
+
+    list-style: none;
+
+    &__link {
+      display: grid;
+      place-items: center;
+
+      svg {
+        width: 20px;
+        height: 20px;
+
+        fill: $color-neutral-900;
+        transition: fill 0.4s ease;
+      }
+    }
+
+    &__link:hover svg {
+      fill: $color-neutral-400;
+    }
+  }
+}

@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import './SearchInput.scss'
 
 type Props = {
   placeholder?: string

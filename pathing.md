@@ -19,18 +19,14 @@
   - [x] Cambiar mock por películas reales
 - **Búsqueda de Películas**
   - [x] Buscar películas por medio de una barra de búsqueda
-- **Filtrado de Películas**
-  - [x] Filtrar películas por titulo (AZ | ZA)
-  - [x] Filtrar películas por fecha de lanzamiento (Ascendent, Descendent)
-- **Visualización de Detalles Básicos**
-  - [ ] Al hacer clic en una película, mostrar una modal o un pequeño panel con información básica como el título, la descripción, la fecha de lanzamiento y la puntuación.
+- **Sort de Películas**
+  - [x] Ordenar películas por titulo (AZ | ZA)
+  - [x] Ordenar películas por fecha de lanzamiento (Ascendent, Descendent)
 
 ### Ideas para Futuras Iteraciones (Post-MVP)
 
 Estas funcionalidades se explorarán una vez que el MVP esté completamente funcional, con estilos básicos y subido al portafolio.
 
-- **Componente Hero / Película Destacada:**
-  Un componente visualmente atractivo que muestre una película destacada en la parte superior de la página.
 - **Paginación:**
   Implementar navegación entre páginas de resultados para manejar grandes listas de películas.
 - **Página de Detalles de Película:**
