@@ -16,8 +16,14 @@
     align-items: center;
 
     svg {
-      width: 2.8rem;
-      height: 2.8rem;
+      width: 2rem;
+      height: 2rem;
     }
+  }
+}
+
+@media (width <= 480px) {
+  .header {
+    padding: 1rem 8%;
   }
 }

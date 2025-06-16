@@ -1,6 +1,6 @@
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
-import { MovieList } from './components/MovieList/MovieList'
+import { MovieGrid } from './components/MovieGrid'
 import { useMovies } from './hooks/useMovies'
 
 export default function App() {
@@ -20,7 +20,7 @@ export default function App() {
         onSortChange={updateSort}
       />
       {error && <span>ERROR {error}</span>}
-      {isLoading ? <span>Is Loading</span> : <MovieList movies={movies} />}
+      {isLoading ? <span>Is Loading</span> : <MovieGrid movies={movies} />}
     </main>
   )
 }

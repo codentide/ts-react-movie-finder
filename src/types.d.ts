@@ -6,6 +6,8 @@ interface Movie {
   releaseDate: string
   poster: string
   backdrop: string | null
+  // popularity: number
+  stars: string
 }
 
 // API

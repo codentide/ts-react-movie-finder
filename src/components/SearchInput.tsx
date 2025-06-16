@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import DeleteIcon from '../assets/svg/delete-text.svg?react'
 
 type Props = {
   placeholder?: string
@@ -41,7 +42,7 @@ export const SearchInput = ({ placeholder, onInputChange }: Props) => {
           className='input-box__reset-button'
           onClick={() => setValue('')}
         >
-          🡐
+          <DeleteIcon />
         </button>
       )}
     </div>

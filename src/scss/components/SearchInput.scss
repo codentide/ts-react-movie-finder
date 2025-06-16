@@ -11,7 +11,7 @@
     width: 100%;
     height: auto;
 
-    padding: 0.6rem 0.8rem;
+    padding: 0.4rem 0.8rem 0.5rem;
     border-radius: 0.32rem;
     border: none;
     outline-color: transparent;
@@ -36,16 +36,14 @@
 
   &__reset-button {
     position: absolute;
-    right: 0.7rem;
-    top: 0.6rem;
-    bottom: 0.6rem;
+    right: 0.8rem;
+    top: 0.7rem;
+    bottom: 0.7rem;
 
     display: inline-grid;
     place-items: center;
 
     width: fit-content;
-    // height: ;
-    padding: 0rem 0.4rem;
     border: none;
     border-radius: 0.2rem;
 
@@ -53,11 +51,18 @@
     font-weight: 800;
     line-height: 1.1;
 
+    color: hsl(216, 60%, 64%, 1);
+    background-color: transparent;
+    transition: filter 0.4s ease;
+
     cursor: pointer;
 
-    color: hsl(216, 60%, 64%, 1);
-    background-color: hsl(216, 24%, 16%, 1);
-    transition: filter 0.4s ease;
+    svg {
+      width: auto;
+      height: 100%;
+
+      fill: hsl(216, 64%, 64%, 1);
+    }
 
     &:hover {
       filter: brightness(1.2);

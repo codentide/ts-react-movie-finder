@@ -5,9 +5,9 @@
   gap: 1em;
 
   width: 100%;
-  padding: 7.2rem 16% 4rem;
+  padding: 6.4rem 16% 4rem;
 
-  $gradient-value-1: hsl(216, 40%, 04%, 1);
+  $gradient-value-1: hsl(216, 40%, 04%);
   $gradient-value-2: hsl(216, 64%, 24%, 0.6);
 
   background: linear-gradient(to bottom, $gradient-value-1, $gradient-value-2);
@@ -35,7 +35,7 @@
   &__search-box {
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 0.4rem;
   }
 
   &__backdrop {
@@ -97,18 +97,27 @@
 }
 
 @media (width <= 480px) {
-  .hero__title-box {
-    align-items: center;
-    text-align: center;
+  .hero {
+    padding: 6.4rem 8% 2rem;
 
-    h2 {
-      font-size: calc(1rem + 2vw);
-      color: hsl(216, 100%, 64%, 1);
+    &__title-box {
+      align-items: center;
+      text-align: center;
+      gap: 0.4rem;
+
+      h2 {
+        font-size: calc(1rem + 3.2vw);
+      }
+
+      p {
+        width: 24ch;
+        font-size: 0.92rem;
+        line-height: 1.2;
+      }
     }
 
-    p {
-      font-size: 0.8rem;
-      color: hsl(216, 80%, 96%, 0.4);
+    &__search-box {
+      gap: 0.64rem;
     }
   }
 }

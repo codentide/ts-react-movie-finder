@@ -6,8 +6,8 @@
   width: fit-content;
 
   .sort-button {
-    padding: 0.2rem 0.4rem 0.2rem;
-    border-radius: 0.2rem;
+    padding: 0.05rem 0.4rem 0.1rem;
+    border-radius: 0.28rem;
 
     border: none;
 
@@ -15,7 +15,7 @@
     text-transform: lowercase;
 
     color: hsl(216, 24%, 40%, 1);
-    background-color: hsl(216, 16%, 8%, 1);
+    background-color: hsl(216, 32%, 8%, 1);
     cursor: pointer;
 
     transition: background-color 0.4s ease;
@@ -24,5 +24,12 @@
       color: ghostwhite;
       background-color: hsl(216, 100%, 64%, 1);
     }
+  }
+}
+
+@media (width <= 480px) {
+  .sort-list {
+    width: 100%;
+    justify-content: center;
   }
 }

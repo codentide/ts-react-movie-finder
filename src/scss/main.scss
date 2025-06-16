@@ -5,6 +5,8 @@
 @use './components/AuthorInfo.scss' as *;
 @use './components/Hero.scss' as *;
 @use './components/SearchInput.scss' as *;
+@use './components/MovieGrid.scss' as *;
+@use './components/MovieCard.scss' as *;
 
 * {
   padding: 0;

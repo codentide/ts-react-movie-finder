@@ -1,0 +1,92 @@
+@use '../base/colors' as *;
+
+.movie-card {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  aspect-ratio: 1/1.5;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.6rem;
+
+  overflow: hidden;
+  isolation: isolate;
+  cursor: pointer;
+
+  &__average {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+
+    p {
+      padding: 0.16rem 0.32rem;
+      border-radius: 0.2rem;
+
+      font-size: 0.92rem;
+      font-weight: 600;
+      line-height: 1;
+      background-color: $color-neutral-1300;
+      background-color: hsl($hue-primary, 100%, 40%);
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+
+    h3 {
+      font-size: 1rem;
+      line-height: 1;
+      text-transform: capitalize;
+
+      color: $color-neutral-200;
+    }
+
+    time {
+      display: inline-block;
+      font-size: 0.8rem;
+
+      color: $color-neutral-800;
+    }
+  }
+
+  &:hover .movie-card__poster {
+    transform: scale(1.1);
+  }
+
+  &__poster {
+    position: absolute;
+    inset: 0;
+    z-index: -20;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    user-select: none;
+
+    transition: transform 1s ease;
+  }
+
+  &::before {
+    position: absolute;
+    inset: 0;
+    z-index: -10;
+    content: '';
+
+    width: 100%;
+    height: 100%;
+
+    $gradient-value-1: transparent;
+    $gradient-value-2: $color-neutral-1400;
+    background: linear-gradient(
+      to bottom,
+      $gradient-value-1 50%,
+      $gradient-value-2 90%
+    );
+  }
+}
