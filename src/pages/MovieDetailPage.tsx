@@ -1,69 +1,52 @@
 import { useParams } from 'react-router'
-import type { Movie, MovieFromAPI } from '../types'
+import { useMovieDetail } from '../hooks/useMovieDetail'
 import { useEffect, useState } from 'react'
-import { formatMovie } from '../utils'
-import { MovieCard } from '../components/MovieCard'
-
-const BASE_URL = import.meta.env.VITE_BASE_URL
-const API_KEY = import.meta.env.VITE_API_KEY
+import { BackdropContainer } from '../components/BackdropContainer'
+import { formatDate } from '../utils'
 
 export const MovieDetailPage = () => {
-  const [movie, setMovie] = useState<Movie | null>(null)
-
   const params = useParams()
-
-  async function fetchMovie(url: string): Promise<MovieFromAPI | null> {
-    // setIsLoading(true)
-    // setError(null)
-
-    try {
-      const response = await fetch(url)
-      if (!response.ok) {
-        const httpError = await response.text()
-        throw new Error(`Error HTTP: ${response.status} - ${httpError}`)
-      }
-      const data = await response.json()
-      if (data) {
-        return data as MovieFromAPI
-      } else {
-        throw new Error('La respuesta de la API no tiene el formato esperado')
-      }
-    } catch (error) {
-      // setError(
-      //   'Ocurrió un error trayendo las películas' + (error || 'Desconocido')
-      // )
-      return null
-    } finally {
-      // setIsLoading(false)
-    }
-  }
+  const [movieId, setMovieId] = useState<number | undefined>()
+  const { movieDetail, isLoading, error } = useMovieDetail(movieId)
 
   useEffect(() => {
-    async function getMovies() {
-      const endpoint: string = `/movie/${params.id}?api_key=${API_KEY}`
+    if (params.id) setMovieId(Number(params.id))
+  }, [params])
 
-      //
-      const unformattedMovies = await fetchMovie(`${BASE_URL}${endpoint}`)
-      // const unformattedMovies = await fetchMovie(
-      //   'https://api.themoviedb.org/3/movie/{movie_id}`api_key=a9b423c452ea93f0eef4650dbb652aea`
-      // )
-
-      if (unformattedMovies) {
-        const formattedMovie = formatMovie(unformattedMovies)
-        setMovie(formattedMovie)
-      }
-    }
-
-    if (params.id) {
-      getMovies()
-    }
-  }, [params.id])
+  if (isLoading) return <span>IS LOADING</span>
+  if (error) return <span>{error}</span>
 
   return (
-    <section>
-      <h1>Movie id: {params.id}</h1>
+    <BackdropContainer
+      className='movie-detail'
+      path={movieDetail?.backdrop}
+      alt={`Banner of "${movieDetail?.title}" movie`}
+    >
+      {movieDetail && (
+        <div className='content'>
+          <div className='movie-detail__movie-poster'>
+            <img src={movieDetail.poster} />
+          </div>
+          <div className='movie-info'>
+            <div className='movie-info__heading'>
+              <h2 className='title'>{movieDetail.title}</h2>
+              <div>
+                <time dateTime={movieDetail.releaseDate}>
+                  {formatDate(movieDetail.releaseDate)}
+                </time>
+                <span>{movieDetail.stars}</span>
+              </div>
+            </div>
+            <div className='movie-info__overview'>
+              <h3>Overview</h3>
+              <p>{movieDetail.overview}</p>
+            </div>
 
-      {movie && <MovieCard {...movie} />}
-    </section>
+            {/* Aqui iran los genres */}
+            {/* <h1 style={{ marginTop: 'auto' }}>genres</h1> */}
+          </div>
+        </div>
+      )}
+    </BackdropContainer>
   )
 }

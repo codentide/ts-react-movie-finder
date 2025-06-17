@@ -3,12 +3,19 @@ import type { SORTS } from './constants'
 interface Movie {
   id: number
   title: string
+  overview: string
   releaseDate: string
   poster: string
   backdrop: string | null
   popularity: number
   stars: string
+  // genres: string[]
 }
+
+type MovieId = Movie['id']
+
+type MovieCard = Omit<Movie, 'backdrop' | 'popularity' | 'overview' | 'genres'>
+type MovieDetail = Omit<Movie, 'id'>
 
 // API
 interface MovieFromAPI {

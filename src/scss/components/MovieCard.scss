@@ -1,5 +1,10 @@
 @use '../base/colors' as *;
 
+a:has(.movie-card) {
+  text-decoration: none;
+  color: $color-neutral-200;
+}
+
 .movie-card {
   position: relative;
 
@@ -28,8 +33,9 @@
       font-size: 0.92rem;
       font-weight: 600;
       line-height: 1;
-      background-color: $color-neutral-1300;
-      background-color: hsl($hue-primary, 100%, 40%);
+
+      color: $color-neutral-200;
+      background-color: $color-primary-700;
     }
   }
 
