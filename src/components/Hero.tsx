@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { SortList } from './SortList/SortList'
+import { SortList } from './SortList'
 import type { Movie, SortValue } from '../types'
 import { SearchInput } from './SearchInput'
 
