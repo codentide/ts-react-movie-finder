@@ -1,65 +1,31 @@
 import { useEffect, useState } from 'react'
-import { SortList } from './SortList/SortList'
-import type { Movie, SortValue } from '../types'
-import { SearchInput } from './SearchInput'
+
+import type { Movie } from '../types'
+import { BackdropContainer } from './BackdropContainer'
 
 interface Props {
   children?: React.ReactNode
-  featuredMovie?: Movie
-  currentSort: SortValue
-  onQueryChange: (value: string) => void
-  onSortChange: (sortValue: SortValue) => void
+  featuredMovie?: Movie | null
 }
 
-export const Hero = ({
-  featuredMovie,
-  currentSort,
-  onQueryChange,
-  onSortChange,
-}: Props) => {
+export const Hero = ({ featuredMovie, children }: Props) => {
   const [backdrop, setBackdrop] = useState<string>('')
-  const [isActive, setIsActive] = useState<boolean>(true)
 
+  // Limpiar mejor el efecto
   useEffect(() => {
     if (!featuredMovie) return
     if (featuredMovie.backdrop === null) return
-    if (featuredMovie.backdrop === backdrop) return
 
-    setIsActive(false)
-    const debouncer = setTimeout(() => {
-      setBackdrop(featuredMovie.backdrop as string)
-      setIsActive(true)
-    }, 1000)
-
-    return () => {
-      clearTimeout(debouncer)
-    }
-  }, [featuredMovie, backdrop])
-
-  // function handleImageError(event: React.SyntheticEvent<HTMLImageElement>) {
-  //   const imageWrapper = event.currentTarget
-  //   imageWrapper.src = '/img/default-banner.jpg'
-  // }
+    setBackdrop(featuredMovie.backdrop as string)
+  }, [featuredMovie])
 
   return (
-    <section className='hero'>
+    <BackdropContainer className='hero' path={backdrop}>
       <div className='hero__title-box'>
         <h2>React/TS Movie Finder</h2>
         <p>Look for the first movie that comes to mind!</p>
       </div>
-      <div className='hero__search-box'>
-        <SearchInput
-          onInputChange={onQueryChange}
-          placeholder='Search a movie...'
-        />
-        <SortList onSortChange={onSortChange} currentSort={currentSort} />
-      </div>
-      <img
-        className={`hero__backdrop ${isActive ? 'active' : 'unactive'}`}
-        src={backdrop || '#'}
-        alt='Featured Movie Image'
-        // onError={handleImageError}
-      />
-    </section>
+      <div className='hero__search-box'>{children}</div>
+    </BackdropContainer>
   )
 }

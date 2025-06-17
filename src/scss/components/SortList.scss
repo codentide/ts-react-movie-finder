@@ -1,0 +1,44 @@
+@use '../base/colors' as *;
+@use '../base/typography' as *;
+
+$sort-button-background: $color-neutral-1300;
+$sort-button-text-color: $color-neutral-800;
+
+$active-sort-button-background: $color-primary-600;
+$active-sort-button-text-color: $color-neutral-100;
+
+.sort-list {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  width: fit-content;
+
+  .sort-button {
+    padding: 0.28rem 0.4rem;
+    border-radius: 0.28rem;
+    border: none;
+
+    font-family: $font-primary;
+    text-transform: lowercase;
+    line-height: 1;
+
+    color: $sort-button-text-color;
+    background-color: $sort-button-background;
+
+    transition: background-color 0.4s ease;
+    cursor: pointer;
+
+    &.active {
+      color: $active-sort-button-text-color;
+      background-color: $active-sort-button-background;
+    }
+  }
+}
+
+@media (width <= 480px) {
+  .sort-list {
+    width: 100%;
+    justify-content: center;
+  }
+}

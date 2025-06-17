@@ -1,26 +1,22 @@
+import { Route, Routes } from 'react-router'
 import { Header } from './components/Header'
-import { Hero } from './components/Hero'
-import { MovieGrid } from './components/MovieGrid'
-import { useMovies } from './hooks/useMovies'
+
+import { HomePage } from './pages/HomePage'
+import { MovieDetailPage } from './pages/MovieDetailPage'
+import { DefaultPage } from './pages/404'
+
+// [ ]: Cuando tengo un valor de busqueda y entro en la info de una pelicula pierd mi valor de búsqueda
+// [ ]: Traer los genres de las peliculas cuando estan en detail
 
 export default function App() {
-  const { movies, isLoading, error, updateQuery, sort, updateSort } =
-    useMovies()
-
-  // [ ]: Añadir nombre y enlace a linkedn y github
-
   return (
     <main className='super-container'>
-      {/* Header */}
       <Header />
-      <Hero
-        featuredMovie={movies[0]}
-        currentSort={sort}
-        onQueryChange={updateQuery}
-        onSortChange={updateSort}
-      />
-      {error && <span>ERROR {error}</span>}
-      {isLoading ? <span>Is Loading</span> : <MovieGrid movies={movies} />}
+      <Routes>
+        <Route index element={<HomePage />} />
+        <Route path='movie/:id' element={<MovieDetailPage />} />
+        <Route path='/*' element={<DefaultPage />} />
+      </Routes>
     </main>
   )
 }
