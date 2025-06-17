@@ -1,0 +1,31 @@
+@use '../base/colors' as *;
+
+.default-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
+
+  height: 100dvh;
+
+  $gradient-value-1: hsl(216, 40%, 04%);
+  $gradient-value-2: hsl(216, 64%, 24%, 0.6);
+
+  background: radial-gradient($gradient-value-2, $gradient-value-1);
+
+  h2 {
+    font-size: 12rem;
+    line-height: 1;
+
+    color: $color-primary-600;
+  }
+
+  p {
+    color: $color-neutral-800;
+  }
+
+  a {
+    color: $color-primary-600;
+  }
+}

@@ -1,0 +1,55 @@
+.backdrop-container {
+  position: relative;
+
+  width: 100%;
+  padding: 8rem 16%;
+
+  $gradient-value-1: hsl(216, 40%, 04%);
+  $gradient-value-2: hsl(216, 64%, 24%, 0.6);
+
+  background: linear-gradient(to bottom, $gradient-value-1, $gradient-value-2);
+  overflow: hidden;
+
+  &__backdrop {
+    position: absolute;
+    z-index: -10;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+    transform: scale(1.2);
+
+    filter: grayscale(20%) blur(0.4rem) brightness(1.2) contrast(1.2);
+
+    opacity: 0;
+
+    &.active {
+      animation: appear 1.2s ease forwards;
+    }
+
+    &.unactive {
+      animation: disappear 0.8s ease forwards;
+    }
+  }
+
+  @keyframes appear {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes disappear {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+}

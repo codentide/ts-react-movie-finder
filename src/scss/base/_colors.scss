@@ -2,32 +2,33 @@
 $hue-primary: 208;
 
 // Primary colors
-$color-primary-100: hsl($hue-primary, 100%, 96%);
-$color-primary-200: hsl($hue-primary, 100%, 88%);
-$color-primary-300: hsl($hue-primary, 88%, 80%);
-$color-primary-400: hsl($hue-primary, 88%, 72%);
-$color-primary-500: hsl($hue-primary, 72%, 64%);
-$color-primary-600: hsl($hue-primary, 72%, 56%);
-$color-primary-700: hsl($hue-primary, 40%, 48%);
-$color-primary-800: hsl($hue-primary, 40%, 40%);
+$color-primary-100: hsl($hue-primary, 80%, 96%);
+$color-primary-200: hsl($hue-primary, 80%, 88%);
+$color-primary-300: hsl($hue-primary, 80%, 80%);
+$color-primary-400: hsl($hue-primary, 80%, 72%);
+$color-primary-500: hsl($hue-primary, 80%, 64%);
+$color-primary-600: hsl($hue-primary, 80%, 56%);
+$color-primary-700: hsl($hue-primary, 80%, 48%);
+$color-primary-800: hsl($hue-primary, 80%, 40%);
+$color-primary-800: hsl($hue-primary, 80%, 32%);
 
 // Neutral colors
-$color-neutral-100: hsl($hue-primary, 16%, 100%);
-$color-neutral-200: hsl($hue-primary, 16%, 92%);
-$color-neutral-300: hsl($hue-primary, 16%, 88%);
-$color-neutral-400: hsl($hue-primary, 16%, 80%);
-$color-neutral-500: hsl($hue-primary, 16%, 72%);
-$color-neutral-600: hsl($hue-primary, 16%, 64%);
-$color-neutral-700: hsl($hue-primary, 16%, 56%);
-$color-neutral-800: hsl($hue-primary, 16%, 48%);
-$color-neutral-900: hsl($hue-primary, 16%, 40%);
-$color-neutral-1000: hsl($hue-primary, 16%, 32%);
-$color-neutral-1100: hsl($hue-primary, 16%, 24%);
-$color-neutral-1150: hsl($hue-primary, 16%, 20%);
-$color-neutral-1200: hsl($hue-primary, 16%, 16%);
-$color-neutral-1250: hsl($hue-primary, 16%, 12%);
-$color-neutral-1300: hsl($hue-primary, 16%, 8%);
-$color-neutral-1400: hsl($hue-primary, 16%, 0%);
+$color-neutral-100: hsl($hue-primary, 12%, 100%);
+$color-neutral-200: hsl($hue-primary, 12%, 92%);
+$color-neutral-300: hsl($hue-primary, 12%, 88%);
+$color-neutral-400: hsl($hue-primary, 12%, 80%);
+$color-neutral-500: hsl($hue-primary, 12%, 72%);
+$color-neutral-600: hsl($hue-primary, 12%, 64%);
+$color-neutral-700: hsl($hue-primary, 12%, 56%);
+$color-neutral-800: hsl($hue-primary, 12%, 48%);
+$color-neutral-900: hsl($hue-primary, 12%, 40%);
+$color-neutral-1000: hsl($hue-primary, 12%, 32%);
+$color-neutral-1100: hsl($hue-primary, 12%, 24%);
+$color-neutral-1150: hsl($hue-primary, 12%, 20%);
+$color-neutral-1200: hsl($hue-primary, 12%, 16%);
+$color-neutral-1250: hsl($hue-primary, 12%, 12%);
+$color-neutral-1300: hsl($hue-primary, 12%, 8%);
+$color-neutral-1400: hsl($hue-primary, 12%, 0%);
 
 // --- State colors ---
 $color-success: hsl(120, 60%, 45%);
