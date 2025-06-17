@@ -1,92 +1,45 @@
 import type { Movie, MovieFromAPI, SortValue } from '../types'
 import { useEffect, useState } from 'react'
-import { mapMovies, sortMovies } from '../utils'
+import { formatMovies, sortMovies } from '../utils'
 
 const BASE_URL = import.meta.env.VITE_BASE_URL
 const API_KEY = import.meta.env.VITE_API_KEY
 
-interface PopularMoviesProps {
-  type: 'popular'
-}
-
-interface SearchMoviesProps {
-  type: 'search'
-}
-
-interface MovieByIdProps {
-  type: 'id'
-  id: string
-}
-
-type Props = PopularMoviesProps | SearchMoviesProps | MovieByIdProps
-
-// Retornos
-
 interface UseMoviesReturn {
-  data: Movie[] | Movie | undefined
+  movies: Movie[] | null
+  featuredMovie: Movie | null
   isLoading: boolean
   error: string | null
-  sort: SortValue
-  updateQuery: (query: string) => void
-  updateSort: (sortValue: SortValue) => void
 }
 
-interface UseMoviesListReturn {
-  data: Movie[] | undefined // Aquí 'data' es un array de Movie
-  isLoading: boolean
-  error: string | null
-  sort: SortValue
-  updateQuery: (query: string) => void
-  updateSort: (sortValue: SortValue) => void
-}
-
-interface UseMoviesDetailReturn {
-  data: Movie | undefined // Aquí 'data' es una sola Movie
-  isLoading: boolean
-  error: string | null
-  sort: SortValue // Aunque no uses sort en el detalle, el hook lo retorna igual.
-  updateQuery: (query: string) => void
-  updateSort: (sortValue: SortValue) => void
-}
-
-// Sobrecarga de retorno
-export function useMovies(props: PopularMoviesProps): UseMoviesListReturn
-export function useMovies(props: SearchMoviesProps): UseMoviesListReturn
-export function useMovies(props: MovieByIdProps): UseMoviesDetailReturn
-
-export function useMovies(props: Props): UseMoviesReturn {
-  // Resultado
-  const [data, setData] = useState<Movie[] | Movie | undefined>(undefined)
-  // Query con el que se busca la película
-  const [searchQuery, setQuery] = useState<string>('')
-  // Query auxiliar para debounce de la busqueda de película
-  const [debouncedQuery, setDebouncedQuery] = useState<string>('')
-  // Sort de las películas
-  const [sort, setSort] = useState<SortValue>('all')
-
+export function useMovies(
+  query: string,
+  sort: SortValue = 'all'
+): UseMoviesReturn {
+  const [movies, setMovies] = useState<Movie[] | null>(null)
+  const [featuredMovie, setFeaturedMovie] = useState<Movie | null>(null)
+  const [searchQuery, setSearchQuery] = useState<string>('')
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    if (props.type !== 'search') {
-      setDebouncedQuery('')
+    const debouncer = setTimeout(() => setSearchQuery(query), 500)
+    return () => clearTimeout(debouncer)
+  }, [query])
+
+  function getMostPopularMovie(movies: Movie[]): Movie {
+    let movie = movies[0]
+
+    if (movies.length > 0) {
+      movie = movies.reduce((prev, current) => {
+        return current.popularity > prev.popularity ? current : prev
+      })
     }
 
-    const handler = setTimeout(() => setQuery(debouncedQuery), 500)
-    return () => clearTimeout(handler)
-  }, [props.type, debouncedQuery])
-
-  function updateQuery(query: string) {
-    setDebouncedQuery(query)
+    return movie
   }
 
-  function updateSort(sortValue: SortValue) {
-    setSort(sortValue)
-  }
-
-  async function fetchMovies(
-    url: string
-  ): Promise<MovieFromAPI[] | MovieFromAPI | null> {
+  async function fetchMovies(url: string): Promise<MovieFromAPI[] | null> {
     setIsLoading(true)
     setError(null)
 
@@ -96,52 +49,44 @@ export function useMovies(props: Props): UseMoviesReturn {
         const httpError = await response.text()
         throw new Error(`Error HTTP: ${response.status} - ${httpError}`)
       }
-
       const data = await response.json()
-      if (data) {
-        if (Array.isArray(data.results)) {
-          return data.results as MovieFromAPI[]
-        }
-        return data as MovieFromAPI
+      if (data && Array.isArray(data.results)) {
+        return data.results as MovieFromAPI[]
       } else {
         throw new Error('La respuesta de la API no tiene el formato esperado')
       }
     } catch (error) {
-      setError('Ocurrió un error trayendo las películas' + error)
+      setError(
+        'Ocurrió un error trayendo las películas' + (error || 'Desconocido')
+      )
       return null
     } finally {
       setIsLoading(false)
     }
   }
 
-  // Efecto encargado de traer las peliculas populares en el home
   useEffect(() => {
     async function getMovies() {
       let endpoint: string = ''
 
-      switch (props.type) {
-        case 'search':
-          endpoint = `/search/movie?api_key=${API_KEY}&query=${searchQuery}`
-          break
-        case 'id':
-          endpoint = `/movie/movie_id?api_key=${API_KEY}`
-          break
-        case 'popular':
-        default:
-          endpoint = `/movie/popular?api_key=${API_KEY}`
-          break
+      if (searchQuery.length > 0) {
+        endpoint = `/search/movie?api_key=${API_KEY}&query=${searchQuery}`
+      } else {
+        endpoint = `/movie/popular?api_key=${API_KEY}`
       }
 
-      const unmappedMovies = await fetchMovies(`${BASE_URL}${endpoint}`)
-      if (unmappedMovies !== null) {
-        const mappedMovies = mapMovies(unmappedMovies)
-        const sortedMovies = sortMovies(mappedMovies, sort)
-        setData(sortedMovies)
+      const unformattedMovies = await fetchMovies(`${BASE_URL}${endpoint}`)
+      if (unformattedMovies) {
+        const formattedMovies = formatMovies(unformattedMovies)
+        const mostPopularMovie = getMostPopularMovie(formattedMovies)
+        const sortedMovies = sortMovies(formattedMovies, sort)
+        setFeaturedMovie(mostPopularMovie)
+        setMovies(sortedMovies)
       }
     }
 
     getMovies()
-  }, [searchQuery, sort, props.type])
+  }, [searchQuery, sort])
 
-  return { data, isLoading, error, sort, updateSort, updateQuery }
+  return { movies, featuredMovie, isLoading, error }
 }

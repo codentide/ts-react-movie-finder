@@ -9,6 +9,7 @@ export function formatMovie({
   poster_path,
   backdrop_path,
   vote_average,
+  popularity,
 }: MovieFromAPI): Movie {
   const posterFallback = `https://placehold.co/300x500/1a2637/3b567d?font=roboto&text=${title}`
   const poster = poster_path ? posterUrl + poster_path : posterFallback
@@ -18,9 +19,10 @@ export function formatMovie({
     id,
     title: title.toLocaleLowerCase(),
     releaseDate: release_date,
+    stars: voteAverageToStars(vote_average),
+    popularity,
     poster,
     backdrop,
-    stars: voteAverageToStars(vote_average),
   }
 }
 

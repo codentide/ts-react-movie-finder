@@ -1,7 +1,10 @@
-// import { Hero } from '../components/Hero'
-// import { MovieGrid } from '../components/MovieGrid'
-import { PopularMovieGrid } from '../components/PopularMovieGrid'
-// import { useMovies } from '../hooks/useMovies'
+import type { SortValue } from '../types'
+import { useState } from 'react'
+import { Hero } from '../components/Hero'
+import { SortList } from '../components/SortList'
+import { SearchInput } from '../components/SearchInput'
+import { MovieGrid } from '../components/MovieGrid'
+import { useMovies } from '../hooks/useMovies'
 
 interface Props {
   children?: React.ReactNode | React.ReactNode[]
@@ -10,21 +13,21 @@ interface Props {
 export const HomePage: React.FunctionComponent<
   Props
 > = (): React.JSX.Element => {
-  // const { movies, isLoading, error, updateQuery, sort, updateSort } =
-  //   useMovies()
+  const [sort, setSort] = useState<SortValue>('all')
+  const [query, setQuery] = useState<string>('')
+
+  const { movies, featuredMovie, isLoading, error } = useMovies(query, sort)
+  const Loading = () => <h2>LOADING</h2>
 
   return (
     <section className='home-page'>
-      {/* <Hero
-        featuredMovie={movies[0]}
-        currentSort={sort}
-        onQueryChange={updateQuery}
-        onSortChange={updateSort}
-      /> */}
-      {/* {error && <span>ERROR {error}</span>}
-      {isLoading ? <span>Is Loading</span> : <MovieGrid movies={movies} />} */}
+      <Hero featuredMovie={featuredMovie}>
+        <SearchInput onInputChange={setQuery} placeholder='Search a movie...' />
+        <SortList onSortChange={setSort} currentSort={sort} />
+      </Hero>
 
-      <PopularMovieGrid />
+      {error && <span>{error}</span>}
+      {isLoading ? <Loading /> : <MovieGrid movies={movies || []} />}
     </section>
   )
 }

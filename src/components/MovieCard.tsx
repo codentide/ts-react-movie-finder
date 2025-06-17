@@ -1,3 +1,4 @@
+import { Link } from 'react-router'
 import type { Movie } from '../types'
 import { formatDate } from '../utils/formatDate'
 
@@ -12,6 +13,7 @@ export const MovieCard = ({ id, title, poster, stars, releaseDate }: Movie) => {
         <h3>{title}</h3>
         {/* YYYY/MM/DD */}
         <time dateTime={releaseDate}>{formatDate(releaseDate)}</time>
+        <Link to={`movie/${id}`} children='Read More' />
       </div>
       <img
         className='movie-card__poster'

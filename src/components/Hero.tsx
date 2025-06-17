@@ -1,22 +1,13 @@
 import { useEffect, useState } from 'react'
-import { SortList } from './SortList'
-import type { Movie, SortValue } from '../types'
-import { SearchInput } from './SearchInput'
+
+import type { Movie } from '../types'
 
 interface Props {
   children?: React.ReactNode
-  featuredMovie?: Movie
-  currentSort: SortValue
-  onQueryChange: (value: string) => void
-  onSortChange: (sortValue: SortValue) => void
+  featuredMovie?: Movie | null
 }
 
-export const Hero = ({
-  featuredMovie,
-  currentSort,
-  onQueryChange,
-  onSortChange,
-}: Props) => {
+export const Hero = ({ featuredMovie, children }: Props) => {
   const [backdrop, setBackdrop] = useState<string>('')
   const [isActive, setIsActive] = useState<boolean>(true)
 
@@ -36,11 +27,6 @@ export const Hero = ({
     }
   }, [featuredMovie, backdrop])
 
-  // function handleImageError(event: React.SyntheticEvent<HTMLImageElement>) {
-  //   const imageWrapper = event.currentTarget
-  //   imageWrapper.src = '/img/default-banner.jpg'
-  // }
-
   return (
     <section className='hero'>
       <div className='hero__title-box'>
@@ -48,17 +34,17 @@ export const Hero = ({
         <p>Look for the first movie that comes to mind!</p>
       </div>
       <div className='hero__search-box'>
-        <SearchInput
+        {/* <SearchInput
           onInputChange={onQueryChange}
           placeholder='Search a movie...'
         />
-        <SortList onSortChange={onSortChange} currentSort={currentSort} />
+        <SortList onSortChange={onSortChange} currentSort={currentSort} /> */}
+        {children}
       </div>
       <img
         className={`hero__backdrop ${isActive ? 'active' : 'unactive'}`}
         src={backdrop || '#'}
         alt='Featured Movie Image'
-        // onError={handleImageError}
       />
     </section>
   )

@@ -17,7 +17,7 @@ interface Props {
 }
 
 export const SortList = ({ onSortChange, currentSort }: Props) => {
-  function renderButtons() {
+  function FilterButtons() {
     return SORT_BUTTONS_ARRAY.map(([key, label]) => {
       const className = `sort-button ${key === currentSort ? 'active' : ''}`
       function handleSortChange() {
@@ -32,5 +32,9 @@ export const SortList = ({ onSortChange, currentSort }: Props) => {
     })
   }
 
-  return <div className='sort-list'>{renderButtons()}</div>
+  return (
+    <div className='sort-list'>
+      <FilterButtons />
+    </div>
+  )
 }
