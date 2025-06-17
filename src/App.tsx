@@ -3,7 +3,7 @@ import { Header } from './components/Header'
 
 import { HomePage } from './pages/HomePage'
 import { MovieDetailPage } from './pages/MovieDetailPage'
-import { DefaultPage } from './pages/404'
+import { DefaultPage } from './pages/DefaultPage'
 
 // [ ]: Cuando tengo un valor de busqueda y entro en la info de una pelicula pierd mi valor de búsqueda
 // [ ]: Traer los genres de las peliculas cuando estan en detail
