@@ -10,6 +10,9 @@
 
   list-style: none;
 
+  opacity: 0;
+  animation: appear 0.8s 0.4s ease forwards;
+
   &__item {
     width: 100%;
   }

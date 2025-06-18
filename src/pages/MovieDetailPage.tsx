@@ -3,6 +3,7 @@ import { useMovieDetail } from '../hooks/useMovieDetail'
 import { useEffect, useState } from 'react'
 import { BackdropContainer } from '../components/BackdropContainer'
 import { formatDate } from '../utils'
+import { LoadingSpinner } from '../components/LoadingSpinner'
 
 export const MovieDetailPage = () => {
   const [movieId, setMovieId] = useState<number | undefined>()
@@ -14,7 +15,7 @@ export const MovieDetailPage = () => {
     if (params.id) setMovieId(Number(params.id))
   }, [params])
 
-  if (isLoading) return <span>IS LOADING</span>
+  if (isLoading) return <LoadingSpinner />
   if (error) return <span>{error}</span>
 
   function handleGoBack() {

@@ -16,13 +16,14 @@ interface UseMoviesReturn {
 export function useMovies(sort: SortValue = 'all'): UseMoviesReturn {
   const [movies, setMovies] = useState<Movie[] | null>(null)
   const [featuredMovie, setFeaturedMovie] = useState<Movie | null>(null)
-  const [query, setQuery] = useState<string>('')
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
 
   const [searchParam] = useSearchParams()
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
   const lastSearchRef = useRef<string | null>(null)
+  const moviesRef = useRef<Movie[] | null>(null)
 
   function getMostPopularMovie(movies: Movie[]): Movie {
     let movie = movies[0]
@@ -62,11 +63,6 @@ export function useMovies(sort: SortValue = 'all'): UseMoviesReturn {
     }
   }
 
-  // useEffect(() => {
-  //   const currentQuery = searchParam.get('query')?.trim() || ''
-  //   setQuery(currentQuery)
-  // }, [searchParam])
-
   useEffect(() => {
     const currentQuery = searchParam.get('query')?.trim() || ''
 
@@ -87,12 +83,19 @@ export function useMovies(sort: SortValue = 'all'): UseMoviesReturn {
 
     async function updateMovies(url: string) {
       const unformattedMovies = await fetchMovies(url)
+
       if (unformattedMovies) {
         const formattedMovies = formatMovies(unformattedMovies)
+        // Copia de movies sin sortear
+        moviesRef.current = formattedMovies
         const mostPopularMovie = getMostPopularMovie(formattedMovies)
         const sortedMovies = sortMovies(formattedMovies, sort)
         setFeaturedMovie(mostPopularMovie)
         setMovies(sortedMovies)
+      } else {
+        moviesRef.current = null
+        setFeaturedMovie(null)
+        setMovies(null)
       }
     }
 
@@ -100,6 +103,15 @@ export function useMovies(sort: SortValue = 'all'): UseMoviesReturn {
       if (debounceRef.current) clearTimeout(debounceRef.current)
     }
   }, [sort, searchParam])
+
+  useEffect(() => {
+    if (moviesRef.current) {
+      const sortedMovies = sortMovies([...moviesRef.current], sort)
+      setMovies(sortedMovies)
+    } else {
+      setMovies(null)
+    }
+  }, [sort])
 
   return { movies, featuredMovie, isLoading, error }
 }

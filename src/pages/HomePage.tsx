@@ -5,6 +5,7 @@ import { SortList } from '../components/SortList'
 import { SearchInput } from '../components/SearchInput'
 import { MovieGrid } from '../components/MovieGrid'
 import { useMovies } from '../hooks/useMovies'
+import { LoadingSpinner } from '../components/LoadingSpinner'
 
 interface Props {
   children?: React.ReactNode | React.ReactNode[]
@@ -16,7 +17,7 @@ export const HomePage: React.FunctionComponent<
   const [sort, setSort] = useState<SortValue>('all')
 
   const { movies, featuredMovie, isLoading, error } = useMovies(sort)
-  const Loading = () => <h2>LOADING</h2>
+  // const Loading = () => <h2>LOADING</h2>
 
   return (
     <section className='home-page'>
@@ -24,9 +25,8 @@ export const HomePage: React.FunctionComponent<
         <SearchInput placeholder='Search a movie...' />
         <SortList onSortChange={setSort} currentSort={sort} />
       </Hero>
-
       {error && <span>{error}</span>}
-      {isLoading ? <Loading /> : <MovieGrid movies={movies || []} />}
+      {isLoading ? <LoadingSpinner /> : <MovieGrid movies={movies || []} />}
     </section>
   )
 }
