@@ -14,15 +14,14 @@ export const HomePage: React.FunctionComponent<
   Props
 > = (): React.JSX.Element => {
   const [sort, setSort] = useState<SortValue>('all')
-  const [query, setQuery] = useState<string>('')
 
-  const { movies, featuredMovie, isLoading, error } = useMovies(query, sort)
+  const { movies, featuredMovie, isLoading, error } = useMovies(sort)
   const Loading = () => <h2>LOADING</h2>
 
   return (
     <section className='home-page'>
       <Hero featuredMovie={featuredMovie}>
-        <SearchInput onInputChange={setQuery} placeholder='Search a movie...' />
+        <SearchInput placeholder='Search a movie...' />
         <SortList onSortChange={setSort} currentSort={sort} />
       </Hero>
 

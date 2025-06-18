@@ -10,7 +10,7 @@ export const MovieCard = ({
   releaseDate,
 }: MovieCardType) => {
   return (
-    <Link to={`movie/${id}`}>
+    <Link to={`/movie/${id}`}>
       <div className='movie-card' movie-id={id}>
         <div className='movie-card__average'>
           {/* svg */}
