@@ -25,6 +25,7 @@ export const HomePage: React.FunctionComponent<
         <SearchInput placeholder='Search a movie...' />
         <SortList onSortChange={setSort} currentSort={sort} />
       </Hero>
+      {/* <LoadingSpinner /> */}
       {error && <span>{error}</span>}
       {isLoading ? <LoadingSpinner /> : <MovieGrid movies={movies || []} />}
     </section>

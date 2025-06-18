@@ -15,7 +15,7 @@ export const MovieDetailPage = () => {
     if (params.id) setMovieId(Number(params.id))
   }, [params])
 
-  if (isLoading) return <LoadingSpinner />
+  // if (isLoading) return <LoadingSpinner />
   if (error) return <span>{error}</span>
 
   function handleGoBack() {
@@ -28,7 +28,7 @@ export const MovieDetailPage = () => {
       path={movieDetail?.backdrop}
       alt={`Banner of "${movieDetail?.title}" movie`}
     >
-      {movieDetail && (
+      {!isLoading && movieDetail && (
         <div className='content'>
           <div className='movie-detail__movie-poster'>
             <img src={movieDetail.poster} />
