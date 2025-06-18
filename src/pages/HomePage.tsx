@@ -17,7 +17,6 @@ export const HomePage: React.FunctionComponent<
   const [sort, setSort] = useState<SortValue>('all')
 
   const { movies, featuredMovie, isLoading, error } = useMovies(sort)
-  // const Loading = () => <h2>LOADING</h2>
 
   return (
     <section className='home-page'>
