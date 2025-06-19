@@ -3,7 +3,8 @@ import { useMovieDetail } from '../hooks/useMovieDetail'
 import { useEffect, useState } from 'react'
 import { BackdropContainer } from '../components/BackdropContainer'
 import { formatDate } from '../utils'
-import { LoadingSpinner } from '../components/LoadingSpinner'
+
+import BackIcon from '../assets/svg/arrow-alt-left.svg?react'
 
 export const MovieDetailPage = () => {
   const [movieId, setMovieId] = useState<number | undefined>()
@@ -25,34 +26,48 @@ export const MovieDetailPage = () => {
   return (
     <BackdropContainer
       className='movie-detail'
-      path={movieDetail?.backdrop}
+      path={movieDetail?.backdropPath}
       alt={`Banner of "${movieDetail?.title}" movie`}
     >
       {!isLoading && movieDetail && (
-        <div className='content'>
-          <div className='movie-detail__movie-poster'>
-            <img src={movieDetail.poster} />
+        <div className='movie-detail__content'>
+          <div className='movie-detail__poster'>
+            <img src={movieDetail.posterPath} />
           </div>
-          <div className='movie-info'>
-            <div className='movie-info__heading'>
-              <a href='#' onClick={handleGoBack}>
-                Back
-              </a>
-              <h2 className='title'>{movieDetail.title}</h2>
-              <div>
-                <time dateTime={movieDetail.releaseDate}>
+          <div className='info-container'>
+            <a
+              className='info-container__back-button'
+              href='#'
+              onClick={handleGoBack}
+            >
+              <BackIcon />
+            </a>
+            <div className='info-container__header'>
+              <h2 className='header__title'>{movieDetail.title}</h2>
+              <div className='header__subtitle-box '>
+                <time
+                  className='subtitle-box__date'
+                  dateTime={movieDetail.releaseDate}
+                >
                   {formatDate(movieDetail.releaseDate)}
                 </time>
-                <span>{movieDetail.stars}</span>
+                <span className='subtitle-box__score'>
+                  {movieDetail.score}/5
+                </span>
               </div>
+              {/* Genres podia ser un badge que al dar click aplique filtro a una lista en base a ese genero */}
+              <ul className='subtitle-box__genre-list'>
+                {movieDetail.genres.map((genre) => (
+                  <li>
+                    <span>{genre}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <div className='movie-info__overview'>
-              <h3>Overview</h3>
-              <p>{movieDetail.overview}</p>
+            <div className='info-container__overview-box'>
+              <h3 className='overview-box__title'>Overview</h3>
+              <p className='overview-box__overview'>{movieDetail.overview}</p>
             </div>
-
-            {/* Aqui iran los genres */}
-            {/* <h1 style={{ marginTop: 'auto' }}>genres</h1> */}
           </div>
         </div>
       )}

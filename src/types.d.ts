@@ -1,23 +1,5 @@
 import type { SORTS } from './constants'
 
-interface Movie {
-  id: number
-  title: string
-  overview: string
-  releaseDate: string
-  poster: string
-  backdrop: string | null
-  popularity: number
-  stars: string
-  // genres: string[]
-}
-
-type MovieId = Movie['id']
-
-type MovieCard = Omit<Movie, 'backdrop' | 'popularity' | 'overview' | 'genres'>
-type MovieDetail = Omit<Movie, 'id'>
-
-// API
 interface MovieFromAPI {
   adult: boolean
   backdrop_path: string | null
@@ -35,6 +17,51 @@ interface MovieFromAPI {
   vote_count: number
 }
 
-//
+interface Movie {
+  id: number
+  title: string
+  releaseDate: string
+  posterPath: string
+  backdropPath: string | null
+  popularity: number
+  score: string
+  genres: number[]
+}
+
+type MovieId = Movie['id']
+
+// Movie detail es la data que trae la info extendida de la movie
+
+interface MovieDetailFromApi {
+  id: number
+  title: string
+  genres: { id: number; name: string }[]
+  overview: string
+  release_date: string
+  status: string
+  backdrop_path: string
+  poster_path: string
+  production_companies: {
+    id: number
+    logo_path: string | null
+    name: string
+    origin_country: string
+  }
+  vote_average: number
+  // popularity: number
+  // imdb_id: string
+  // original_title: 'Life After Fighting'
+}
+
+interface MovieDetail {
+  id: number
+  title: string
+  overview: string
+  posterPath: string
+  backdropPath: string | null
+  releaseDate: string
+  score: string
+  genres: string[]
+}
 
 type SortValue = (typeof SORTS)[keyof typeof SORTS]
