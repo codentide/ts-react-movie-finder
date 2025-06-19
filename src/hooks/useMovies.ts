@@ -1,6 +1,6 @@
 import type { Movie, MovieFromAPI, SortValue } from '../types'
 import { useEffect, useRef, useState } from 'react'
-import { formatMovies, sortMovies } from '../utils'
+import { formatMovieList, sortMovies } from '../utils'
 import { useSearchParams } from 'react-router'
 
 const BASE_URL = import.meta.env.VITE_BASE_URL
@@ -85,7 +85,7 @@ export function useMovies(sort: SortValue = 'all'): UseMoviesReturn {
       const unformattedMovies = await fetchMovies(url)
 
       if (unformattedMovies) {
-        const formattedMovies = formatMovies(unformattedMovies)
+        const formattedMovies = formatMovieList(unformattedMovies)
         // Copia de movies sin sortear
         moviesRef.current = formattedMovies
         const mostPopularMovie = getMostPopularMovie(formattedMovies)
