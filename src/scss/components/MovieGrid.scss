@@ -30,15 +30,6 @@
   }
 }
 
-@keyframes appear {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 @media (width <= 480px) {
   .movie-list {
     padding: 4rem 8%;

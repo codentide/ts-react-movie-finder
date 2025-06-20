@@ -5,6 +5,7 @@ import { BackdropContainer } from '../components/BackdropContainer'
 import { formatDate } from '../utils'
 
 import BackIcon from '../assets/svg/arrow-alt-left.svg?react'
+import { ScoreBadge } from '../components/ScoreBadge'
 
 export const MovieDetailPage = () => {
   const [movieId, setMovieId] = useState<number | undefined>()
@@ -49,16 +50,14 @@ export const MovieDetailPage = () => {
                   className='subtitle-box__date'
                   dateTime={movieDetail.releaseDate}
                 >
-                  {formatDate(movieDetail.releaseDate)}
+                  {formatDate(movieDetail.releaseDate, 'en')}
                 </time>
-                <span className='subtitle-box__score'>
-                  {movieDetail.score}/5
-                </span>
+                <ScoreBadge score={movieDetail.score} />
               </div>
               {/* Genres podia ser un badge que al dar click aplique filtro a una lista en base a ese genero */}
               <ul className='subtitle-box__genre-list'>
-                {movieDetail.genres.map((genre) => (
-                  <li>
+                {movieDetail.genres.map((genre, index) => (
+                  <li key={index}>
                     <span>{genre}</span>
                   </li>
                 ))}
