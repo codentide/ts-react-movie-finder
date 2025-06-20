@@ -1,5 +1,9 @@
-@use '../base/colors' as *;
+@use '../base/colors' as c;
 @use '../base/typography' as *;
+
+$author-name-cl: c.$color-neutral-900;
+$author-link-cl: c.$color-neutral-900;
+$hovered-author-link-cl: c.$color-neutral-400;
 
 .author-info {
   display: flex;
@@ -11,7 +15,7 @@
     text-transform: capitalize;
     font-weight: 500;
 
-    color: $color-neutral-900;
+    color: $author-name-cl;
   }
 
   .link-list {
@@ -32,13 +36,13 @@
         width: 20px;
         height: 20px;
 
-        fill: $color-neutral-900;
+        fill: $author-link-cl;
         transition: fill 0.4s ease;
       }
     }
 
     &__link:hover svg {
-      fill: $color-neutral-400;
+      fill: $hovered-author-link-cl;
     }
   }
 }

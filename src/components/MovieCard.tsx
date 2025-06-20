@@ -1,29 +1,35 @@
 import { Link } from 'react-router'
-import type { MovieCard as MovieCardType } from '../types'
+import type { Movie } from '../types'
 import { formatDate } from '../utils/formatDate'
+import { ScoreBadge } from './ScoreBadge'
 
 export const MovieCard = ({
   id,
   title,
-  poster,
-  stars,
+  posterPath,
+  score,
   releaseDate,
-}: MovieCardType) => {
+  genres,
+}: Movie) => {
   return (
-    <Link to={`movie/${id}`}>
-      <div className='movie-card' movie-id={id}>
+    <Link to={`/movie/${id}`}>
+      <div
+        className='movie-card'
+        data-movie-id={id}
+        data-genre-id-list={`${genres.join(',')}`}
+      >
         <div className='movie-card__average'>
-          {/* svg */}
-          <p>{stars}</p>
+          {/* <p>{score}</p> */}
+          <ScoreBadge score={score} />
         </div>
         <div className='movie-card__info'>
           <h3>{title}</h3>
           {/* YYYY/MM/DD */}
-          <time dateTime={releaseDate}>{formatDate(releaseDate)}</time>
+          <time dateTime={releaseDate}>{formatDate(releaseDate, 'en')}</time>
         </div>
         <img
           className='movie-card__poster'
-          src={poster}
+          src={posterPath}
           alt={`Poster of '${title}' movie`}
           draggable='false'
         />

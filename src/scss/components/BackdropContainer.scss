@@ -1,11 +1,13 @@
+@use '../base/colors' as c;
+
+$gradient-value-1: hsl(c.$hue-primary, 40%, 04%);
+$gradient-value-2: hsl(c.$hue-primary, 64%, 24%, 0.6);
+
 .backdrop-container {
   position: relative;
 
   width: 100%;
   padding: 8rem 16%;
-
-  $gradient-value-1: hsl(216, 40%, 04%);
-  $gradient-value-2: hsl(216, 64%, 24%, 0.6);
 
   background: linear-gradient(to bottom, $gradient-value-1, $gradient-value-2);
   overflow: hidden;
@@ -32,24 +34,6 @@
 
     &.unactive {
       animation: disappear 0.8s ease forwards;
-    }
-  }
-
-  @keyframes appear {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes disappear {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0;
     }
   }
 }

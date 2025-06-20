@@ -1,7 +1,9 @@
-@use './base/colors' as *;
-@use './base/typography' as *;
+@use './base/colors' as c;
+@use './base/typography' as t;
 
 @use './components/BackdropContainer.scss' as *;
+@use './components/LoadingSpinner.scss' as *;
+@use './components/ScoreBadge.scss' as *;
 
 @use './pages/DefaultPage.scss' as *;
 @use './pages/HomePage.scss' as *;
@@ -27,9 +29,9 @@ body {
   width: 100%;
   min-height: 100vh;
 
-  font-family: $font-primary, monospace;
+  font-family: t.$font-primary, monospace;
   color-scheme: dark;
-  accent-color: hsl(216, 80%, 50%);
+  accent-color: hsl(c.$hue-primary, 80%, 50%);
 }
 
 body {
@@ -41,4 +43,48 @@ body {
 .super-container {
   display: flex;
   flex-direction: column;
+}
+
+/*  */
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes disappear {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes spin {
+  0% {
+    rotate: 0deg;
+  }
+
+  100% {
+    rotate: 180deg;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }

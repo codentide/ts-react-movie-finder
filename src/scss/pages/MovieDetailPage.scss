@@ -1,4 +1,11 @@
 @use '../base/colors' as *;
+@use '../base/media-queries' as media-query;
+
+$gradient-value-1: hsl(216, 40%, 04%);
+$gradient-value-2: hsl(216, 64%, 24%, 0.6);
+
+$back-button-color: $color-primary-600;
+$back-button-bg: hsl($hue-primary, 100%, 64%, 0.16);
 
 .movie-detail {
   display: flex;
@@ -7,18 +14,20 @@
   width: 100%;
   height: 100dvh;
 
-  $gradient-value-1: hsl(216, 40%, 04%);
-  $gradient-value-2: hsl(216, 64%, 24%, 0.6);
-
   background: radial-gradient($gradient-value-2, $gradient-value-1);
 
-  .content {
-    display: flex;
-    gap: 2rem;
-    height: 100%;
+  @include media-query.tablet {
+    padding: 8rem 12%;
   }
 
-  &__movie-poster {
+  @include media-query.mobile-large {
+    height: auto;
+    min-height: 100dvh;
+
+    padding: 5.2rem 12%;
+  }
+
+  &__poster {
     display: grid;
     place-items: center;
     flex-shrink: 0;
@@ -36,87 +45,155 @@
     }
   }
 
-  .movie-info {
+  &__content {
+    position: relative;
+
+    display: flex;
+    gap: 2rem;
+    height: 100%;
+
+    opacity: 0;
+    animation: appear 0.8s 0s ease forwards;
+
+    @include media-query.tablet {
+      height: 88%;
+      gap: 1.6rem;
+    }
+
+    @include media-query.mobile-large {
+      flex-direction: column;
+    }
+  }
+
+  .info-container {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.6rem;
 
-    &__heading {
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
+    &__back-button {
+      display: inline-grid;
+      place-items: center;
 
-      .title {
-        font-size: 2.8rem;
-        line-height: 1.2;
-        text-transform: capitalize;
+      padding: 0rem 0.48rem;
+      border-radius: 0.32rem;
+
+      width: fit-content;
+
+      background-color: $back-button-bg;
+
+      svg {
+        width: 20px;
+
+        fill: $back-button-color;
       }
 
-      div {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
+      &:hover {
+        filter: brightness(1.2);
+      }
 
-        time {
-          font-size: 1rem;
-          color: $color-neutral-200;
-        }
+      @include media-query.mobile-large {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
 
-        span {
-          padding: 0.2rem 0.32rem 0.1rem;
-          border-radius: 0.2rem;
+        padding: 0.2rem 0.4rem;
 
-          font-size: 0.92rem;
-          font-weight: 600;
-          line-height: 1;
+        background-color: hsl($hue-primary, 100%, 32%, 0.64);
+        backdrop-filter: blur(0.32rem);
 
-          color: $color-neutral-200;
-          background-color: $color-primary-700;
+        svg {
+          width: 32px;
+          fill: $color-primary-100;
         }
       }
     }
 
-    &__overview {
+    &__header {
       display: flex;
       flex-direction: column;
       gap: 0.4rem;
 
-      h3 {
-        font-size: 1.6rem;
+      .header__title {
+        font-size: 2.2rem;
+        text-transform: capitalize;
+        line-height: 1.2;
+
+        @include media-query.tablet {
+          font-size: 2rem;
+        }
       }
 
-      p {
-        font-size: 1.2rem;
-        font-weight: 300;
+      .header__subtitle-box {
+        display: flex;
+        align-items: center;
+        gap: 0.64rem;
 
-        color: $color-neutral-400;
+        .subtitle-box__date {
+          font-size: 0.88rem;
+          color: $color-neutral-200;
+        }
+
+        // [ ] Componentizar
+        // .subtitle-box__score {
+        //   padding: 0.2rem 0.32rem 0.2rem;
+        //   border-radius: 0.2rem;
+
+        //   font-size: 0.8rem;
+        //   font-weight: 600;
+        //   line-height: 1;
+
+        //   color: $color-neutral-200;
+        //   background-color: $color-primary-700;
+        // }
+      }
+
+      .subtitle-box__genre-list {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+
+        margin-top: 0.2rem;
+        list-style: none;
+
+        li span {
+          padding: 0 0.4rem 0.1rem;
+          border-radius: 0.32rem;
+
+          font-size: 0.88rem;
+          color: $color-neutral-500;
+
+          background-color: hsl($hue-primary, 12%, 0%, 0.32);
+
+          user-select: none;
+        }
       }
     }
-  }
-}
 
-// [ ]: Mejorar el estilo del responsive
+    &__overview-box {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
 
-@media (width <= 1024px) {
-  .movie-detail .content {
-    height: 90%;
-  }
+      .overview-box__title {
+        font-size: 1.6rem;
 
-  // [ ]: Esto no esta bien
-  .movie-detail .movie-info .movie-info__heading .title {
-    font-size: 2rem;
-  }
-}
+        @include media-query.tablet {
+          font-size: 1.2rem;
+        }
+      }
 
-@media (width <= 768px) {
-  .movie-detail {
-    height: auto;
-    min-height: 100dvh;
-  }
+      .overview-box__overview {
+        font-size: 1.12rem;
+        font-weight: 300;
+        line-height: 1.5;
 
-  .movie-detail .content {
-    flex-direction: column;
-    height: 100%;
+        color: $color-neutral-400;
+
+        @include media-query.tablet {
+          font-size: 1rem;
+        }
+      }
+    }
   }
 }
 

@@ -14,9 +14,9 @@ export const Hero = ({ featuredMovie, children }: Props) => {
   // Limpiar mejor el efecto
   useEffect(() => {
     if (!featuredMovie) return
-    if (featuredMovie.backdrop === null) return
+    if (featuredMovie.backdropPath === null) return
 
-    setBackdrop(featuredMovie.backdrop as string)
+    setBackdrop(featuredMovie.backdropPath as string)
   }, [featuredMovie])
 
   return (

@@ -10,6 +10,9 @@
 
   list-style: none;
 
+  opacity: 0;
+  animation: appear 0.4s 0.2s ease forwards;
+
   &__item {
     width: 100%;
   }
@@ -24,15 +27,6 @@
 
     opacity: 0;
     animation: appear 0.8s 1s ease forwards;
-  }
-}
-
-@keyframes appear {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
   }
 }
 

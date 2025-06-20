@@ -24,7 +24,7 @@ export const BackdropContainer: React.FunctionComponent<Props> = ({
     const debouncer = setTimeout(() => {
       setCurrentPath(path)
       setIsActive(true)
-    }, 1000)
+    }, 500)
 
     return () => {
       clearTimeout(debouncer)

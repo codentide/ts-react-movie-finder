@@ -1,4 +1,5 @@
 @use '../base/colors' as *;
+@use '../base/media-queries' as media-query;
 
 a:has(.movie-card) {
   text-decoration: none;
@@ -25,18 +26,6 @@ a:has(.movie-card) {
     display: flex;
     align-items: center;
     justify-content: end;
-
-    p {
-      padding: 0.16rem 0.32rem;
-      border-radius: 0.2rem;
-
-      font-size: 0.92rem;
-      font-weight: 600;
-      line-height: 1;
-
-      color: $color-neutral-200;
-      background-color: $color-primary-700;
-    }
   }
 
   &__info {
@@ -50,6 +39,11 @@ a:has(.movie-card) {
       text-transform: capitalize;
 
       color: $color-neutral-200;
+
+      @include media-query.mobile-small {
+        font-size: 1.32rem;
+        line-height: 1.2;
+      }
     }
 
     time {
@@ -57,6 +51,10 @@ a:has(.movie-card) {
       font-size: 0.8rem;
 
       color: $color-neutral-800;
+
+      @include media-query.mobile-small {
+        font-size: 1rem;
+      }
     }
   }
 
