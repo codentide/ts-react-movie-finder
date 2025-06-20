@@ -6,6 +6,7 @@ import { formatDate } from '../utils'
 
 import BackIcon from '../assets/svg/arrow-alt-left.svg?react'
 import { ScoreBadge } from '../components/ScoreBadge'
+import { LoadingSpinner } from '../components/LoadingSpinner'
 
 export const MovieDetailPage = () => {
   const [movieId, setMovieId] = useState<number | undefined>()
@@ -17,8 +18,10 @@ export const MovieDetailPage = () => {
     if (params.id) setMovieId(Number(params.id))
   }, [params])
 
-  // if (isLoading) return <LoadingSpinner />
-  if (error) return <span>{error}</span>
+  // [ ]: Mejorar performance
+  if (error) {
+    return <span>{error}</span>
+  }
 
   function handleGoBack() {
     navigate(-1)
@@ -30,7 +33,7 @@ export const MovieDetailPage = () => {
       path={movieDetail?.backdropPath}
       alt={`Banner of "${movieDetail?.title}" movie`}
     >
-      {!isLoading && movieDetail && (
+      {!isLoading && movieDetail ? (
         <div className='movie-detail__content'>
           <div className='movie-detail__poster'>
             <img src={movieDetail.posterPath} />
@@ -69,6 +72,8 @@ export const MovieDetailPage = () => {
             </div>
           </div>
         </div>
+      ) : (
+        <LoadingSpinner className='movie-detail__loading-spinner' />
       )}
     </BackdropContainer>
   )

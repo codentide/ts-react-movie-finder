@@ -1,137 +1,168 @@
 # Movie Finder App
 
-![Movie App Home](/public/screenshots/home-page.webp)
-![Movie Detailes Page](/public/screenshots/movie-page.webp)
+Una aplicación web moderna para descubrir y explorar películas consumidas desde el API de TMDB, construida con React 19, TypeScript y React Router.
 
-## Visión General
+## Screenshots
 
-**Movie Finder App** es una aplicación web interactiva que transforma la experiencia de descubrimiento de películas. Desarrollada con tecnologías modernas como React y TypeScript, esta aplicación no solo demuestra competencias técnicas avanzadas sino que también ofrece una experiencia de usuario fluida y atractiva.
-
-## Tecnologías Utilizadas
-
-- **React 19**: Framework de JavaScript para construir interfaces de usuario
-- **TypeScript**: Superset de JavaScript que añade tipado estático
-- **Sass**: Preprocesador CSS para estilos más organizados y mantenibles
-- **Vite**: Herramienta de construcción rápida para proyectos web modernos
-- **API de Películas**: Integración con una API externa para obtener datos de películas
+| Página Principal                                  | Página de Detalle                                     | Búsqueda                                              |
+| ------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| ![Home Page](./public/screenshots/home-page.webp) | ![Movie Detail](./public/screenshots/movie-page.webp) | ![Search Page](./public/screenshots/search-page.webp) |
 
 ## Características Principales
 
-### 1. Búsqueda de Películas
+### Búsqueda Inteligente
 
-- Implementación de búsqueda en tiempo real con debounce para optimizar las llamadas a la API
-- Visualización de resultados de búsqueda con información relevante de cada película
+- Búsqueda en tiempo real con debounce optimizado
+- Persistencia de búsquedas en URL mediante query parameters
+- Integración con React Router para navegación fluida
 
-### 2. Ordenación Avanzada
+### Páginas de Detalle
 
-- Sistema de ordenación flexible que permite ordenar películas por:
-  - Título (A-Z y Z-A)
-  - Fecha de lanzamiento (más recientes y más antiguas)
+- Vista detallada de cada película con información completa
+- Navegación entre páginas con React Router
+- Diseño responsive con imágenes de fondo dinámicas
 
-### 3. Interfaz Adaptativa
+### Sistema de Ordenación
 
-- Diseño responsive que se adapta a diferentes tamaños de pantalla
-- Componente Hero dinámico que muestra la imagen de fondo de la película destacada
-- Transiciones suaves entre estados de la interfaz
+- Ordenación por título (A-Z, Z-A)
+- Ordenación por fecha (más recientes/antiguas)
+- Estado persistente durante la navegación
 
-### 4. Gestión de Estado
+### Interfaz Moderna
 
-- Uso de hooks personalizados para encapsular la lógica de negocio
-- Implementación de patrones de estado eficientes para manejar datos y UI
+- Diseño completamente responsive
+- Componentes reutilizables y modulares
+- Transiciones suaves y feedback visual
+- Manejo de estados de carga y errores
 
-## Arquitectura del Proyecto
+## Tecnologías
 
-### Estructura de Carpetas
+- **React 19** - Framework principal
+- **TypeScript** - Tipado estático
+- **React Router 7** - Enrutamiento y navegación
+- **Sass** - Preprocesador CSS
+- **Vite** - Build tool y dev server
+- **TMDB API** - Datos de películas
+
+## 📁 Estructura del Proyecto
 
 ```
 src/
-|-- assets/         # Recursos estáticos (SVGs, imágenes)
-|-- components/     # Componentes React reutilizables
-|-- hooks/          # Hooks personalizados
-|-- scss/           # Estilos organizados por componentes
-|-- utils/          # Funciones utilitarias
-|-- App.tsx         # Componente principal
-|-- constants.ts    # Constantes de la aplicación
-|-- types.d.ts      # Definiciones de tipos TypeScript
+├── assets/          # SVGs y recursos estáticos
+├── components/      # Componentes React reutilizables
+├── hooks/           # Hooks personalizados
+├── pages/           # Páginas de la aplicación
+├── scss/            # Estilos organizados
+│   ├── base/        # Variables y tipografía
+│   ├── components/  # Estilos por componente
+│   └── pages/       # Estilos por página
+├── utils/           # Funciones utilitarias
+└── types.d.ts       # Definiciones TypeScript
 ```
 
-### Componentes Principales
+## 🔧 Componentes Principales
 
-#### 1. App
+### App.tsx
 
-Componente raíz que orquesta la aplicación y gestiona el estado global.
+Componente raíz que configura el enrutamiento con React Router:
 
-#### 2. Hero
+- Ruta principal redirige a `/movies`
+- Página de detalle en `/movie/:id`
+- Página 404 para rutas no encontradas
 
-Componente destacado que muestra:
+### HomePage
 
-- Título de la aplicación
-- Campo de búsqueda
-- Selector de ordenación
-- Imagen de fondo dinámica de la película destacada
+Página principal que integra:
 
-#### 3. MovieGrid
+- Componente Hero con búsqueda y ordenación
+- Grid de películas con estado de carga
+- Manejo de errores de API
 
-Componente que renderiza la cuadrícula de películas utilizando el componente MovieCard.
+### MovieDetailPage
 
-#### 4. MovieCard
+Página de detalle individual que muestra:
 
-Componente que muestra la información individual de cada película:
-
-- Póster
-- Título
-- Fecha de lanzamiento
-- Puntuación en estrellas
+- Información completa de la película
+- Imagen de fondo dinámica
+- Navegación de regreso
+- Géneros y puntuación
 
 ### Hooks Personalizados
 
 #### useMovies
 
-Hook central que maneja:
+Hook principal para gestión de películas:
 
-- Obtención de datos de la API
-- Búsqueda de películas
-- Ordenación de resultados
-- Estado de carga y errores
+- Integración con React Router para query parameters
+- Debounce optimizado para búsquedas
+- Gestión de película destacada
+- Estados de carga y error
 
-## Aspectos Técnicos Destacados
+#### useMovieDetail
 
-### 1. Tipado Estricto con TypeScript
+Hook para detalles de película individual:
 
-- Definición clara de interfaces para los datos de películas
-- Tipado estricto para props de componentes
-- Tipos personalizados para valores de ordenación
+- Fetch de datos específicos por ID
+- Formateo de datos de la API
+- Manejo de errores específicos
 
-### 2. Optimización de Rendimiento
+## Mejoras Implementadas
 
-- Implementación de debounce para reducir llamadas a la API durante la búsqueda
-- Transiciones optimizadas para cambios de estado visual
+### Arquitectura
 
-### 3. Manejo de Errores
+- **Eliminación de prop drilling**: Los hooks manejan el estado localmente
+- **Separación de responsabilidades**: Cada página maneja su propio estado
+- **Componentes más pequeños**: Mayor reutilización y mantenibilidad
 
-- Sistema robusto de manejo de errores en llamadas a la API
-- Fallbacks visuales para posters no disponibles
+### Navegación
 
-### 4. Utilidades Reutilizables
+- **React Router 7**: Navegación moderna con URL state
+- **Query parameters**: Búsquedas persistentes en URL
+- **Navegación programática**: Botón de regreso funcional
 
-- `mapMovies`: Transforma los datos de la API al formato interno de la aplicación
-- `sortMovies`: Implementa diferentes algoritmos de ordenación
-- `formatDate`: Formatea fechas para una presentación consistente
+### Performance
 
-## Desafíos y Soluciones
+- **Debounce mejorado**: Menos llamadas a la API
+- **Referencias optimizadas**: Evita re-renders innecesarios
+- **Lazy loading**: Componentes cargados bajo demanda
 
-### Desafío 1: Gestión de Imágenes Dinámicas
+### UX/UI
 
-**Solución:** Implementación de un sistema de fallback para pósters y fondos no disponibles, utilizando placeholders generados dinámicamente.
+- **Estados de carga**: Spinner personalizado
+- **Manejo de errores**: Mensajes informativos
+- **Responsive design**: Adaptable a todos los dispositivos
+- **Transiciones suaves**: Mejor experiencia visual
 
-### Desafío 2: Ordenación Eficiente
+## Instalación y Uso
 
-**Solución:** Desarrollo de algoritmos de ordenación específicos para cada tipo de dato (texto, fechas) con manejo adecuado de casos especiales como fechas inválidas.
+```bash
+# Clonar repositorio
+git clone [repository-url]
 
-### Desafío 3: Experiencia de Usuario Fluida
+# Instalar dependencias
+pnpm install
 
-**Solución:** Implementación de transiciones suaves y estados de carga para proporcionar feedback visual durante las operaciones asíncronas.
+# Ejecutar en desarrollo
+pnpm dev
 
-## Conclusiones y Aprendizajes
+# Build para producción
+pnpm build
+```
 
-La Movie Finder App representa un ejemplo sólido de desarrollo frontend moderno, combinando buenas prácticas de programación, tipado estricto y una experiencia de usuario cuidadosamente diseñada.
+## Variables de Entorno
+
+```env
+VITE_BASE_URL=https://api.themoviedb.org/3
+VITE_IMG_BASE_URL=https://image.tmdb.org/t/p/w500
+VITE_API_KEY=tu_api_key_aqui
+```
+
+## Características de Diseño
+
+- **CSS Grid/Flexbox**: Layout moderno y flexible
+- **Sass Variables**: Colores y tipografía consistentes
+- **Component-based CSS**: Estilos organizados por componente
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.

@@ -24,9 +24,13 @@ export const HomePage: React.FunctionComponent<
         <SearchInput placeholder='Search a movie...' />
         <SortList onSortChange={setSort} currentSort={sort} />
       </Hero>
-      {/* <LoadingSpinner /> */}
+      {/* <LoadingSpinner className='home-page__loading-spinner' /> */}
       {error && <span>{error}</span>}
-      {isLoading ? <LoadingSpinner /> : <MovieGrid movies={movies || []} />}
+      {isLoading ? (
+        <LoadingSpinner className='home-page__loading-spinner' />
+      ) : (
+        <MovieGrid movies={movies || []} />
+      )}
     </section>
   )
 }

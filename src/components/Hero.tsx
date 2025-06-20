@@ -21,9 +21,11 @@ export const Hero = ({ featuredMovie, children }: Props) => {
 
   return (
     <BackdropContainer className='hero' path={backdrop}>
-      <div className='hero__title-box'>
-        <h2>React/TS Movie Finder</h2>
-        <p>Look for the first movie that comes to mind!</p>
+      <div className='title-box'>
+        <h2 className='title-box__title'>React/TS Movie Finder</h2>
+        <p className='title-box__slogan'>
+          Look for the first movie that comes to mind!
+        </p>
       </div>
       <div className='hero__search-box'>{children}</div>
     </BackdropContainer>

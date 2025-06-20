@@ -1,3 +1,10 @@
+@use '../base/colors' as c;
+@use '../base/media-queries' as media-query;
+
+$search-input-cl: c.$color-neutral-600;
+$search-input-placeholder-cl: c.$color-neutral-600;
+$search-input-bg: hsl(c.$hue-primary, 16%, 8%, 0.88);
+
 .input-box {
   position: relative;
 
@@ -19,8 +26,8 @@
     font-family: inherit;
     font-size: 1rem;
 
-    color: hsl(216, 80%, 96%, 0.6);
-    background-color: hsl(216, 16%, 8%, 1);
+    color: $search-input-cl;
+    background-color: $search-input-bg;
 
     transition: outline 0.4s ease;
 

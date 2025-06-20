@@ -1,11 +1,12 @@
-@use '../base/colors' as *;
-@use '../base/typography' as *;
+@use '../base/colors' as c;
+@use '../base/typography' as t;
+@use '../base/media-queries' as media-query;
 
-$sort-button-background: $color-neutral-1300;
-$sort-button-text-color: $color-neutral-800;
+$sort-button-background: hsl(c.$hue-primary, 16%, 8%);
+$sort-button-text-color: c.$color-neutral-800;
 
-$active-sort-button-background: $color-primary-600;
-$active-sort-button-text-color: $color-neutral-100;
+$active-sort-button-background: c.$color-primary-700;
+$active-sort-button-text-color: c.$color-neutral-100;
 
 .sort-list {
   display: flex;
@@ -19,25 +20,24 @@ $active-sort-button-text-color: $color-neutral-100;
     border-radius: 0.28rem;
     border: none;
 
-    font-family: $font-primary;
+    font-family: t.$font-primary;
     text-transform: lowercase;
     line-height: 1;
 
     color: $sort-button-text-color;
     background-color: $sort-button-background;
 
-    transition: background-color 0.4s ease;
     cursor: pointer;
+    transition: background-color 0.4s ease;
 
     &.active {
       color: $active-sort-button-text-color;
       background-color: $active-sort-button-background;
+      transition: background-color 0.4s ease;
     }
   }
-}
 
-@media (width <= 480px) {
-  .sort-list {
+  @include media-query.mobile-small {
     width: 100%;
     justify-content: center;
   }
