@@ -1,8 +1,12 @@
 import SpinnerIcon from '../assets/svg/logo.svg?react'
 
-export const LoadingSpinner = (): React.JSX.Element => {
+interface Props {
+  className?: string
+}
+
+export const LoadingSpinner = ({ className }: Props): React.JSX.Element => {
   return (
-    <div className='loading-spinner'>
+    <div className={`loading-spinner ${className ? className : ''}`}>
       <SpinnerIcon className='spinner' />
     </div>
   )

@@ -17,12 +17,12 @@ export const MovieGrid: React.FunctionComponent<Props> = ({ movies }) => {
   }
 
   return (
-    <ul className='movie-list'>
+    <>
       {hasMovies ? (
-        renderMovies()
+        <ul className='movie-list'>{renderMovies()}</ul>
       ) : (
-        <span className='message_no-movies'>Theres is no movies...</span>
+        <span className='message_no-movies'>No movies found...</span>
       )}
-    </ul>
+    </>
   )
 }

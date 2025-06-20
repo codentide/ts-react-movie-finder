@@ -1,3 +1,9 @@
+@use '../base/media-queries' as media-query;
+@use '../base/colors' as c;
+
+$hero-title-color: c.$color-primary-600;
+$hero-slogan-color: c.$color-neutral-700;
+
 .hero {
   display: flex;
   flex-direction: column;
@@ -6,22 +12,48 @@
   width: 100%;
   padding: 6.4rem 16% 4rem;
 
-  &__title-box {
+  @include media-query.mobile-small {
+    padding: 6.4rem 8% 2rem;
+  }
+
+  .title-box {
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
 
     width: 100%;
 
-    h2 {
+    &__title {
       font-size: 2rem;
       line-height: 1;
-      color: hsl(216, 100%, 64%, 1);
+      color: $hero-title-color;
     }
 
-    p {
+    &__slogan {
       font-size: 1rem;
-      color: hsl(216, 80%, 96%, 0.4);
+      color: $hero-slogan-color;
+    }
+
+    @include media-query.mobile-large {
+      &__title {
+        font-size: 1.8rem;
+      }
+    }
+
+    @include media-query.mobile-small {
+      align-items: center;
+      text-align: center;
+      gap: 0.4rem;
+
+      &__title {
+        font-size: calc(1rem + 3.2vw);
+      }
+
+      &__slogan {
+        width: 24ch;
+        font-size: 0.92rem;
+        line-height: 1.2;
+      }
     }
   }
 
@@ -29,44 +61,8 @@
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
-  }
-}
 
-@media (width <= 768px) {
-  .hero__title-box {
-    h2 {
-      font-size: 1.8rem;
-      color: hsl(216, 100%, 64%, 1);
-    }
-
-    p {
-      font-size: 1rem;
-      color: hsl(216, 80%, 96%, 0.4);
-    }
-  }
-}
-
-@media (width <= 480px) {
-  .hero {
-    padding: 6.4rem 8% 2rem;
-
-    &__title-box {
-      align-items: center;
-      text-align: center;
-      gap: 0.4rem;
-
-      h2 {
-        font-size: calc(1rem + 3.2vw);
-      }
-
-      p {
-        width: 24ch;
-        font-size: 0.92rem;
-        line-height: 1.2;
-      }
-    }
-
-    &__search-box {
+    @include media-query.mobile-small {
       gap: 0.64rem;
     }
   }

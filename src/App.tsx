@@ -12,7 +12,6 @@ export default function App() {
   return (
     <main className='super-container'>
       <Header />
-
       <Routes>
         <Route index element={<Navigate to={'/movies'} replace />} />
         <Route path='movies' element={<HomePage />} />

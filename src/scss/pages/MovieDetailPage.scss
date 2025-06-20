@@ -8,6 +8,8 @@ $back-button-color: $color-primary-600;
 $back-button-bg: hsl($hue-primary, 100%, 64%, 0.16);
 
 .movie-detail {
+  position: relative;
+
   display: flex;
   align-items: center;
 
@@ -25,6 +27,19 @@ $back-button-bg: hsl($hue-primary, 100%, 64%, 0.16);
     min-height: 100dvh;
 
     padding: 5.2rem 12%;
+  }
+
+  @include media-query.mobile-small {
+    padding: 4.8rem 8%;
+  }
+
+  &__loading-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1000;
+
+    transform: translate(-50%, -50%) !important;
   }
 
   &__poster {
@@ -132,19 +147,6 @@ $back-button-bg: hsl($hue-primary, 100%, 64%, 0.16);
           font-size: 0.88rem;
           color: $color-neutral-200;
         }
-
-        // [ ] Componentizar
-        // .subtitle-box__score {
-        //   padding: 0.2rem 0.32rem 0.2rem;
-        //   border-radius: 0.2rem;
-
-        //   font-size: 0.8rem;
-        //   font-weight: 600;
-        //   line-height: 1;
-
-        //   color: $color-neutral-200;
-        //   background-color: $color-primary-700;
-        // }
       }
 
       .subtitle-box__genre-list {
@@ -194,11 +196,5 @@ $back-button-bg: hsl($hue-primary, 100%, 64%, 0.16);
         }
       }
     }
-  }
-}
-
-@media (width <= 480px) {
-  .movie-detail {
-    padding: 4.8rem 8%;
   }
 }
