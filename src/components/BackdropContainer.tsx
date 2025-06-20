@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import type { Movie } from '../types'
 
 interface Props {
-  path: Movie['backdrop'] | null | undefined
+  path: Movie['backdropPath'] | null | undefined
   children?: React.ReactNode | React.ReactNode[]
   alt?: string
   className?: string
