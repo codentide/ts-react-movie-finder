@@ -1,6 +1,7 @@
 # Movie Finder App
 
-![Movie Finder App](/public/img/og-image.webp)
+![Movie App Home](/public/screenshots/home-page.webp)
+![Movie Detailes Page](/public/screenshots/movie-page.webp)
 
 ## Visión General
 
