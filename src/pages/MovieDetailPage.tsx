@@ -9,7 +9,7 @@ import { ScoreBadge } from '../components/ScoreBadge'
 import { LoadingSpinner } from '../components/LoadingSpinner'
 
 export const MovieDetailPage = () => {
-  const [movieId, setMovieId] = useState<number | undefined>()
+  const [movieId, setMovieId] = useState<number | null>(null)
   const { movieDetail, isLoading, error } = useMovieDetail(movieId)
   const params = useParams()
   const navigate = useNavigate()

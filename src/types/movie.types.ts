@@ -1,6 +1,6 @@
-import type { SORTS } from './constants'
+import type { SORTS } from '../constants'
 
-interface MovieFromAPI {
+export type MovieFromAPI = {
   adult: boolean
   backdrop_path: string | null
   genre_ids: number[]
@@ -17,7 +17,7 @@ interface MovieFromAPI {
   vote_count: number
 }
 
-interface Movie {
+export type Movie = {
   id: number
   title: string
   releaseDate: string
@@ -28,11 +28,9 @@ interface Movie {
   genres: number[]
 }
 
-type MovieId = Movie['id']
+export type MovieId = Movie['id']
 
-// Movie detail es la data que trae la info extendida de la movie
-
-interface MovieDetailFromApi {
+export type MovieDetailFromApi = {
   id: number
   title: string
   genres: { id: number; name: string }[]
@@ -53,7 +51,7 @@ interface MovieDetailFromApi {
   // original_title: 'Life After Fighting'
 }
 
-interface MovieDetail {
+export type MovieDetail = {
   id: number
   title: string
   overview: string
@@ -64,4 +62,4 @@ interface MovieDetail {
   genres: string[]
 }
 
-type SortValue = (typeof SORTS)[keyof typeof SORTS]
+export type SortValue = (typeof SORTS)[keyof typeof SORTS]

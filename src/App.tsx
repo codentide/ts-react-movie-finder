@@ -6,9 +6,6 @@ import { MovieDetailPage } from './pages/MovieDetailPage'
 import { DefaultPage } from './pages/DefaultPage'
 
 export default function App() {
-  // const location = useLocation()
-  // console.log(location)
-
   return (
     <main className='super-container'>
       <Header />

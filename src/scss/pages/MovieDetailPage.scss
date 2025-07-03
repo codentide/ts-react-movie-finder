@@ -18,20 +18,6 @@ $back-button-bg: hsl($hue-primary, 100%, 64%, 0.16);
 
   background: radial-gradient($gradient-value-2, $gradient-value-1);
 
-  @include media-query.tablet {
-    padding: 8rem 12%;
-  }
-
-  @include media-query.mobile-large {
-    height: auto;
-    min-height: 100dvh;
-
-    padding: 5.2rem 12%;
-  }
-
-  @include media-query.mobile-small {
-    padding: 4.8rem 8%;
-  }
 
   &__loading-spinner {
     position: absolute;
@@ -196,5 +182,20 @@ $back-button-bg: hsl($hue-primary, 100%, 64%, 0.16);
         }
       }
     }
+  }
+
+  @include media-query.tablet {
+    padding: 8rem 12%;
+  }
+
+  @include media-query.mobile-large {
+    height: auto;
+    min-height: 100dvh;
+
+    padding: 5.2rem 12%;
+  }
+
+  @include media-query.mobile-small {
+    padding: 4.8rem 8%;
   }
 }

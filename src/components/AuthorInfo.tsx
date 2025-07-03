@@ -10,7 +10,7 @@ export const AuthorInfo = (): React.JSX.Element => {
           <a
             className='link-list__link'
             target='_blank'
-            href={'https://github.com/codentide/ts-react-movie-finder'}
+            href='https://github.com/codentide/ts-react-movie-finder'
           >
             <GithubIcon className='link__icon' />
           </a>
