@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import type { Movie } from '../types'
+import type { MovieCard } from '../types'
 
 interface Props {
-  path: Movie['backdropPath'] | null | undefined
+  path?: MovieCard['coverPath'] | null
   children?: React.ReactNode | React.ReactNode[]
   alt?: string
   className?: string

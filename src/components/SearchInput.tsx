@@ -4,34 +4,35 @@ import { useSearchParams } from 'react-router'
 
 type Props = {
   placeholder?: string
-  // onInputChange: (value: string) => void
+  onInputChange: (value: string) => void
 }
 
-export const SearchInput = ({ placeholder }: Props) => {
+export const SearchInput = ({ placeholder, onInputChange }: Props) => {
   const [value, setValue] = useState<string>('')
-  const [error, setError] = useState<string | null>(null)
-  const [searchParams, setSearchParams] = useSearchParams()
   const isFirstRender = useRef<boolean>(true)
+  const [searchParams, setSearchParams] = useSearchParams()
 
+  // Cambio de valor de input
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setError(null)
     const input = event.target
-    const inputValue = input.value
+    setValue(input.value)
 
-    setValue(inputValue)
+    if (onInputChange) onInputChange(input.value)
   }
 
   useEffect(() => {
-    if (!isFirstRender.current) return
+    if (isFirstRender.current) {
+      const queryFromUrl = searchParams.get('query')
+      setValue(queryFromUrl || '')
+      isFirstRender.current = false
+      return
+    }
 
-    const queryFromUrl = searchParams.get('query') || ''
-    setValue(queryFromUrl)
-    isFirstRender.current = false
-  }, [searchParams])
-
-  useEffect(() => {
-    setSearchParams(value ? `query=${value}` : '')
-  }, [value, setSearchParams])
+    const newSearchParams = new URLSearchParams(searchParams.toString())
+    if (!value) newSearchParams.delete('query')
+    else newSearchParams.set('query', value)
+    setSearchParams(newSearchParams)
+  }, [searchParams, setSearchParams, value])
 
   return (
     <div className='input-box'>
@@ -41,7 +42,7 @@ export const SearchInput = ({ placeholder }: Props) => {
         onChange={handleInputChange}
         value={value}
       />
-      {error && <span className='input-box__error-msg'>{error}</span>}
+
       {value.length > 0 && (
         <button
           className='input-box__reset-button'

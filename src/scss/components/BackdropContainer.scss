@@ -24,12 +24,12 @@ $gradient-value-2: hsl(c.$hue-primary, 64%, 24%, 0.6);
     object-position: center;
     transform: scale(1.2);
 
-    filter: grayscale(20%) blur(0.4rem) brightness(1.2) contrast(1.2);
+    filter: grayscale(20%) blur(0.32rem) brightness(1.2) contrast(1.2);
 
     opacity: 0;
 
     &.active {
-      animation: appear 1.2s ease forwards;
+      animation: appear 1.2s 0.2s ease forwards;
     }
 
     &.unactive {

@@ -1,6 +1,54 @@
-import type { SORTS } from '../constants'
+import { MovieCard } from '../components/MovieCard'
+import { SORTS } from '../constants'
 
-export type MovieFromAPI = {
+export type SortValue = (typeof SORTS)[keyof typeof SORTS]
+
+export type ProductionCompany = {
+  id: number
+  logoPath: string | null
+  name: string
+  originCountry: string
+}
+
+export type Genre = {
+  id: number
+  name: string
+}
+
+export interface Movie {
+  id: number
+  title: string
+  releaseDate: Date
+  // popularity: number
+  coverPath: string | null
+  posterPath: string
+  score: number
+  voteCount: number
+}
+
+export type MovieID = Movie['id']
+
+//
+
+export interface MovieCard extends Movie {
+  genreIDs: Genre['id'][]
+  popularity: number
+}
+
+export interface MovieDetail extends Movie {
+  overview: string
+  status: string
+  runtime: number
+  homepage: string | null
+  // productionCountry: string
+  productionCompanies: ProductionCompany[]
+  tagline: string | null
+  genres: Genre['name'][]
+}
+
+// API RESPONSE TYPES
+
+export type MovieCardFromAPI = {
   adult: boolean
   backdrop_path: string | null
   genre_ids: number[]
@@ -17,49 +65,43 @@ export type MovieFromAPI = {
   vote_count: number
 }
 
-export type Movie = {
-  id: number
-  title: string
-  releaseDate: string
-  posterPath: string
-  backdropPath: string | null
-  popularity: number
-  score: string
-  genres: number[]
-}
-
-export type MovieId = Movie['id']
-
-export type MovieDetailFromApi = {
-  id: number
-  title: string
-  genres: { id: number; name: string }[]
-  overview: string
-  release_date: string
-  status: string
+export interface MovieDetailFromAPI {
+  adult: boolean
   backdrop_path: string
+  belongs_to_collection: null
+  budget: number
+  genres: { id: number; name: string }[]
+  homepage: string
+  id: number
+  imdb_id: string
+  origin_country: string[]
+  original_language: string
+  original_title: string
+  overview: string
+  popularity: number
   poster_path: string
   production_companies: {
     id: number
-    logo_path: string | null
+    logo_path: null | string
     name: string
     origin_country: string
-  }
-  vote_average: number
-  // popularity: number
-  // imdb_id: string
-  // original_title: 'Life After Fighting'
-}
-
-export type MovieDetail = {
-  id: number
+  }[]
+  production_countries: { iso_3166_1: string; name: string }[]
+  release_date: string
+  revenue: number
+  runtime: number
+  spoken_languages: {
+    english_name: string
+    iso_639_1: string
+    name: string
+  }[]
+  status: string
+  tagline: string
   title: string
-  overview: string
-  posterPath: string
-  backdropPath: string | null
-  releaseDate: string
-  score: string
-  genres: string[]
+  video: boolean
+  vote_average: number
+  vote_count: number
 }
 
-export type SortValue = (typeof SORTS)[keyof typeof SORTS]
+export type ProductionCompanyAPI =
+  MovieDetailFromAPI['production_companies'][number]

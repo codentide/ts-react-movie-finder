@@ -1,3 +1,4 @@
+import { useSearchParams } from 'react-router'
 import { SORTS } from '../constants'
 import type { SortValue } from '../types'
 
@@ -11,21 +12,29 @@ const SORT_BUTTONS = {
 
 const SORT_BUTTONS_ARRAY = Object.entries(SORT_BUTTONS)
 
-interface Props {
-  onSortChange: (sortValue: SortValue) => void
-  currentSort: SortValue
-}
+export const SortList = () => {
+  const [searchParams, setSearchParams] = useSearchParams()
+  const currentSort = searchParams.get('sort') || 'all'
 
-export const SortList = ({ onSortChange, currentSort }: Props) => {
+  const updateSort = (key: SortValue) => {
+    const newSearchParams = new URLSearchParams(searchParams.toString())
+
+    if (key === currentSort) newSearchParams.delete('sort')
+    else newSearchParams.set('sort', key)
+
+    setSearchParams(newSearchParams)
+  }
+
   function FilterButtons() {
     return SORT_BUTTONS_ARRAY.map(([key, label]) => {
       const className = `sort-button ${key === currentSort ? 'active' : ''}`
-      function handleSortChange() {
-        onSortChange((key === currentSort ? 'all' : key) as SortValue)
-      }
 
       return (
-        <button className={className} key={key} onClick={handleSortChange}>
+        <button
+          className={className}
+          key={key}
+          onClick={() => updateSort(key as SortValue)}
+        >
           {label}
         </button>
       )

@@ -1,14 +1,20 @@
 import StarIcon from '../assets/svg/star.svg?react'
 
 interface Prop {
-  score: string
+  score: number
+  limit?: number
 }
 
-export const ScoreBadge: React.FunctionComponent<Prop> = ({ score }) => {
+export const ScoreBadge: React.FunctionComponent<Prop> = ({
+  score,
+  limit = 10,
+}) => {
   return (
     <div className='score-badge'>
       <StarIcon className='score-badge__icon' />
-      <span className='score-badge__score'>{score}/5</span>
+      <span className='score-badge__score'>
+        {score.toFixed(1)}/{limit}
+      </span>
     </div>
   )
 }

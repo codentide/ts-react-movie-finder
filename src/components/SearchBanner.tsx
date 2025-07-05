@@ -1,22 +1,22 @@
 import { useEffect, useState } from 'react'
 
-import type { Movie } from '../types'
+import type { MovieCard } from '../types'
 import { BackdropContainer } from './BackdropContainer'
 
 interface Props {
   children?: React.ReactNode
-  featuredMovie?: Movie | null
+  featuredMovie?: MovieCard | null
 }
 
-export const Hero = ({ featuredMovie, children }: Props) => {
+export const SearchBanner = ({ featuredMovie, children }: Props) => {
   const [backdrop, setBackdrop] = useState<string>('')
 
   // Limpiar mejor el efecto
   useEffect(() => {
     if (!featuredMovie) return
-    if (featuredMovie.backdropPath === null) return
+    if (featuredMovie.coverPath === null) return
 
-    setBackdrop(featuredMovie.backdropPath as string)
+    setBackdrop(featuredMovie.coverPath as string)
   }, [featuredMovie])
 
   return (

@@ -1,8 +1,8 @@
-import type { Movie } from '../types'
+import type { MovieCard as MovieCardType } from '../types'
 import { MovieCard } from './MovieCard'
 
 interface Props {
-  movies: Movie[]
+  movies: MovieCardType[]
 }
 
 export const MovieGrid: React.FunctionComponent<Props> = ({ movies }) => {

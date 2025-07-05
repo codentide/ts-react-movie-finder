@@ -27,3 +27,4 @@ Estas funcionalidades se explorarán una vez que el MVP esté completamente func
 - [ ]: Implementar seccion de géneros
 - [ ]: Implementar cambio de idiomas (en, es)(estado)
 - [ ]: Soporte para videos
+- [ ]: Una vez en movie detail, al presionar en el poster, este se expande

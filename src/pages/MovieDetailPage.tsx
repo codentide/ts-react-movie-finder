@@ -30,7 +30,7 @@ export const MovieDetailPage = () => {
   return (
     <BackdropContainer
       className='movie-detail'
-      path={movieDetail?.backdropPath}
+      path={movieDetail?.coverPath}
       alt={`Banner of "${movieDetail?.title}" movie`}
     >
       {!isLoading && movieDetail ? (
@@ -51,7 +51,7 @@ export const MovieDetailPage = () => {
               <div className='header__subtitle-box '>
                 <time
                   className='subtitle-box__date'
-                  dateTime={movieDetail.releaseDate}
+                  dateTime={movieDetail.releaseDate.toLocaleString()}
                 >
                   {formatDate(movieDetail.releaseDate, 'en')}
                 </time>
