@@ -1,8 +1,8 @@
-import type { MovieCard as MovieCardType } from '../types'
-import { MovieCard } from './MovieCard'
+import type { MovieCard } from '../../types'
+import { MemoizedMovieCard } from './MovieCard'
 
 interface Props {
-  movies: MovieCardType[]
+  movies: MovieCard[]
 }
 
 export const MovieGrid: React.FunctionComponent<Props> = ({ movies }) => {
@@ -11,7 +11,7 @@ export const MovieGrid: React.FunctionComponent<Props> = ({ movies }) => {
   function renderMovies() {
     return movies.map((movie) => (
       <li key={movie.id} className='movie-list__item'>
-        <MovieCard {...movie} />
+        <MemoizedMovieCard movie={movie} />
       </li>
     ))
   }

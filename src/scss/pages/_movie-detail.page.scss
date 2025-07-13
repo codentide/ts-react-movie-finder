@@ -2,22 +2,31 @@
 @use '../base/media-queries' as media-query;
 
 $gradient-value-1: hsl(216, 40%, 04%);
-$gradient-value-2: hsl(216, 64%, 24%, 0.6);
+$gradient-value-2: hsl(216, 80%, 24%, 0.4);
 
 $back-button-color: $color-primary-600;
 $back-button-bg: hsl($hue-primary, 100%, 64%, 0.16);
 
-.movie-detail {
-  position: relative;
-
+.detail-page {
   display: flex;
   align-items: center;
+  padding: 3rem 16%;
 
   width: 100%;
-  height: 100dvh;
+  height: 80dvh;
 
-  background: radial-gradient($gradient-value-2, $gradient-value-1);
+  .backdrop-container {
+    position: absolute !important;
+    z-index: -10;
+    top: 0;
+    left: 0;
 
+    min-height: 100%;
+
+    &::after {
+      background: radial-gradient($gradient-value-2, $gradient-value-1);
+    }
+  }
 
   &__loading-spinner {
     position: absolute;
@@ -36,7 +45,7 @@ $back-button-bg: hsl($hue-primary, 100%, 64%, 0.16);
     aspect-ratio: 1/1.5;
     height: 100%;
 
-    border-radius: 0.6rem;
+    border-radius: 0.4rem;
     overflow: hidden;
 
     img {
@@ -47,8 +56,6 @@ $back-button-bg: hsl($hue-primary, 100%, 64%, 0.16);
   }
 
   &__content {
-    position: relative;
-
     display: flex;
     gap: 2rem;
     height: 100%;

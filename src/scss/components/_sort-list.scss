@@ -1,6 +1,6 @@
 @use '../base/colors' as c;
 @use '../base/typography' as t;
-@use '../base/media-queries' as media-query;
+@use '../base/media-queries' as mq;
 
 $sort-button-background: hsl(c.$hue-primary, 16%, 8%);
 $sort-button-text-color: c.$color-neutral-800;
@@ -16,8 +16,8 @@ $active-sort-button-text-color: c.$color-neutral-100;
   width: fit-content;
 
   .sort-button {
-    padding: 0.28rem 0.4rem;
-    border-radius: 0.28rem;
+    padding: 0.32rem 0.4rem 0.28rem;
+    border-radius: 0.24rem;
     border: none;
 
     font-family: t.$font-primary;
@@ -37,7 +37,7 @@ $active-sort-button-text-color: c.$color-neutral-100;
     }
   }
 
-  @include media-query.mobile-small {
+  @include mq.mobile-small {
     width: 100%;
     justify-content: center;
   }

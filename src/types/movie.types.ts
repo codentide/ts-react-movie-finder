@@ -1,4 +1,3 @@
-import { MovieCard } from '../components/MovieCard'
 import { SORTS } from '../constants'
 
 export type SortValue = (typeof SORTS)[keyof typeof SORTS]
@@ -20,10 +19,13 @@ export interface Movie {
   title: string
   releaseDate: Date
   // popularity: number
+  overview: string
   coverPath: string | null
+  hdCoverPath: string | null
   posterPath: string
   score: number
   voteCount: number
+  genreIDs: number[]
 }
 
 export type MovieID = Movie['id']
@@ -31,19 +33,16 @@ export type MovieID = Movie['id']
 //
 
 export interface MovieCard extends Movie {
-  genreIDs: Genre['id'][]
   popularity: number
 }
 
 export interface MovieDetail extends Movie {
-  overview: string
   status: string
   runtime: number
   homepage: string | null
   // productionCountry: string
   productionCompanies: ProductionCompany[]
   tagline: string | null
-  genres: Genre['name'][]
 }
 
 // API RESPONSE TYPES

@@ -1,12 +1,15 @@
-import { useNavigate, useParams } from 'react-router'
-import { useMovieDetail } from '../hooks/useMovieDetail'
 import { useEffect, useState } from 'react'
-import { BackdropContainer } from '../components/BackdropContainer'
-import { formatDate } from '../utils'
+import { useNavigate, useParams } from 'react-router'
+import {
+  ScoreBadge,
+  LoadingSpinner,
+  GenreList,
+  DateString,
+  BackdropContainer,
+} from '../components'
+import { useMovieDetail } from '../hooks/useMovieDetail'
 
 import BackIcon from '../assets/svg/arrow-alt-left.svg?react'
-import { ScoreBadge } from '../components/ScoreBadge'
-import { LoadingSpinner } from '../components/LoadingSpinner'
 
 export const MovieDetailPage = () => {
   const [movieId, setMovieId] = useState<number | null>(null)
@@ -20,7 +23,8 @@ export const MovieDetailPage = () => {
 
   // [ ]: Mejorar performance
   if (error) {
-    return <span>{error}</span>
+    navigate('/')
+    // return <span>{error}</span>
   }
 
   function handleGoBack() {
@@ -28,14 +32,15 @@ export const MovieDetailPage = () => {
   }
 
   return (
-    <BackdropContainer
-      className='movie-detail'
-      path={movieDetail?.coverPath}
-      alt={`Banner of "${movieDetail?.title}" movie`}
-    >
+    <section className='detail-page'>
+      <BackdropContainer
+        // className='detail-page'
+        path={movieDetail?.coverPath}
+        alt={`Cover of "${movieDetail?.title}" movie`}
+      />
       {!isLoading && movieDetail ? (
-        <div className='movie-detail__content'>
-          <div className='movie-detail__poster'>
+        <div className='detail-page__content'>
+          <div className='detail-page__poster'>
             <img src={movieDetail.posterPath} />
           </div>
           <div className='info-container'>
@@ -49,32 +54,39 @@ export const MovieDetailPage = () => {
             <div className='info-container__header'>
               <h2 className='header__title'>{movieDetail.title}</h2>
               <div className='header__subtitle-box '>
-                <time
-                  className='subtitle-box__date'
-                  dateTime={movieDetail.releaseDate.toLocaleString()}
-                >
-                  {formatDate(movieDetail.releaseDate, 'en')}
-                </time>
+                <DateString date={movieDetail.releaseDate} />
+                {/* {'-'}
+                <small>{movieDetail.runtime}mins</small> */}
                 <ScoreBadge score={movieDetail.score} />
               </div>
-              {/* Genres podia ser un badge que al dar click aplique filtro a una lista en base a ese genero */}
-              <ul className='subtitle-box__genre-list'>
-                {movieDetail.genres.map((genre, index) => (
-                  <li key={index}>
-                    <span>{genre}</span>
-                  </li>
-                ))}
-              </ul>
+              <GenreList genres={movieDetail.genreIDs} />
             </div>
             <div className='info-container__overview-box'>
-              <h3 className='overview-box__title'>Overview</h3>
+              <h3 className='overview-box__title'>
+                {movieDetail.tagline || 'Synopsis'}
+              </h3>
               <p className='overview-box__overview'>{movieDetail.overview}</p>
             </div>
           </div>
         </div>
       ) : (
-        <LoadingSpinner className='movie-detail__loading-spinner' />
+        <LoadingSpinner className='detail-page__loading-spinner' />
       )}
-    </BackdropContainer>
+    </section>
   )
 }
+
+// export const RuntimeBadge = () => {
+//   return (
+//     <>
+//       (
+//       <time
+//         className='subtitle-box__date'
+//         dateTime={movieDetail.releaseDate.toLocaleString()}
+//       >
+//         {formatDate(movieDetail.releaseDate, 'en')}
+//       </time>
+//       ) - <small>{movieDetail.runtime}mins</small>
+//     </>
+//   )
+// }

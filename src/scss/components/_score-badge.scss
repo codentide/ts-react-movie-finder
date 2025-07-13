@@ -11,22 +11,22 @@ $score-badge-cl: c.$color-neutral-200;
 
   height: fit-content;
 
-  padding: 0.2rem 0.4rem 0.24rem;
-  border-radius: 0.32rem;
+  padding: 0.4rem;
+  border-radius: 0.24rem;
 
   background-color: $score-badge-bg;
 
   &__icon {
-    width: 12px;
-    height: 12px;
+    width: 0.64rem;
+    height: 0.64rem;
 
     fill: $score-badge-cl;
   }
 
   &__score {
     font-size: 0.8rem;
-    font-weight: 600;
-    line-height: 1.2;
+    // font-weight: 600;
+    line-height: 0.8;
 
     color: $score-badge-cl;
   }

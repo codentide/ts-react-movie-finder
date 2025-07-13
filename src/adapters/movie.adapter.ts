@@ -9,7 +9,8 @@ import type {
 
 // [ ]: Usar el tamaño original para quitar el blur
 
-const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w500'
+const BASE_IMG_URL_500 = 'https://image.tmdb.org/t/p/w500'
+const BASE_IMG_URL_OG = 'https://image.tmdb.org/t/p/original'
 
 // MOVIE
 
@@ -23,18 +24,24 @@ export const mapMovieCard = ({
   genre_ids,
   vote_average,
   vote_count,
+  overview,
 }: MovieCardFromAPI): MovieCard => {
   const poster_fallback = `https://placehold.co/300x500/1a2637/3b567d?font=roboto&text=${title}`
-  const coverPath = backdrop_path ? BASE_IMG_URL + backdrop_path : null
-  const posterPath = poster_path ? BASE_IMG_URL + poster_path : poster_fallback
+  const coverPath = backdrop_path ? BASE_IMG_URL_500 + backdrop_path : null
+  const hdCoverPath = backdrop_path ? BASE_IMG_URL_OG + backdrop_path : null
+  const posterPath = poster_path
+    ? BASE_IMG_URL_500 + poster_path
+    : poster_fallback
 
   return {
     id,
     title,
     releaseDate: new Date(release_date),
+    overview,
     popularity,
     posterPath,
     coverPath,
+    hdCoverPath,
     genreIDs: genre_ids,
     score: vote_average,
     voteCount: vote_count,
@@ -64,22 +71,27 @@ export const mapMovieDetail = ({
   production_companies,
 }: MovieDetailFromAPI): MovieDetail => {
   const poster_fallback = `https://placehold.co/300x500/1a2637/3b567d?font=roboto&text=${title}`
-  const posterPath = poster_path ? BASE_IMG_URL + poster_path : poster_fallback
-  const coverPath = backdrop_path ? BASE_IMG_URL + backdrop_path : null
+  const posterPath = poster_path
+    ? BASE_IMG_URL_500 + poster_path
+    : poster_fallback
+  const coverPath = backdrop_path ? BASE_IMG_URL_500 + backdrop_path : null
+  const hdCoverPath = backdrop_path ? BASE_IMG_URL_OG + backdrop_path : null
   const releaseDate = new Date(release_date)
-  const genre_names = genres.map((genre) => genre.name)
+  // const genre_names = genres.map((genre) => genre.name)
   const productionCompanies = mapProductionCompanyArray(production_companies)
+  const genreIDs = genres.map((item) => item.id)
 
   return {
     id,
     title,
     status,
     releaseDate,
-    genres: genre_names,
+    genreIDs,
     overview,
     score: vote_average,
     voteCount: vote_count,
     posterPath,
+    hdCoverPath,
     coverPath,
     runtime,
     homepage,

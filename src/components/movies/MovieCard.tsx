@@ -1,20 +1,22 @@
+import React from 'react'
+import type { MovieCard as MovieCardType } from '../../types'
 import { Link } from 'react-router'
-import type { MovieCard as MovieCardType } from '../types'
-import { formatDate } from '../utils/formatDate'
-import { ScoreBadge } from './ScoreBadge'
+import { DateString, ScoreBadge } from '../common'
 
-export const MovieCard = ({
-  id,
-  title,
-  posterPath,
-  genreIDs,
-  score,
-  releaseDate,
-}: MovieCardType) => {
+interface Props {
+  movie: MovieCardType
+  showInfo?: boolean
+}
+
+export const MovieCard = ({ movie, showInfo = true }: Props) => {
+  if (!movie) return
+
+  const { id, genreIDs, score, title, releaseDate, posterPath } = movie
+
   return (
     <Link to={`/movie/${id}`}>
       <div
-        className='movie-card'
+        className={`movie-card ${!showInfo ? 'no-info' : ''}`}
         data-movie-id={id}
         data-genre-id-list={`${genreIDs.join(',')}`}
       >
@@ -23,11 +25,9 @@ export const MovieCard = ({
         </div>
         <div className='movie-card__info'>
           <h3>{title}</h3>
-          {/* [ ]: Componentizar time */}
-          <time dateTime={releaseDate.toString()}>
-            {formatDate(releaseDate, 'en')}
-          </time>
+          <DateString date={releaseDate} />
         </div>
+
         <img
           className='movie-card__poster'
           src={posterPath}
@@ -38,3 +38,4 @@ export const MovieCard = ({
     </Link>
   )
 }
+export const MemoizedMovieCard = React.memo(MovieCard)

@@ -1,6 +1,6 @@
 import { usePopularMovies } from '../../hooks/usePopularMovies'
-import { LoadingSpinner } from '../LoadingSpinner'
-import { MovieGrid } from '../MovieGrid'
+import { LoadingSpinner } from '../common/LoadingSpinner'
+import { MovieGrid } from './MovieGrid'
 
 export const PopularMovies = () => {
   const { movies, loading, error } = usePopularMovies()

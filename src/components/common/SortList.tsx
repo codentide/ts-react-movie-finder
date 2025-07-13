@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router'
-import { SORTS } from '../constants'
-import type { SortValue } from '../types'
+import { SORTS } from '../../constants'
+import type { SortValue } from '../../types'
 
 const SORT_BUTTONS = {
   // [SORTS.ALL]: 'All',

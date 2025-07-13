@@ -1,4 +1,4 @@
-import SpinnerIcon from '../assets/svg/logo.svg?react'
+import SpinnerIcon from '../../assets/svg/logo.svg?react'
 
 interface Props {
   className?: string

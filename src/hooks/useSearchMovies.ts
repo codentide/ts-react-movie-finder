@@ -1,88 +1,64 @@
-import type { MovieCard } from '../types'
+import type { MovieCard, SortValue } from '../types'
 import { useEffect, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router'
-import { sortMovies } from '../utils'
 import { getMoviesByQuery } from '../services/movie.service'
+import { sortMovies } from '../utils'
+import { getMostPopularMovie } from '../utils/getMostPopular'
 
-interface UseMoviesReturn {
+export function useSearchMovies(): {
   movies: MovieCard[] | null
   featuredMovie: MovieCard | null
   loading: boolean
   error: string | null
-}
-
-export function useSearchMovies(): UseMoviesReturn {
+} {
   const [movies, setMovies] = useState<MovieCard[] | null>(null)
-  const [featuredMovie, setFeaturedMovie] = useState<MovieCard | null>(null)
-  const [loading, setLoading] = useState<boolean>(false)
+  const [rawMovies, setRawMovies] = useState<MovieCard[] | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [loading, setLoading] = useState<boolean>(false)
+  const [featuredMovie, setFeaturedMovie] = useState<MovieCard | null>(null)
 
-  const [searchParam] = useSearchParams()
-  const query = searchParam.get('query')?.trim() || ''
-  const sort = searchParam.get('sort')?.trim() || ''
+  const [searchParams] = useSearchParams()
+  const query = searchParams.get('query') || ''
+  const sort = (searchParams.get('sort') || 'all') as SortValue
 
-  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const lastSearchRef = useRef<string | null>(null)
-  const moviesRef = useRef<MovieCard[] | null>(null)
-
-  function getMostPopularMovie(movies: MovieCard[]): MovieCard {
-    let movie = movies[0]
-
-    if (movies.length > 0) {
-      movie = movies.reduce((prev, current) => {
-        return current.popularity > prev.popularity ? current : prev
-      })
-    }
-
-    return movie
-  }
+  const debounceTimerRef = useRef<number | null>(null)
+  const lastQuery = useRef<string | null>(null)
 
   useEffect(() => {
-    if (!query) {
-      setMovies([])
-      setFeaturedMovie(null)
-      return
-    }
-
-    if (query === lastSearchRef.current) return
-
-    const updateMovies = async () => {
-      setError(null)
-      setLoading(true)
-
-      debounceRef.current = setTimeout(async () => {
-        const { data, error } = await getMoviesByQuery(query)
-
-        if (error) {
-          setError(error.message)
-          setMovies([])
-          return
-        }
-
-        setFeaturedMovie(getMostPopularMovie(data))
-        const sortedMovies = sortMovies(data, 'all')
+    const getMovies = () => {
+      // Cambia sort
+      if (query === lastQuery.current) {
+        if (!rawMovies) return
+        const sortedMovies = sortMovies([...rawMovies], sort)
         setMovies(sortedMovies)
-        lastSearchRef.current = query
-      }, 500)
+        // Cambia query
+      } else {
+        setLoading(true)
+        debounceTimerRef.current = setTimeout(async () => {
+          const { data: movies, error } = await getMoviesByQuery(query)
 
-      setLoading(false)
+          if (error) {
+            setError(error.message)
+            setLoading(false)
+            return
+          }
+
+          // const sortedMovies = sortMovies(movies, sort)
+          // setMovies(movies)
+          setRawMovies(movies)
+          setFeaturedMovie(getMostPopularMovie(movies))
+          lastQuery.current = query
+          setLoading(false)
+        }, 500)
+      }
     }
 
-    updateMovies()
+    getMovies()
 
     return () => {
-      if (debounceRef.current) clearTimeout(debounceRef.current)
+      if (debounceTimerRef.current) clearTimeout(debounceTimerRef.current)
     }
-  }, [query])
-
-  useEffect(() => {
-    if (moviesRef.current) {
-      const sortedMovies = sortMovies([...moviesRef.current], 'all')
-      setMovies(sortedMovies)
-    } else {
-      setMovies(null)
-    }
-  }, [])
+  }, [query, sort, rawMovies])
 
   return { movies, featuredMovie, loading, error }
 }

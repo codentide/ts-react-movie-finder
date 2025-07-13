@@ -1,0 +1,40 @@
+@use '../base/colors' as c;
+
+.home-page {
+  display: flex;
+  flex-direction: column;
+  padding: 0 16%;
+
+  &__hero-background {
+    position: absolute !important;
+    z-index: -10;
+    top: 0;
+    left: 0;
+
+    height: 92vh;
+
+    img {
+      filter: grayscale(20%) blur(0rem) brightness(1.2) contrast(1.2);
+    }
+  }
+
+  &__loading-spinner {
+    position: absolute;
+    top: 28rem;
+    left: 50%;
+    z-index: 1000;
+
+    transform: translateX(-50%) !important;
+  }
+
+  // Sección
+  .home-hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 2rem;
+
+    width: 100%;
+    height: 84vh;
+  }
+}

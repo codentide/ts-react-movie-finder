@@ -14,33 +14,6 @@ $search-input-bg: hsl(c.$hue-primary, 16%, 8%, 0.88);
   width: 100%;
   max-width: 480px;
 
-  input[type='text'] {
-    width: 100%;
-    height: auto;
-
-    padding: 0.4rem 0.8rem 0.5rem;
-    border-radius: 0.32rem;
-    border: none;
-    outline-color: transparent;
-
-    font-family: inherit;
-    font-size: 1rem;
-
-    color: $search-input-cl;
-    background-color: $search-input-bg;
-
-    transition: outline 0.4s ease;
-
-    &:focus {
-      outline: 1px solid hsl(216, 100%, 64%, 0.2);
-      caret-color: hsl(216, 100%, 64%, 0.6);
-    }
-
-    &::placeholder {
-      color: hsl(216, 80%, 96%, 0.2);
-    }
-  }
-
   &__reset-button {
     position: absolute;
     right: 0.8rem;

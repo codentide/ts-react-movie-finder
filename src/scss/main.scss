@@ -1,21 +1,29 @@
 @use './base/colors' as c;
 @use './base/typography' as t;
 
-@use './components/BackdropContainer.scss' as *;
-@use './components/LoadingSpinner.scss' as *;
-@use './components/ScoreBadge.scss' as *;
-
-@use './pages/DefaultPage.scss' as *;
-@use './pages/HomePage.scss' as *;
-@use './pages/MovieDetailPage.scss' as *;
-
+// Components
+@use './components/input.scss' as *;
 @use './components/Header.scss' as *;
 @use './components/Hero.scss' as *;
-@use './components/MovieGrid.scss' as *;
 @use './components/MovieCard.scss' as *;
-@use './components/SortList.scss' as *;
 @use './components/AuthorInfo.scss' as *;
-@use './components/SearchInput.scss' as *;
+@use './components/search-input.scss' as *;
+@use './components/LoadingSpinner.scss' as *;
+@use './components/hero-movie-info' as *;
+@use './components/genre-list' as *;
+@use './components/score-badge' as *;
+
+// Containers
+@use './components/sort-list' as *;
+@use './components/MovieGrid.scss' as *;
+@use './components/movie-carousel' as *;
+@use './components/backdrop-container' as *;
+
+// Pages
+@use './pages/DefaultPage.scss' as *;
+@use './pages/home.page.scss' as *;
+@use './pages/search.page.scss' as *;
+@use './pages/movie-detail.page.scss' as *;
 
 * {
   padding: 0;
@@ -26,6 +34,7 @@
 
 html,
 body {
+  position: relative;
   width: 100%;
   min-height: 100vh;
 
@@ -35,7 +44,8 @@ body {
 }
 
 body {
-  overflow-y: scroll;
+  // overflow-y: scroll;
+  background-color: c.$color-neutral-1300;
 }
 
 /*  */

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import type { MovieCard } from '../types'
+import type { MovieCard } from '../../types'
 
 interface Props {
   path?: MovieCard['coverPath'] | null
@@ -17,6 +17,7 @@ export const BackdropContainer: React.FunctionComponent<Props> = ({
   const [currentPath, setCurrentPath] = useState<string | null>(null)
   const [isActive, setIsActive] = useState<boolean>(true)
 
+  // Verificar bien la transición
   useEffect(() => {
     if (!path || path === null || path === currentPath) return
 
@@ -24,7 +25,7 @@ export const BackdropContainer: React.FunctionComponent<Props> = ({
     const debouncer = setTimeout(() => {
       setCurrentPath(path)
       setIsActive(true)
-    }, 500)
+    }, 1000)
 
     return () => {
       clearTimeout(debouncer)

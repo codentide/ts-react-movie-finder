@@ -1,0 +1,35 @@
+@use '../base/colors' as c;
+@use '../base/media-queries' as media-query;
+
+$input-color: c.$color-neutral-600;
+$input-placeholder-color: hsl(c.$hue-primary, 80%, 96%, 0.2);
+$input-background-color: hsl(c.$hue-primary, 16%, 8%, 0.88);
+$input-caret-color: hsl(c.$hue-primary, 100%, 64%, 0.6);
+$input-focus-outline: 1px solid hsl(216, 100%, 64%, 0.2);
+
+.search-input {
+  width: 100%;
+  height: auto;
+
+  padding: 0.28rem 0.8rem 0.4rem;
+  border-radius: 0.32rem;
+  border: none;
+  outline-color: transparent;
+
+  font-family: inherit;
+  font-size: 1rem;
+
+  color: $input-color;
+  background-color: $input-background-color;
+
+  transition: outline 0.4s ease;
+
+  &:focus {
+    outline: $input-focus-outline;
+    caret-color: $input-caret-color;
+  }
+
+  &::placeholder {
+    color: $input-placeholder-color;
+  }
+}

@@ -1,4 +1,4 @@
-import StarIcon from '../assets/svg/star.svg?react'
+import StarIcon from '../../assets/svg/star.svg?react'
 
 interface Prop {
   score: number

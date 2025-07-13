@@ -1,0 +1,78 @@
+@use '../base/colors' as c;
+
+$no-movies-color: c.$color-neutral-1200;
+
+.message_no-movies {
+  display: block;
+  width: 100%;
+  padding-top: 4rem;
+
+  font-size: 2.4rem;
+  font-weight: 600;
+  text-align: center;
+
+  opacity: 0;
+  animation: appear 0.8s 1s ease forwards;
+  color: $no-movies-color;
+}
+
+.movie-carousel {
+  position: relative;
+
+  &__button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+
+    &.--left {
+      left: -4rem;
+    }
+
+    &.--right {
+      right: -4rem;
+    }
+  }
+
+  &__wrapper {
+    $gap: 1rem;
+    $columns: 5;
+
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: calc(
+      (100% / #{$columns}) - (#{$gap} * (#{$columns} - 1) / #{$columns})
+    );
+    gap: $gap;
+
+    width: 100%;
+    padding-top: 1.6rem;
+
+    list-style: none;
+    opacity: 0;
+
+    overflow-x: hidden;
+    scroll-snap-type: x mandatory;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    // background-color: red;
+    animation: appear 0.4s 0.2s ease forwards;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    li {
+      scroll-snap-align: start;
+      border: 1px solid transparent;
+
+      transition: all 0.32s ease-in-out;
+
+      &.active {
+        // border-color: red;
+        transform: translateY(-1.6rem);
+      }
+    }
+  }
+}

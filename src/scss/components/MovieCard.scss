@@ -21,7 +21,7 @@ a:has(.movie-card) {
   aspect-ratio: 1/1.5;
   width: 100%;
   padding: 1rem;
-  border-radius: 0.6rem;
+  border-radius: 0.32rem;
 
   overflow: hidden;
   isolation: isolate;
@@ -97,13 +97,24 @@ a:has(.movie-card) {
     );
   }
 
+  // oculta la info y deja solo el poster
+  &.no-info {
+    &::before {
+      background: none;
+    }
+
+    *:not(img) {
+      display: none;
+    }
+  }
+
   @include media-query.mobile-small {
     .score-badge {
       gap: 0.32rem;
 
       &__icon {
-        width: 16px;
-        height: 16px;
+        width: 1rem;
+        height: 1rem;
       }
 
       &__score {
