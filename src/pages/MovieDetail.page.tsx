@@ -8,8 +8,7 @@ import {
   BackdropContainer,
 } from '../components'
 import { useMovieDetail } from '../hooks/useMovieDetail'
-
-import BackIcon from '../assets/svg/arrow-alt-left.svg?react'
+import { FaArrowLeftLong } from 'react-icons/fa6'
 
 export const MovieDetailPage = () => {
   const [movieId, setMovieId] = useState<number | null>(null)
@@ -49,7 +48,8 @@ export const MovieDetailPage = () => {
               href='#'
               onClick={handleGoBack}
             >
-              <BackIcon />
+              {/* <BackIcon /> */}
+              <FaArrowLeftLong className='icon' />
             </a>
             <div className='info-container__header'>
               <h2 className='header__title'>{movieDetail.title}</h2>

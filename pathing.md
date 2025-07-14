@@ -19,12 +19,12 @@ Estas funcionalidades se explorarán una vez que el MVP esté completamente func
 
 ---
 
-- [ ]: Reestructurar los servicios
-- [ ]: Implementar Axios
-- [ ]: Mas información de detalle (Duración, cantidad de votos)
+- [ ]: Mas secciones en home (populares, tendencias, novedades)
 - [ ]: Lazy loading
-- [ ]: Mas secciones en home (populares, tendencies, novedades)
-- [ ]: Implementar seccion de géneros
-- [ ]: Implementar cambio de idiomas (en, es)(estado)
 - [ ]: Soporte para videos
 - [ ]: Una vez en movie detail, al presionar en el poster, este se expande
+- [ ]: Implementar seccion de géneros
+- [ ]: Implementar cambio de idiomas (en, es)(estado)
+- [x]: Reestructurar los servicios
+- [x]: Implementar Axios
+- [x]: Mas información de detalle (Duración, cantidad de votos)

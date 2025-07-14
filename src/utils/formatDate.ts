@@ -6,5 +6,5 @@ export function formatDate(date: string | Date, lang?: string): string {
     month: 'long',
     day: 'numeric',
   }
-  return date.toLocaleDateString(lang, options)
+  return date.toLocaleDateString(lang, options) || 'Invalid Date'
 }

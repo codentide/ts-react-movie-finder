@@ -47,6 +47,13 @@ export interface MovieDetail extends Movie {
 
 // API RESPONSE TYPES
 
+export type MovieListFromAPI = {
+  page: number
+  results: MovieCardFromAPI[]
+  total_pages: number
+  total_results: number
+}
+
 export type MovieCardFromAPI = {
   adult: boolean
   backdrop_path: string | null

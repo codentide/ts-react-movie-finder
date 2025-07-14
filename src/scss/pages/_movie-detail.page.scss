@@ -82,17 +82,16 @@ $back-button-bg: hsl($hue-primary, 100%, 64%, 0.16);
       display: inline-grid;
       place-items: center;
 
-      padding: 0rem 0.48rem;
+      padding: 0.2rem 0.64rem;
       border-radius: 0.32rem;
 
       width: fit-content;
 
       background-color: $back-button-bg;
 
-      svg {
-        width: 20px;
-
-        fill: $back-button-color;
+      .icon {
+        color: $back-button-color;
+        font-size: 1.2rem;
       }
 
       &:hover {

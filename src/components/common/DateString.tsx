@@ -6,6 +6,11 @@ interface Props {
 }
 
 export const DateString = ({ date, lang }: Props) => {
+  const dateIsValid = date instanceof Date && !isNaN(date.getTime())
+
+  if (!dateIsValid)
+    return <time className='date-string'>Date not available</time>
+
   return (
     <time className='date-string' dateTime={date.toISOString()}>
       {formatDate(date, lang || 'en')}

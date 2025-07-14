@@ -1,6 +1,7 @@
 import { forwardRef, useImperativeHandle, useRef } from 'react'
-import { MemoizedMovieCard } from './MovieCard'
 import type { MovieCard } from '../../types'
+import { MemoizedMovieCard } from './MovieCard'
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa6'
 
 // Representa el contrato de los elemento expuestos a través de useImperativeHandle
 export interface MovieCarouselHandle {
@@ -86,7 +87,7 @@ export const MovieCarousel = forwardRef<MovieCarouselHandle, Props>(
           className='movie-carousel__button --left'
           onClick={() => handleScroll('left')}
         >
-          LEFT
+          <FaAngleLeft />
         </button>
         <ul className='movie-carousel__wrapper' ref={scrollContainerRef}>
           {renderItems()}
@@ -95,7 +96,7 @@ export const MovieCarousel = forwardRef<MovieCarouselHandle, Props>(
           className='movie-carousel__button --right'
           onClick={() => handleScroll('right')}
         >
-          RIGHT
+          <FaAngleRight />
         </button>
       </div>
     )

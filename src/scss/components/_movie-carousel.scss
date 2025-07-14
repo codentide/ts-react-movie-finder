@@ -1,4 +1,5 @@
 @use '../base/colors' as c;
+@use '../base/mixins' as m;
 
 $no-movies-color: c.$color-neutral-1200;
 
@@ -25,12 +26,25 @@ $no-movies-color: c.$color-neutral-1200;
     transform: translateY(-50%);
     z-index: 100;
 
+    @include m.base-button(transparent, c.$color-neutral-800);
+
+    height: 8rem;
+    padding: 0 0.24rem 0 0.2rem;
+    font-size: 1.6rem;
+
     &.--left {
       left: -4rem;
     }
 
     &.--right {
       right: -4rem;
+    }
+
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: hsl(0, 0%, 8%, 0.4);
+      filter: none;
     }
   }
 
