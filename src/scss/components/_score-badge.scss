@@ -1,0 +1,33 @@
+@use '../base/colors' as c;
+@use '../base/media-queries' as media-query;
+
+$score-badge-bg: c.$color-primary-700;
+$score-badge-cl: c.$color-neutral-200;
+
+.score-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+
+  height: fit-content;
+
+  padding: 0.4rem;
+  border-radius: 0.24rem;
+
+  background-color: $score-badge-bg;
+
+  &__icon {
+    width: 0.64rem;
+    height: 0.64rem;
+
+    fill: $score-badge-cl;
+  }
+
+  &__score {
+    font-size: 0.8rem;
+    // font-weight: 600;
+    line-height: 0.8;
+
+    color: $score-badge-cl;
+  }
+}

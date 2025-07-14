@@ -1,0 +1,44 @@
+@use '../base/colors' as c;
+@use '../base/typography' as t;
+@use '../base/media-queries' as mq;
+
+$sort-button-background: hsl(c.$hue-primary, 16%, 8%);
+$sort-button-text-color: c.$color-neutral-800;
+
+$active-sort-button-background: c.$color-primary-700;
+$active-sort-button-text-color: c.$color-neutral-100;
+
+.sort-list {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  width: fit-content;
+
+  .sort-button {
+    padding: 0.32rem 0.4rem 0.28rem;
+    border-radius: 0.24rem;
+    border: none;
+
+    font-family: t.$font-primary;
+    text-transform: lowercase;
+    line-height: 1;
+
+    color: $sort-button-text-color;
+    background-color: $sort-button-background;
+
+    cursor: pointer;
+    transition: background-color 0.4s ease;
+
+    &.active {
+      color: $active-sort-button-text-color;
+      background-color: $active-sort-button-background;
+      transition: background-color 0.4s ease;
+    }
+  }
+
+  @include mq.mobile-small {
+    width: 100%;
+    justify-content: center;
+  }
+}

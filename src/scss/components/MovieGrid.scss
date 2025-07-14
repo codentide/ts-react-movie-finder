@@ -23,7 +23,7 @@ $no-movies-color: c.$color-neutral-1200;
   gap: 1rem;
 
   width: 100%;
-  padding: 4rem 16%;
+  // padding: 4rem 16%;
 
   list-style: none;
 
@@ -35,8 +35,8 @@ $no-movies-color: c.$color-neutral-1200;
   }
 }
 
-@media (width <= 480px) {
-  .movie-list {
-    padding: 4rem 8%;
-  }
-}
+// @media (width <= 480px) {
+//   .movie-list {
+//     padding: 4rem 8%;
+//   }
+// }

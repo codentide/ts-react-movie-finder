@@ -1,21 +1,19 @@
-import type { Movie, MovieFromAPI, SortValue } from '../types'
+import type { MovieCard, SortValue } from '../types'
 import { useEffect, useRef, useState } from 'react'
-import { formatMovieList, sortMovies } from '../utils'
 import { useSearchParams } from 'react-router'
-
-const BASE_URL = import.meta.env.VITE_BASE_URL
-const API_KEY = import.meta.env.VITE_API_KEY
+import { sortMovies } from '../utils'
+import { getMoviesByQuery, getPopularMovies } from '../services/movie.service'
 
 interface UseMoviesReturn {
-  movies: Movie[] | null
-  featuredMovie: Movie | null
+  movies: MovieCard[] | null
+  featuredMovie: MovieCard | null
   isLoading: boolean
   error: string | null
 }
 
 export function useMovies(sort: SortValue = 'all'): UseMoviesReturn {
-  const [movies, setMovies] = useState<Movie[] | null>(null)
-  const [featuredMovie, setFeaturedMovie] = useState<Movie | null>(null)
+  const [movies, setMovies] = useState<MovieCard[] | null>(null)
+  const [featuredMovie, setFeaturedMovie] = useState<MovieCard | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -23,81 +21,53 @@ export function useMovies(sort: SortValue = 'all'): UseMoviesReturn {
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const lastSearchRef = useRef<string | null>(null)
-  const moviesRef = useRef<Movie[] | null>(null)
+  const moviesRef = useRef<MovieCard[] | null>(null)
 
-  function getMostPopularMovie(movies: Movie[]): Movie {
-    let movie = movies[0]
+  // function getMostPopularMovie(movies: MovieCard[]): MovieCard {
+  //   let movie = movies[0]
 
-    if (movies.length > 0) {
-      movie = movies.reduce((prev, current) => {
-        return current.popularity > prev.popularity ? current : prev
-      })
-    }
+  //   if (movies.length > 0) {
+  //     movie = movies.reduce((prev, current) => {
+  //       return current.popularity > prev.popularity ? current : prev
+  //     })
+  //   }
 
-    return movie
-  }
-
-  async function fetchMovies(url: string): Promise<MovieFromAPI[] | null> {
-    setIsLoading(true)
-    setError(null)
-
-    try {
-      const response = await fetch(url)
-      if (!response.ok) {
-        const httpError = await response.text()
-        throw new Error(`Error HTTP: ${response.status} - ${httpError}`)
-      }
-      const data = await response.json()
-      if (data && Array.isArray(data.results)) {
-        return data.results as MovieFromAPI[]
-      } else {
-        throw new Error('La respuesta de la API no tiene el formato esperado')
-      }
-    } catch (error) {
-      setError(
-        'Ocurrió un error trayendo las películas' + (error || 'Desconocido')
-      )
-      return null
-    } finally {
-      setIsLoading(false)
-    }
-  }
+  //   return movie
+  // }
 
   useEffect(() => {
-    const currentQuery = searchParam.get('query')?.trim() || ''
+    const updateMovies = async () => {
+      let movies: MovieCard[] = []
+      const currentQuery = searchParam.get('query')?.trim() || ''
 
-    if (currentQuery === lastSearchRef.current) return
+      if (currentQuery === lastSearchRef.current) return
 
-    if (!currentQuery) {
-      const endpoint = `/movie/popular?api_key=${API_KEY}`
-      updateMovies(`${BASE_URL}${endpoint}`)
-      lastSearchRef.current = currentQuery
-      return
-    }
+      if (currentQuery) {
+        debounceRef.current = setTimeout(async () => {
+          const { data, error } = await getMoviesByQuery(currentQuery)
 
-    debounceRef.current = setTimeout(() => {
-      const endpoint = `/search/movie?api_key=${API_KEY}&query=${currentQuery}`
-      updateMovies(`${BASE_URL}${endpoint}`)
-      lastSearchRef.current = currentQuery
-    }, 500)
-
-    async function updateMovies(url: string) {
-      const unformattedMovies = await fetchMovies(url)
-
-      if (unformattedMovies) {
-        const formattedMovies = formatMovieList(unformattedMovies)
-        // Copia de movies sin sortear
-        moviesRef.current = formattedMovies
-        const mostPopularMovie = getMostPopularMovie(formattedMovies)
-        const sortedMovies = sortMovies(formattedMovies, sort)
-        setFeaturedMovie(mostPopularMovie)
-        setMovies(sortedMovies)
+          if (error) {
+            setError(error.message)
+            return
+          }
+          movies = data
+        }, 500)
       } else {
-        moviesRef.current = null
-        setFeaturedMovie(null)
-        setMovies(null)
+        const { data, error } = await getPopularMovies()
+        if (error) {
+          setError(error.message)
+          return
+        }
+
+        movies = data
       }
+
+      const sortedMovies = sortMovies(movies, sort)
+      setMovies(sortedMovies)
+      lastSearchRef.current = currentQuery
     }
+
+    updateMovies()
 
     return () => {
       if (debounceRef.current) clearTimeout(debounceRef.current)

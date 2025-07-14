@@ -1,4 +1,4 @@
-import type { Movie, SortValue } from '../types'
+import type { MovieCard, SortValue } from '../types'
 
 function dateCompare(dateA: string, dateB: string) {
   const numberDateA = new Date(dateA).getTime()
@@ -11,7 +11,10 @@ function dateCompare(dateA: string, dateB: string) {
   return numberDateA - numberDateB
 }
 
-export function sortMovies(movies: Movie[], sortType: SortValue): Movie[] {
+export function sortMovies(
+  movies: MovieCard[],
+  sortType: SortValue
+): MovieCard[] {
   let sortedMovies = movies
 
   switch (sortType) {
@@ -27,12 +30,12 @@ export function sortMovies(movies: Movie[], sortType: SortValue): Movie[] {
       break
     case 'oldest':
       sortedMovies = movies.sort((a, b) =>
-        dateCompare(a.releaseDate, b.releaseDate)
+        dateCompare(a.releaseDate.toString(), b.releaseDate.toString())
       )
       break
     case 'latest':
       sortedMovies = movies.sort((a, b) =>
-        dateCompare(b.releaseDate, a.releaseDate)
+        dateCompare(b.releaseDate.toString(), a.releaseDate.toString())
       )
       break
   }

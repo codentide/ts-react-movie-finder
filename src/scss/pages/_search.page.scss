@@ -1,0 +1,49 @@
+@use '../base/colors' as c;
+@use '../base/media-queries' as mq;
+
+.search-page {
+  display: flex;
+  flex-direction: column;
+  // gap: 1.6rem;
+
+  padding: 4rem 16%;
+
+  &__hero {
+    position: absolute !important;
+    z-index: -10;
+    top: 0;
+    left: 0;
+
+    height: 80vh;
+  }
+
+  .heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 1.6rem 0 1.6rem;
+
+    text-align: center;
+    // background-color: red;
+
+    &__title {
+      font-size: 2.4rem;
+      line-height: 2.4rem;
+      color: c.$color-neutral-100;
+    }
+
+    &__subtitle {
+      color: c.$color-neutral-500;
+    }
+  }
+
+  .sort-list {
+    margin: 1rem auto 0;
+    padding: 0 0 1rem;
+  }
+
+  @include mq.mobile-small {
+    padding: 4rem 8%;
+  }
+}

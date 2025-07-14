@@ -1,0 +1,51 @@
+@use '../base/colors' as c;
+@use '../base/media-queries' as media-query;
+
+$search-input-cl: c.$color-neutral-600;
+$search-input-placeholder-cl: c.$color-neutral-600;
+$search-input-bg: hsl(c.$hue-primary, 16%, 8%, 0.88);
+
+.input-box {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 480px;
+
+  &__reset-button {
+    position: absolute;
+    right: 0.8rem;
+    top: 0.7rem;
+    bottom: 0.7rem;
+
+    display: inline-grid;
+    place-items: center;
+
+    width: fit-content;
+    border: none;
+    border-radius: 0.2rem;
+
+    font-size: 1rem;
+    font-weight: 800;
+    line-height: 1.1;
+
+    color: hsl(216, 60%, 64%, 1);
+    background-color: transparent;
+    transition: filter 0.4s ease;
+
+    cursor: pointer;
+
+    svg {
+      width: auto;
+      height: 100%;
+
+      fill: hsl(216, 64%, 64%, 1);
+    }
+
+    &:hover {
+      filter: brightness(1.2);
+    }
+  }
+}

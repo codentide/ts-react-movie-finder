@@ -1,0 +1,40 @@
+@use '../base/colors' as c;
+@use '../base/mixins' as m;
+
+.hero-movie-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+
+  &__title {
+    font-size: 2.8rem;
+    line-height: 0.8;
+
+    color: c.$color-neutral-200;
+  }
+
+  &__row-box {
+    display: flex;
+    align-items: center;
+    gap: 0.64rem;
+  }
+
+  &__overview {
+    width: 44%;
+
+    font-size: 1rem;
+    line-height: 1.5;
+
+    color: c.$color-neutral-200;
+    opacity: 0.8;
+
+    filter: drop-shadow(0 0 0.4rem black);
+
+    @include m.truncate-text(2);
+  }
+
+  &__button {
+    @include m.base-button(c.$color-primary-700, c.$color-neutral-200);
+    font-weight: 500;
+  }
+}

@@ -1,0 +1,65 @@
+@use '../base/colors' as c;
+
+$gradient-value-1: hsl(c.$hue-primary, 100%, 04%, 0.8);
+$gradient-value-2: hsl(c.$hue-primary, 40%, 04%, 0.7);
+$gradient-value-3: c.$color-neutral-1300;
+
+.backdrop-container {
+  position: relative;
+
+  width: 100%;
+  padding: 8rem 16%;
+
+  overflow: hidden;
+
+  isolation: isolate;
+
+  &::after {
+    position: absolute;
+    z-index: -10;
+    inset: 0;
+    content: '';
+
+    // buscar una mejor manera de hacer esto
+    background: linear-gradient(
+      to bottom,
+      $gradient-value-1,
+      $gradient-value-2,
+      hsl(c.$hue-primary, 40%, 04%, 0.6),
+      hsl(c.$hue-primary, 40%, 04%, 0.5),
+      hsl(c.$hue-primary, 40%, 04%, 0.4),
+      hsl(c.$hue-primary, 40%, 04%, 0.45),
+      hsl(c.$hue-primary, 40%, 04%, 0.5),
+      hsl(c.$hue-primary, 40%, 04%, 0.6),
+      hsl(c.$hue-primary, 40%, 04%, 0.7),
+      hsl(c.$hue-primary, 40%, 04%, 0.8),
+      hsl(c.$hue-primary, 40%, 04%, 0.9),
+      $gradient-value-3
+    );
+  }
+
+  &__backdrop {
+    position: absolute;
+    z-index: -20;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: top;
+    transform: scale(1.2);
+
+    filter: grayscale(20%) blur(0.8rem) brightness(1.2) contrast(1.2);
+
+    opacity: 0;
+
+    &.active {
+      animation: appear 1.2s 0.2s ease forwards;
+    }
+
+    &.unactive {
+      animation: disappear 0.8s ease forwards;
+    }
+  }
+}
