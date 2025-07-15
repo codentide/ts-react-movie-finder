@@ -1,26 +1,28 @@
 @use './base/colors' as c;
+// Mirar @forward
 @use './base/typography' as t;
+@use './base/animations' as a;
 
 // Components
 @use './components/input.scss' as *;
-@use './components/Header.scss' as *;
-@use './components/Hero.scss' as *;
-@use './components/MovieCard.scss' as *;
-@use './components/AuthorInfo.scss' as *;
+@use './components/header.scss' as *;
+@use './components/hero.scss' as *;
+@use './components/movie-card.scss' as *;
+@use './components/author-info.scss' as *;
 @use './components/search-input.scss' as *;
-@use './components/LoadingSpinner.scss' as *;
+@use './components/loading-spinner' as *;
 @use './components/hero-movie-info' as *;
 @use './components/genre-list' as *;
 @use './components/score-badge' as *;
 
 // Containers
 @use './components/sort-list' as *;
-@use './components/MovieGrid.scss' as *;
+@use './components/movie-grid' as *;
 @use './components/movie-carousel' as *;
 @use './components/backdrop-container' as *;
 
 // Pages
-@use './pages/DefaultPage.scss' as *;
+@use './pages/default.page.scss' as *;
 @use './pages/home.page.scss' as *;
 @use './pages/search.page.scss' as *;
 @use './pages/movie-detail.page.scss' as *;
@@ -34,7 +36,6 @@
 
 html,
 body {
-  position: relative;
   width: 100%;
   min-height: 100vh;
 
@@ -44,57 +45,6 @@ body {
 }
 
 body {
-  // overflow-y: scroll;
+  position: relative;
   background-color: c.$color-neutral-1300;
-}
-
-/*  */
-
-.super-container {
-  display: flex;
-  flex-direction: column;
-}
-
-/*  */
-
-@keyframes appear {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes disappear {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-
-@keyframes spin {
-  0% {
-    rotate: 0deg;
-  }
-
-  100% {
-    rotate: 180deg;
-  }
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.2);
-  }
-
-  100% {
-    transform: scale(1);
-  }
 }
