@@ -1,5 +1,4 @@
-@use '../base/colors' as *;
-@use '../base/media-queries' as media-query;
+@use '../base' as *;
 
 .loading-spinner {
   display: grid;
@@ -18,7 +17,7 @@
 
     animation: spin 2s linear infinite, pulse 2s linear alternate infinite;
 
-    @include media-query.mobile-small {
+    @include media-query($breakpoint-sm) {
       width: 5.6rem;
       height: 5.6rem;
     }

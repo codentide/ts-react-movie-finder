@@ -17,6 +17,7 @@ export type Failure = {
 
 export type APIResponse<T> = Success<T> | Failure
 
+// Used to capture api native error info
 export interface TMDBErrorResponse {
   status_code: number
   status_message: string

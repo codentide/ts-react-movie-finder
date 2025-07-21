@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router'
 import DeleteIcon from '../../assets/svg/delete-text.svg?react'
-import { CustomInput } from './Input'
+import { CustomInput } from './CustomInput'
 
 export const SearchInput = () => {
   const [value, setValue] = useState<string>('')

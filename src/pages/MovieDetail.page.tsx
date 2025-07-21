@@ -9,6 +9,7 @@ import {
 } from '../components'
 import { useMovieDetail } from '../hooks/useMovieDetail'
 import { FaArrowLeftLong } from 'react-icons/fa6'
+import type { MovieDetail } from '../types'
 
 export const MovieDetailPage = () => {
   const [movieId, setMovieId] = useState<number | null>(null)
@@ -20,55 +21,17 @@ export const MovieDetailPage = () => {
     if (params.id) setMovieId(Number(params.id))
   }, [params])
 
-  // [ ]: Mejorar performance
-  if (error) {
-    navigate('/')
-    // return <span>{error}</span>
-  }
-
-  function handleGoBack() {
-    navigate(-1)
-  }
+  // [ ]: Mirar si se puede redirigir al 404
+  if (error) navigate('/')
 
   return (
     <section className='detail-page'>
       <BackdropContainer
-        // className='detail-page'
         path={movieDetail?.coverPath}
         alt={`Cover of "${movieDetail?.title}" movie`}
       />
       {!isLoading && movieDetail ? (
-        <div className='detail-page__content'>
-          <div className='detail-page__poster'>
-            <img src={movieDetail.posterPath} />
-          </div>
-          <div className='info-container'>
-            <a
-              className='info-container__back-button'
-              href='#'
-              onClick={handleGoBack}
-            >
-              {/* <BackIcon /> */}
-              <FaArrowLeftLong className='icon' />
-            </a>
-            <div className='info-container__header'>
-              <h2 className='header__title'>{movieDetail.title}</h2>
-              <div className='header__subtitle-box '>
-                <DateString date={movieDetail.releaseDate} />
-                {/* {'-'}
-                <small>{movieDetail.runtime}mins</small> */}
-                <ScoreBadge score={movieDetail.score} />
-              </div>
-              <GenreList genres={movieDetail.genreIDs} />
-            </div>
-            <div className='info-container__overview-box'>
-              <h3 className='overview-box__title'>
-                {movieDetail.tagline || 'Synopsis'}
-              </h3>
-              <p className='overview-box__overview'>{movieDetail.overview}</p>
-            </div>
-          </div>
-        </div>
+        <MovieDetailContent movieDetail={movieDetail} />
       ) : (
         <LoadingSpinner className='detail-page__loading-spinner' />
       )}
@@ -76,17 +39,41 @@ export const MovieDetailPage = () => {
   )
 }
 
-// export const RuntimeBadge = () => {
-//   return (
-//     <>
-//       (
-//       <time
-//         className='subtitle-box__date'
-//         dateTime={movieDetail.releaseDate.toLocaleString()}
-//       >
-//         {formatDate(movieDetail.releaseDate, 'en')}
-//       </time>
-//       ) - <small>{movieDetail.runtime}mins</small>
-//     </>
-//   )
-// }
+// SubComponente
+
+const MovieDetailContent = ({ movieDetail }: { movieDetail: MovieDetail }) => {
+  const navigate = useNavigate()
+
+  function handleGoBack() {
+    navigate(-1)
+  }
+
+  return (
+    <>
+      <div className='detail-page__header'>
+        <div className='poster'>
+          <img src={movieDetail.posterPath} />
+        </div>
+        <div className='metadata-box'>
+          <a className='back-button' href='#' onClick={handleGoBack}>
+            <FaArrowLeftLong className='icon' />
+          </a>
+          <div className='metadata-box__metadata'>
+            <h2 className='title'>{movieDetail.title}</h2>
+            <div className='tag-box '>
+              <DateString date={movieDetail.releaseDate} />
+
+              <small>{movieDetail.runtime}mins</small>
+              <ScoreBadge score={movieDetail.score} />
+            </div>
+            <GenreList genres={movieDetail.genreIDs} />
+          </div>
+        </div>
+      </div>
+      <div className='detail-page__overview-box'>
+        <h3 className='title'>{movieDetail.tagline || 'Synopsis'}</h3>
+        <p className='overview'>{movieDetail.overview}</p>
+      </div>
+    </>
+  )
+}

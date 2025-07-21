@@ -1,8 +1,8 @@
-@use '../base/colors' as c;
+@use '../base' as *;
 
-$gradient-value-1: hsl(c.$hue-primary, 100%, 04%, 0.8);
-$gradient-value-2: hsl(c.$hue-primary, 40%, 04%, 0.7);
-$gradient-value-3: c.$color-neutral-1300;
+$gradient-value-1: hsl($hue-primary, 100%, 04%, 0.8);
+$gradient-value-2: hsl($hue-primary, 40%, 04%, 0.7);
+$gradient-value-3: $color-neutral-1300;
 
 .backdrop-container {
   position: relative;
@@ -11,7 +11,6 @@ $gradient-value-3: c.$color-neutral-1300;
   padding: 8rem 16%;
 
   overflow: hidden;
-
   isolation: isolate;
 
   &::after {
@@ -25,15 +24,15 @@ $gradient-value-3: c.$color-neutral-1300;
       to bottom,
       $gradient-value-1,
       $gradient-value-2,
-      hsl(c.$hue-primary, 40%, 04%, 0.6),
-      hsl(c.$hue-primary, 40%, 04%, 0.5),
-      hsl(c.$hue-primary, 40%, 04%, 0.4),
-      hsl(c.$hue-primary, 40%, 04%, 0.45),
-      hsl(c.$hue-primary, 40%, 04%, 0.5),
-      hsl(c.$hue-primary, 40%, 04%, 0.6),
-      hsl(c.$hue-primary, 40%, 04%, 0.7),
-      hsl(c.$hue-primary, 40%, 04%, 0.8),
-      hsl(c.$hue-primary, 40%, 04%, 0.9),
+      hsl($hue-primary, 40%, 04%, 0.6),
+      hsl($hue-primary, 40%, 04%, 0.5),
+      hsl($hue-primary, 40%, 04%, 0.4),
+      hsl($hue-primary, 40%, 04%, 0.45),
+      hsl($hue-primary, 40%, 04%, 0.5),
+      hsl($hue-primary, 40%, 04%, 0.6),
+      hsl($hue-primary, 40%, 04%, 0.7),
+      hsl($hue-primary, 40%, 04%, 0.8),
+      hsl($hue-primary, 40%, 04%, 0.9),
       $gradient-value-3
     );
   }

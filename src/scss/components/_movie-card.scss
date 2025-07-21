@@ -1,11 +1,10 @@
-@use '../base/colors' as c;
-@use '../base/media-queries' as media-query;
+@use '../base' as *;
 
-$movie-title-color: c.$color-neutral-200;
-$movie-date-color: c.$color-neutral-800;
+$movie-title-color: $color-neutral-200;
+$movie-date-color: $color-neutral-800;
 
 $gradient-value-1: transparent;
-$gradient-value-2: c.$color-neutral-1400;
+$gradient-value-2: $color-neutral-1400;
 
 a:has(.movie-card) {
   text-decoration: none;
@@ -13,10 +12,7 @@ a:has(.movie-card) {
 
 .movie-card {
   position: relative;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  @include flex(column, space-between);
 
   aspect-ratio: 1/1.5;
   width: 100%;
@@ -28,15 +24,11 @@ a:has(.movie-card) {
   cursor: pointer;
 
   &__average {
-    display: flex;
-    align-items: center;
-    justify-content: end;
+    @include flex(column, end, center);
   }
 
   &__info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.1rem;
+    @include flex(column, start, start, 0.1rem);
 
     h3 {
       font-size: 1rem;
@@ -45,7 +37,7 @@ a:has(.movie-card) {
 
       color: $movie-title-color;
 
-      @include media-query.mobile-small {
+      @include media-query($breakpoint-sm) {
         font-size: 1.32rem;
         line-height: 1.2;
       }
@@ -57,7 +49,7 @@ a:has(.movie-card) {
 
       color: $movie-date-color;
 
-      @include media-query.mobile-small {
+      @include media-query($breakpoint-sm) {
         font-size: 1rem;
       }
     }
@@ -108,7 +100,7 @@ a:has(.movie-card) {
     }
   }
 
-  @include media-query.mobile-small {
+  @include media-query($breakpoint-sm) {
     .score-badge {
       gap: 0.32rem;
 

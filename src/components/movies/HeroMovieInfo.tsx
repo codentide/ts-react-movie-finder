@@ -14,12 +14,8 @@ export const HeroMovieInfo = ({ movie }: Props) => {
   return (
     <div className='hero-movie-info'>
       <h1 className='hero-movie-info__title'>{movie.title}</h1>
-      {/* <div className='hero-movie-info__row-box'> */}
       <GenreList genres={movie.genreIDs} />
-      {/* <ScoreBadge score={movie.score} /> */}
-      {/* </div> */}
       <p className='hero-movie-info__overview'>{movie.overview}</p>
-      {/* navigate to movie detail */}
       <button
         className='hero-movie-info__button'
         onClick={() => navigate(`/movie/${movie.id}`)}

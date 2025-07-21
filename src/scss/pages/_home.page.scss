@@ -1,12 +1,11 @@
-@use '../base/colors' as c;
+@use '../base' as *;
 
 .home-page {
-  display: flex;
-  flex-direction: column;
+  @include flex(column);
   padding: 0 16%;
 
   &__hero-background {
-    position: absolute !important;
+    position: absolute;
     z-index: -10;
     top: 0;
     left: 0;
@@ -27,12 +26,8 @@
     transform: translateX(-50%) !important;
   }
 
-  // Sección
   .home-hero {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    gap: 2rem;
+    @include flex(column, flex-end, auto, 2rem);
 
     width: 100%;
     height: 84vh;

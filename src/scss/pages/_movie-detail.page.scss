@@ -1,5 +1,4 @@
-@use '../base/colors' as *;
-@use '../base/media-queries' as media-query;
+@use '../base' as *;
 
 $gradient-value-1: hsl(216, 40%, 04%);
 $gradient-value-2: hsl(216, 80%, 24%, 0.4);
@@ -8,15 +7,28 @@ $back-button-color: $color-primary-600;
 $back-button-bg: hsl($hue-primary, 100%, 64%, 0.16);
 
 .detail-page {
-  display: flex;
-  align-items: center;
-  padding: 3rem 16%;
+  @include flex(column, auto, auto, 1rem);
 
+  padding: 3rem 16%;
   width: 100%;
-  height: 80dvh;
+
+  @include media-query($breakpoint-lg) {
+    padding: 3.2rem 8%;
+  }
+
+  @include media-query($breakpoint-md) {
+    height: auto;
+    min-height: 100dvh;
+
+    padding: 1.2rem 8%;
+  }
+
+  @include media-query($breakpoint-sm) {
+    padding: 1.2rem 4% 2rem;
+  }
 
   .backdrop-container {
-    position: absolute !important;
+    position: absolute;
     z-index: -10;
     top: 0;
     left: 0;
@@ -34,174 +46,150 @@ $back-button-bg: hsl($hue-primary, 100%, 64%, 0.16);
     left: 50%;
     z-index: 1000;
 
-    transform: translate(-50%, -50%) !important;
+    transform: translate(-50%, -50%);
   }
 
-  &__poster {
-    display: grid;
-    place-items: center;
-    flex-shrink: 0;
-
-    aspect-ratio: 1/1.5;
-    height: 100%;
-
-    border-radius: 0.4rem;
-    overflow: hidden;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
-
-  &__content {
-    display: flex;
-    gap: 2rem;
-    height: 100%;
+  &__header {
+    @include flex(row, auto, auto, 2rem);
+    position: relative;
 
     opacity: 0;
     animation: appear 0.8s 0s ease forwards;
 
-    @include media-query.tablet {
-      height: 88%;
+    @include media-query($breakpoint-lg) {
       gap: 1.6rem;
     }
 
-    @include media-query.mobile-large {
-      flex-direction: column;
+    @include media-query($breakpoint-md) {
+      @include flex(column, auto, auto, 2rem);
+    }
+
+    .poster {
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+
+      aspect-ratio: 1/1.5;
+      height: 280px;
+
+      border-radius: 0.4rem;
+      overflow: hidden;
+
+      @include media-query($breakpoint-md) {
+        height: 100%;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .metadata-box {
+      @include flex(column, auto, auto, 1.6rem);
+
+      .back-button {
+        display: inline-grid;
+        place-items: center;
+
+        padding: 0.2rem 0.64rem;
+        border-radius: 0.28rem;
+
+        width: fit-content;
+
+        background-color: $back-button-bg;
+
+        .icon {
+          color: $back-button-color;
+          font-size: 1.12rem;
+        }
+
+        &:hover {
+          filter: brightness(1.2);
+        }
+
+        @include media-query($breakpoint-md) {
+          position: absolute;
+          top: 1rem;
+          left: 1rem;
+
+          padding: 0.2rem 0.4rem;
+
+          background-color: hsl($hue-primary, 100%, 32%, 0.64);
+          backdrop-filter: blur(0.32rem);
+
+          svg {
+            width: 32px;
+            fill: $color-primary-100;
+          }
+        }
+      }
+
+      &__metadata {
+        @include flex(column, auto, auto, 0.64rem);
+
+        .title {
+          width: 24ch;
+          font-size: 2.4rem;
+          text-transform: capitalize;
+          line-height: 1.2;
+
+          @include media-query($breakpoint-md) {
+            width: auto;
+            font-size: 2rem;
+          }
+        }
+
+        .tag-box {
+          @include flex(row, auto, center, 0.64rem);
+
+          .date-string {
+            font-size: 0.8rem;
+            line-height: 0.8;
+            padding-bottom: 0.1rem;
+
+            color: $color-neutral-200;
+          }
+
+          .score-badge {
+            gap: 0.28rem;
+            background-color: transparent;
+          }
+
+          small {
+            font-size: 0.8rem;
+            line-height: 0.8;
+            padding-bottom: 0.1rem;
+          }
+        }
+      }
     }
   }
 
-  .info-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1.6rem;
+  &__overview-box {
+    @include flex(column, auto, auto, 0.4rem);
 
-    &__back-button {
-      display: inline-grid;
-      place-items: center;
+    .title {
+      font-size: 1.6rem;
 
-      padding: 0.2rem 0.64rem;
-      border-radius: 0.32rem;
-
-      width: fit-content;
-
-      background-color: $back-button-bg;
-
-      .icon {
-        color: $back-button-color;
+      @include media-query($breakpoint-lg) {
         font-size: 1.2rem;
       }
-
-      &:hover {
-        filter: brightness(1.2);
-      }
-
-      @include media-query.mobile-large {
-        position: absolute;
-        top: 1rem;
-        left: 1rem;
-
-        padding: 0.2rem 0.4rem;
-
-        background-color: hsl($hue-primary, 100%, 32%, 0.64);
-        backdrop-filter: blur(0.32rem);
-
-        svg {
-          width: 32px;
-          fill: $color-primary-100;
-        }
-      }
     }
 
-    &__header {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
+    .overview {
+      font-size: 1.08rem;
+      font-weight: 300;
+      line-height: 1.5;
 
-      .header__title {
-        font-size: 2.2rem;
-        text-transform: capitalize;
-        line-height: 1.2;
+      text-shadow: 0 0 1.2rem black;
 
-        @include media-query.tablet {
-          font-size: 2rem;
-        }
-      }
+      color: $color-neutral-400;
 
-      .header__subtitle-box {
-        display: flex;
-        align-items: center;
-        gap: 0.64rem;
-
-        .subtitle-box__date {
-          font-size: 0.88rem;
-          color: $color-neutral-200;
-        }
-      }
-
-      .subtitle-box__genre-list {
-        display: flex;
-        align-items: center;
-        gap: 0.4rem;
-
-        margin-top: 0.2rem;
-        list-style: none;
-
-        li span {
-          padding: 0 0.4rem 0.1rem;
-          border-radius: 0.32rem;
-
-          font-size: 0.88rem;
-          color: $color-neutral-500;
-
-          background-color: hsl($hue-primary, 12%, 0%, 0.32);
-
-          user-select: none;
-        }
+      @include media-query($breakpoint-lg) {
+        font-size: 1rem;
       }
     }
-
-    &__overview-box {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-
-      .overview-box__title {
-        font-size: 1.6rem;
-
-        @include media-query.tablet {
-          font-size: 1.2rem;
-        }
-      }
-
-      .overview-box__overview {
-        font-size: 1.12rem;
-        font-weight: 300;
-        line-height: 1.5;
-
-        color: $color-neutral-400;
-
-        @include media-query.tablet {
-          font-size: 1rem;
-        }
-      }
-    }
-  }
-
-  @include media-query.tablet {
-    padding: 8rem 12%;
-  }
-
-  @include media-query.mobile-large {
-    height: auto;
-    min-height: 100dvh;
-
-    padding: 5.2rem 12%;
-  }
-
-  @include media-query.mobile-small {
-    padding: 4.8rem 8%;
   }
 }
