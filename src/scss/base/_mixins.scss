@@ -37,3 +37,13 @@ $btn-cl: c.$color-neutral-500;
   -webkit-line-clamp: $lines;
   -webkit-box-orient: vertical;
 }
+
+//
+
+@mixin flex($direction: row, $justify: auto, $align: auto, $gap: 0) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  gap: $gap;
+}

@@ -1,10 +1,7 @@
-@use '../base/colors' as c;
+@use '../base' as *;
 
 .genre-badge-list {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-
+  @include flex(row, start, center, 0.4rem);
   list-style: none;
 
   .genre-badge {
@@ -19,8 +16,8 @@
     line-height: 0.8;
     text-decoration: none;
 
-    color: c.$color-neutral-500;
-    background-color: hsl(c.$hue-primary, 12%, 8%, 0.8);
+    color: $color-neutral-500;
+    background-color: hsl($hue-primary, 12%, 8%, 0.8);
 
     transition: filter 0.4s ease;
 

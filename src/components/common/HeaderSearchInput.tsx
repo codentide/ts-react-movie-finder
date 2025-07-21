@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router'
-import { CustomInput } from './Input'
+import { CustomInput } from './CustomInput'
 
 export const HeaderSearchInput = () => {
   const navigate = useNavigate()

@@ -1,5 +1,4 @@
-@use '../base/colors' as *;
-@use '../base/media-queries' as media-query;
+@use '../base' as *;
 
 $gradient-value-1: hsl(216, 40%, 04%);
 $gradient-value-2: hsl(216, 80%, 24%, 0.4);
@@ -8,15 +7,15 @@ $back-button-color: $color-primary-600;
 $back-button-bg: hsl($hue-primary, 100%, 64%, 0.16);
 
 .detail-page {
-  display: flex;
-  align-items: center;
+  @include flex(row, start, center);
+
   padding: 3rem 16%;
 
   width: 100%;
   height: 80dvh;
 
   .backdrop-container {
-    position: absolute !important;
+    position: absolute;
     z-index: -10;
     top: 0;
     left: 0;
@@ -34,7 +33,7 @@ $back-button-bg: hsl($hue-primary, 100%, 64%, 0.16);
     left: 50%;
     z-index: 1000;
 
-    transform: translate(-50%, -50%) !important;
+    transform: translate(-50%, -50%);
   }
 
   &__poster {
@@ -56,27 +55,25 @@ $back-button-bg: hsl($hue-primary, 100%, 64%, 0.16);
   }
 
   &__content {
-    display: flex;
+    @include flex();
     gap: 2rem;
     height: 100%;
 
     opacity: 0;
     animation: appear 0.8s 0s ease forwards;
 
-    @include media-query.tablet {
+    @include media-query($breakpoint-lg) {
       height: 88%;
       gap: 1.6rem;
     }
 
-    @include media-query.mobile-large {
+    @include media-query($breakpoint-md) {
       flex-direction: column;
     }
   }
 
   .info-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1.6rem;
+    @include flex(column, start, start, 1.6rem);
 
     &__back-button {
       display: inline-grid;
@@ -98,7 +95,7 @@ $back-button-bg: hsl($hue-primary, 100%, 64%, 0.16);
         filter: brightness(1.2);
       }
 
-      @include media-query.mobile-large {
+      @include media-query($breakpoint-md) {
         position: absolute;
         top: 1rem;
         left: 1rem;
@@ -116,24 +113,20 @@ $back-button-bg: hsl($hue-primary, 100%, 64%, 0.16);
     }
 
     &__header {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
+      @include flex(column, start, start, 0.4rem);
 
       .header__title {
         font-size: 2.2rem;
         text-transform: capitalize;
         line-height: 1.2;
 
-        @include media-query.tablet {
+        @include media-query($breakpoint-lg) {
           font-size: 2rem;
         }
       }
 
       .header__subtitle-box {
-        display: flex;
-        align-items: center;
-        gap: 0.64rem;
+        @include flex(row, start, center, 0.64rem);
 
         .subtitle-box__date {
           font-size: 0.88rem;
@@ -142,9 +135,7 @@ $back-button-bg: hsl($hue-primary, 100%, 64%, 0.16);
       }
 
       .subtitle-box__genre-list {
-        display: flex;
-        align-items: center;
-        gap: 0.4rem;
+        @include flex(row, start, center, 0.4rem);
 
         margin-top: 0.2rem;
         list-style: none;
@@ -164,14 +155,12 @@ $back-button-bg: hsl($hue-primary, 100%, 64%, 0.16);
     }
 
     &__overview-box {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
+      @include flex(column, start, start, 0.4rem);
 
       .overview-box__title {
         font-size: 1.6rem;
 
-        @include media-query.tablet {
+        @include media-query($breakpoint-lg) {
           font-size: 1.2rem;
         }
       }
@@ -183,25 +172,25 @@ $back-button-bg: hsl($hue-primary, 100%, 64%, 0.16);
 
         color: $color-neutral-400;
 
-        @include media-query.tablet {
+        @include media-query($breakpoint-lg) {
           font-size: 1rem;
         }
       }
     }
   }
 
-  @include media-query.tablet {
+  @include media-query($breakpoint-lg) {
     padding: 8rem 12%;
   }
 
-  @include media-query.mobile-large {
+  @include media-query($breakpoint-md) {
     height: auto;
     min-height: 100dvh;
 
     padding: 5.2rem 12%;
   }
 
-  @include media-query.mobile-small {
+  @include media-query($breakpoint-sm) {
     padding: 4.8rem 8%;
   }
 }

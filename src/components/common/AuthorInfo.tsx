@@ -4,7 +4,6 @@ import LinkedinIcon from '../../assets/svg/linkedin.svg?react'
 export const AuthorInfo = (): React.JSX.Element => {
   return (
     <div className='author-info'>
-      {/* <p className='author-info__name'>marco del boccio</p> */}
       <ul className='link-list'>
         <li>
           <a

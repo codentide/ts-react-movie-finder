@@ -1,0 +1,22 @@
+@use '../base' as *;
+
+.header {
+  @include flex(row, space-between, center);
+
+  width: 100%;
+  padding: 1rem 16%;
+
+  &__logo-box {
+    display: flex;
+    align-items: center;
+
+    svg {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+
+  @include media-query($breakpoint-sm) {
+    padding: 1rem 8%;
+  }
+}

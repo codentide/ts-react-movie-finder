@@ -1,11 +1,7 @@
-@use '../base/colors' as c;
-@use '../base/media-queries' as mq;
+@use '../base' as *;
 
 .search-page {
-  display: flex;
-  flex-direction: column;
-  // gap: 1.6rem;
-
+  @include flex(column, start, center);
   padding: 4rem 16%;
 
   &__hero {
@@ -18,23 +14,18 @@
   }
 
   .heading {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.4rem;
+    @include flex(column, start, center, 0.4rem);
     margin: 1.6rem 0 1.6rem;
-
     text-align: center;
-    // background-color: red;
 
     &__title {
       font-size: 2.4rem;
       line-height: 2.4rem;
-      color: c.$color-neutral-100;
+      color: $color-neutral-100;
     }
 
     &__subtitle {
-      color: c.$color-neutral-500;
+      color: $color-neutral-500;
     }
   }
 
@@ -43,7 +34,7 @@
     padding: 0 0 1rem;
   }
 
-  @include mq.mobile-small {
+  @include media-query($breakpoint-sm) {
     padding: 4rem 8%;
   }
 }

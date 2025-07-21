@@ -1,26 +1,20 @@
-@use '../base/colors' as c;
-@use '../base/typography' as t;
-@use '../base/media-queries' as mq;
+@use '../base' as *;
 
-$sort-button-background: hsl(c.$hue-primary, 16%, 8%);
-$sort-button-text-color: c.$color-neutral-800;
+$sort-button-background: hsl($hue-primary, 16%, 8%);
+$sort-button-text-color: $color-neutral-800;
 
-$active-sort-button-background: c.$color-primary-700;
-$active-sort-button-text-color: c.$color-neutral-100;
+$active-sort-button-background: $color-primary-700;
+$active-sort-button-text-color: $color-neutral-100;
 
 .sort-list {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
+  @include flex(row, center, center, 0.4rem);
 
-  width: fit-content;
-
-  .sort-button {
+  button {
     padding: 0.32rem 0.4rem 0.28rem;
     border-radius: 0.24rem;
     border: none;
 
-    font-family: t.$font-primary;
+    font-family: inherit;
     text-transform: lowercase;
     line-height: 1;
 
@@ -37,7 +31,7 @@ $active-sort-button-text-color: c.$color-neutral-100;
     }
   }
 
-  @include mq.mobile-small {
+  @include media-query($breakpoint-sm) {
     width: 100%;
     justify-content: center;
   }
