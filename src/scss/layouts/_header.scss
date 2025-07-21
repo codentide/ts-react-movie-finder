@@ -7,16 +7,30 @@
   padding: 1rem 16%;
 
   &__logo-box {
-    display: flex;
-    align-items: center;
+    display: grid;
+    place-items: center;
+
+    width: 2rem;
+    height: 2rem;
 
     svg {
-      width: 2rem;
-      height: 2rem;
+      width: 100%;
     }
   }
 
-  @include media-query($breakpoint-sm) {
+  &__search-box {
+    width: 50%;
+
+    @include media-query($breakpoint-sm) {
+      width: auto;
+    }
+  }
+
+  @include media-query($breakpoint-lg) {
     padding: 1rem 8%;
+  }
+
+  @include media-query($breakpoint-sm) {
+    padding: 1rem 4%;
   }
 }
