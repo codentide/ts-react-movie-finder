@@ -1,5 +1,4 @@
-@use '../base/colors' as c;
-@use '../base/mixins' as m;
+@use '../base' as *;
 
 .hero-movie-info {
   display: flex;
@@ -8,9 +7,11 @@
 
   &__title {
     font-size: 2.8rem;
-    line-height: 0.8;
+    line-height: 1.2;
 
-    color: c.$color-neutral-200;
+    color: $color-neutral-200;
+
+    filter: drop-shadow(0 0 1rem black);
   }
 
   &__row-box {
@@ -25,16 +26,28 @@
     font-size: 1rem;
     line-height: 1.5;
 
-    color: c.$color-neutral-200;
+    color: $color-neutral-200;
     opacity: 0.8;
 
     filter: drop-shadow(0 0 0.4rem black);
 
-    @include m.truncate-text(2);
+    @include truncate-text(2);
   }
 
   &__button {
-    @include m.base-button(c.$color-primary-700, c.$color-neutral-200);
+    @include base-button($color-primary-700, $color-neutral-200);
     font-weight: 500;
+
+    display: none;
+  }
+
+  @include media-query($breakpoint-sm) {
+    &__title {
+      font-size: 2.4rem;
+    }
+
+    &__overview {
+      width: 100%;
+    }
   }
 }

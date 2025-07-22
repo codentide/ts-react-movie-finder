@@ -1,7 +1,6 @@
-@use '../base/colors' as c;
-@use '../base/mixins' as m;
+@use '../base' as *;
 
-$no-movies-color: c.$color-neutral-1200;
+$no-movies-color: $color-neutral-1200;
 
 .message_no-movies {
   display: block;
@@ -26,25 +25,29 @@ $no-movies-color: c.$color-neutral-1200;
     transform: translateY(-50%);
     z-index: 100;
 
-    @include m.base-button(transparent, c.$color-neutral-800);
+    @include base-button(transparent, $color-neutral-800);
 
     height: 8rem;
-    padding: 0 0.24rem 0 0.2rem;
+    padding-inline: 0.2rem 0.24rem;
     font-size: 1.6rem;
 
+    transition: background-color 0.2s ease;
+
     &.--left {
-      left: -4rem;
+      left: -2.8rem;
     }
 
     &.--right {
-      right: -4rem;
+      right: -2.8rem;
     }
-
-    transition: background-color 0.2s ease;
 
     &:hover {
       background-color: hsl(0, 0%, 8%, 0.4);
       filter: none;
+    }
+
+    @include media-query($breakpoint-sm) {
+      display: none;
     }
   }
 
@@ -70,22 +73,77 @@ $no-movies-color: c.$color-neutral-1200;
     -ms-overflow-style: none;
     scrollbar-width: none;
 
-    // background-color: red;
     animation: appear 0.4s 0.2s ease forwards;
 
     &::-webkit-scrollbar {
       display: none;
     }
 
+    @include media-query($breakpoint-md) {
+      $gap: 1rem;
+      $columns: 4;
+
+      grid-auto-columns: calc(
+        (100% / #{$columns}) - (#{$gap} * (#{$columns} - 1) / #{$columns})
+      );
+      gap: $gap;
+    }
+
+    @include media-query($breakpoint-sm) {
+      $gap: 0.4rem;
+      $columns: 2;
+
+      grid-auto-columns: calc(
+        (100% / #{$columns}) - (#{$gap} * (#{$columns} - 1) / #{$columns})
+      );
+      gap: $gap;
+
+      overflow-x: scroll;
+    }
+
     li {
       scroll-snap-align: start;
-      border: 1px solid transparent;
 
       transition: all 0.32s ease-in-out;
 
       &.active {
-        // border-color: red;
         transform: translateY(-1.6rem);
+
+        @include media-query($breakpoint-sm) {
+          transform: none;
+        }
+      }
+    }
+  }
+
+  @include media-query($breakpoint-sm) {
+    &.controlled {
+      padding-inline: 2rem;
+      // background-color: red;
+
+      .movie-carousel__wrapper {
+        padding-top: 0;
+        overflow-x: hidden !important;
+      }
+
+      .movie-carousel__button {
+        @include base-button(transparent, $color-neutral-800);
+
+        height: 100%;
+        width: 1.6rem;
+
+        padding-inline: 0rem;
+        font-size: 1rem;
+
+        background-color: hsl(0, 0%, 4%, 0.8);
+
+        &.--left {
+          left: 0;
+        }
+
+        &.--right {
+          right: 0;
+        }
       }
     }
   }

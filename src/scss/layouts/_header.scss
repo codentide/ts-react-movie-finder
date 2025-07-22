@@ -26,6 +26,10 @@
     }
   }
 
+  @include media-query($breakpoint-xl) {
+    padding: 1rem 12%;
+  }
+
   @include media-query($breakpoint-lg) {
     padding: 1rem 8%;
   }

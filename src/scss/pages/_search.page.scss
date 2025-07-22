@@ -34,7 +34,15 @@
     padding: 0 0 1rem;
   }
 
-  @include media-query($breakpoint-sm) {
+  @include media-query($breakpoint-xl) {
+    padding: 4rem 12%;
+  }
+
+  @include media-query($breakpoint-lg) {
     padding: 4rem 8%;
+  }
+
+  @include media-query($breakpoint-sm) {
+    padding: 4rem 4%;
   }
 }

@@ -29,9 +29,7 @@ $btn-cl: c.$color-neutral-500;
 //
 
 @mixin truncate-text($lines: 2) {
-  /* Truncate 2 lines  */
   display: -webkit-box;
-  /* text-overflow: ellipsis; */
   overflow: hidden;
   line-clamp: $lines;
   -webkit-line-clamp: $lines;

@@ -86,7 +86,11 @@ export const MovieCarousel = forwardRef<MovieCarouselHandle, Props>(
     }
 
     return (
-      <div className='movie-carousel'>
+      <div
+        className={`movie-carousel ${
+          isExternallyControlled ? 'controlled' : ''
+        }`}
+      >
         <button
           className='movie-carousel__button --left'
           onClick={() => handleScroll('left')}
