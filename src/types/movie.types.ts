@@ -1,6 +1,7 @@
 import { SORTS } from '../constants'
 
 export type SortValue = (typeof SORTS)[keyof typeof SORTS]
+export type TrendingTimeRange = 'week' | 'day'
 
 export type ProductionCompany = {
   id: number

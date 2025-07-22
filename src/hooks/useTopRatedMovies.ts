@@ -1,8 +1,8 @@
 import type { MovieCard } from '../types'
 import { useEffect, useState } from 'react'
-import { getPopularMovies } from '../services/movie.service'
+import { getTopRatedMovies } from '../services/movie.service'
 
-export const usePopularMovies = (): {
+export const useTopRatedMovies = (): {
   movies: MovieCard[]
   loading: boolean
   error: string | null
@@ -15,7 +15,7 @@ export const usePopularMovies = (): {
     const updateMovies = async () => {
       setLoading(true)
       setError(null)
-      const { data, error } = await getPopularMovies()
+      const { data, error } = await getTopRatedMovies()
 
       if (error) {
         console.error(error)

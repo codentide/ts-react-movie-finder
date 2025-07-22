@@ -1,8 +1,10 @@
-import type { MovieCard } from '../types'
+import type { MovieCard, TrendingTimeRange } from '../types'
 import { useEffect, useState } from 'react'
-import { getPopularMovies } from '../services/movie.service'
+import { getTrendingMovies } from '../services/movie.service'
 
-export const usePopularMovies = (): {
+export const useTrendingMovies = (
+  time: TrendingTimeRange
+): {
   movies: MovieCard[]
   loading: boolean
   error: string | null
@@ -15,7 +17,7 @@ export const usePopularMovies = (): {
     const updateMovies = async () => {
       setLoading(true)
       setError(null)
-      const { data, error } = await getPopularMovies()
+      const { data, error } = await getTrendingMovies(time)
 
       if (error) {
         console.error(error)
@@ -28,7 +30,7 @@ export const usePopularMovies = (): {
     }
 
     updateMovies()
-  }, [])
+  }, [time])
 
   return { movies, loading, error }
 }

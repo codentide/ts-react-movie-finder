@@ -7,6 +7,7 @@ import type {
   MovieCard,
   APIResponse,
   MovieListFromAPI,
+  TrendingTimeRange,
 } from '../types'
 import { sortMovies } from '../utils'
 
@@ -73,12 +74,42 @@ export const getNowPlayingMovies = async (): Promise<
 // Trending
 
 export const getTrendingMovies = async (
-  time: 'week' | 'day'
+  time: TrendingTimeRange
 ): Promise<APIResponse<MovieCard[]>> => {
   try {
     const response = await movieAPI.get<MovieListFromAPI>(
       `trending/movie/${time}`
     )
+    const { results } = response.data
+    const movies = mapMovieCardArray(results)
+    return { data: movies, error: null }
+  } catch (error) {
+    return { data: null, error: error as CustomError }
+  }
+}
+
+// Top Rated
+
+export const getTopRatedMovies = async (): Promise<
+  APIResponse<MovieCard[]>
+> => {
+  try {
+    const response = await movieAPI.get<MovieListFromAPI>('movie/top_rated')
+    const { results } = response.data
+    const movies = mapMovieCardArray(results)
+    return { data: movies, error: null }
+  } catch (error) {
+    return { data: null, error: error as CustomError }
+  }
+}
+
+// Upcoming
+
+export const getUpcomingMovies = async (): Promise<
+  APIResponse<MovieCard[]>
+> => {
+  try {
+    const response = await movieAPI.get<MovieListFromAPI>('movie/upcoming')
     const { results } = response.data
     const movies = mapMovieCardArray(results)
     return { data: movies, error: null }

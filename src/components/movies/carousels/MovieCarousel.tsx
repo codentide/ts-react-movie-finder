@@ -1,7 +1,9 @@
 import { forwardRef, useImperativeHandle, useRef } from 'react'
-import type { MovieCard } from '../../types'
-import { MemoizedMovieCard } from './MovieCard'
+import type { MovieCard } from '../../../types'
+import { MemoizedMovieCard } from '../MovieCard'
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa6'
+
+// [ ]: Deshabilitar el boton hasta que termine el movimiento
 
 // Representa el contrato de los elemento expuestos a través de useImperativeHandle
 export interface MovieCarouselHandle {
@@ -10,6 +12,7 @@ export interface MovieCarouselHandle {
 
 interface Props {
   items: MovieCard[]
+  showMovieInfo?: boolean
   currentIndex?: number
   onPrev?: () => void
   onNext?: () => void
@@ -19,7 +22,7 @@ type Direction = 'left' | 'right'
 
 // ForwardRef para admitir referencias desde el padre
 export const MovieCarousel = forwardRef<MovieCarouselHandle, Props>(
-  ({ items, currentIndex, onPrev, onNext }, ref) => {
+  ({ showMovieInfo = true, items, currentIndex, onPrev, onNext }, ref) => {
     const scrollContainerRef = useRef<HTMLUListElement | null>(null)
     const isExternallyControlled = !!ref
 
@@ -33,8 +36,9 @@ export const MovieCarousel = forwardRef<MovieCarouselHandle, Props>(
         if (!target) return
         // scrollIntoView expone el elemento en el scroll de manera que sea visible, lo "busca" por asi decirlo
         target.scrollIntoView({
-          inline: 'start',
           behavior: 'smooth',
+          block: 'end',
+          inline: 'start',
         })
       },
     }))
@@ -76,7 +80,7 @@ export const MovieCarousel = forwardRef<MovieCarouselHandle, Props>(
             currentIndex === index ? 'active' : ''
           }`}
         >
-          <MemoizedMovieCard movie={movie} showInfo={false} />
+          <MemoizedMovieCard movie={movie} showInfo={showMovieInfo} />
         </li>
       ))
     }

@@ -1,5 +1,5 @@
 import type { MovieCard as MovieCardType } from '../../types'
-import { DateString, ScoreBadge } from '../common'
+import { DateString } from '../common'
 import { Link } from 'react-router'
 import React from 'react'
 
@@ -10,7 +10,7 @@ interface Props {
 
 export const MovieCard = ({ movie, showInfo = true }: Props) => {
   if (!movie) return
-  const { id, score, title, releaseDate, posterPath } = movie
+  const { id, title, releaseDate, posterPath } = movie
 
   return (
     <Link to={`/movie/${id}`}>
@@ -18,9 +18,9 @@ export const MovieCard = ({ movie, showInfo = true }: Props) => {
         className={`movie-card ${!showInfo ? 'no-info' : ''}`}
         data-movie-id={id}
       >
-        <div className='movie-card__average'>
+        {/* <div className='movie-card__average'>
           <ScoreBadge score={score} />
-        </div>
+        </div> */}
         <div className='movie-card__info'>
           <h3>{title}</h3>
           <DateString date={releaseDate} />

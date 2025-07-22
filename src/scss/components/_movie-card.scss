@@ -12,11 +12,11 @@ a:has(.movie-card) {
 
 .movie-card {
   position: relative;
-  @include flex(column, space-between);
+  @include flex(column, end);
 
   aspect-ratio: 1/1.5;
   width: 100%;
-  padding: 1rem;
+  // padding: 1rem;
   border-radius: 0.32rem;
 
   overflow: hidden;
@@ -29,13 +29,23 @@ a:has(.movie-card) {
 
   &__info {
     @include flex(column, start, start, 0.1rem);
+    padding: 3rem 1rem 1rem;
+
+    background: linear-gradient(
+      to bottom,
+      $gradient-value-1,
+      $gradient-value-2 50%
+    );
 
     h3 {
       font-size: 1rem;
-      line-height: 1;
+      line-height: 1.2;
       text-transform: capitalize;
+      font-weight: 500;
 
       color: $movie-title-color;
+
+      @include truncate-text(2);
 
       @include media-query($breakpoint-sm) {
         font-size: 1.32rem;
@@ -73,21 +83,21 @@ a:has(.movie-card) {
     transition: transform 1s ease;
   }
 
-  &::before {
-    position: absolute;
-    inset: 0;
-    z-index: -10;
-    content: '';
+  // &::before {
+  //   position: absolute;
+  //   inset: 0;
+  //   z-index: -10;
+  //   content: '';
 
-    width: 100%;
-    height: 100%;
+  //   width: 100%;
+  //   height: 100%;
 
-    background: linear-gradient(
-      to bottom,
-      $gradient-value-1 50%,
-      $gradient-value-2 90%
-    );
-  }
+  //   background: linear-gradient(
+  //     to bottom,
+  //     $gradient-value-1 50%,
+  //     $gradient-value-2 90%
+  //   );
+  // }
 
   // oculta la info y deja solo el poster
   &.no-info {

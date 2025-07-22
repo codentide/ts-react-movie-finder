@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { usePopularMovies } from '../../hooks'
+import { useNowPlayingMovies } from '../../hooks'
 import { BackdropContainer } from './BackdropContainer'
 import { LoadingSpinner } from '../common'
 import {
@@ -10,7 +10,7 @@ import {
 
 export const HomeHero = () => {
   const [focusedMovieIndex, setFocusedMovieIndex] = useState<number>(0)
-  const { movies, loading, error } = usePopularMovies()
+  const { movies, loading, error } = useNowPlayingMovies()
   const focusedMovie = movies[focusedMovieIndex]
 
   // Referencia al carrusel
@@ -48,6 +48,7 @@ export const HomeHero = () => {
           <LoadingSpinner className='home-page__loading-spinner' />
         ) : (
           <MovieCarousel
+            showMovieInfo={false}
             items={movies || []}
             ref={movieCarouselRef}
             currentIndex={focusedMovieIndex}

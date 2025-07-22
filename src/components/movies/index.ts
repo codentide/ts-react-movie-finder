@@ -1,6 +1,6 @@
 export * from './PopularMovies'
 export * from './MovieCard'
 export * from './MovieGrid'
-export * from './MovieCarousel'
+export * from './carousels'
 export * from './HeroMovieInfo'
 export * from './GenreList'
