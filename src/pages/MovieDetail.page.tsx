@@ -6,6 +6,7 @@ import {
   GenreList,
   DateString,
   BackdropContainer,
+  Runtime,
 } from '../components'
 import { useMovieDetail } from '../hooks/useMovieDetail'
 import { FaArrowLeftLong } from 'react-icons/fa6'
@@ -62,8 +63,7 @@ const MovieDetailContent = ({ movieDetail }: { movieDetail: MovieDetail }) => {
             <h2 className='title'>{movieDetail.title}</h2>
             <div className='tag-box '>
               <DateString date={movieDetail.releaseDate} />
-
-              <small>{movieDetail.runtime}mins</small>
+              <Runtime time={movieDetail.runtime} />
               <ScoreBadge score={movieDetail.score} />
             </div>
             <GenreList genres={movieDetail.genreIDs} />

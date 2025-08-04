@@ -1,17 +1,14 @@
-@use '../base/colors' as c;
-@use '../base/media-queries' as media-query;
+@use '../base' as *;
 
-$score-badge-bg: c.$color-primary-700;
-$score-badge-cl: c.$color-neutral-200;
+$score-badge-bg: $color-primary-700;
+$score-badge-cl: $color-neutral-200;
 
 .score-badge {
-  display: flex;
-  align-items: center;
-  gap: 0.2rem;
+  @include flex($align: center, $gap: 0.2rem);
 
   height: fit-content;
 
-  padding: 0.4rem;
+  // padding: 0.4rem;
   border-radius: 0.24rem;
 
   background-color: $score-badge-bg;
@@ -26,7 +23,6 @@ $score-badge-cl: c.$color-neutral-200;
   &__score {
     font-size: 0.8rem;
     line-height: 0.8;
-    padding-bottom: 0.08rem;
 
     color: $score-badge-cl;
   }
