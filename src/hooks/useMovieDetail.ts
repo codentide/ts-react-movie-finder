@@ -1,9 +1,9 @@
-import type { MovieDetail, MovieId } from '../types'
+import type { MovieDetail, MovieID } from '../types'
 import { useEffect, useState } from 'react'
 
 import { getMovieDetail } from '../services/movie.service'
 
-export function useMovieDetail(movieId: MovieId | null): {
+export function useMovieDetail(movieId: MovieID | null): {
   movieDetail: MovieDetail | null
   isLoading: boolean
   error: string | null
@@ -13,7 +13,7 @@ export function useMovieDetail(movieId: MovieId | null): {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    const getNewMovieDetail = async (id: MovieId | null) => {
+    const getNewMovieDetail = async (id: MovieID | null) => {
       if (!id) return
       setIsLoading(true)
       setError(null)
