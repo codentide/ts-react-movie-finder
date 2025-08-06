@@ -1,0 +1,20 @@
+@use '../base' as *;
+
+.runtime {
+  @include flex($align: center, $gap: 0.32rem);
+  border-radius: 0.24rem;
+
+  &__icon {
+    width: 0.64rem;
+    height: 0.64rem;
+
+    fill: $color-neutral-200;
+  }
+
+  &__time {
+    font-size: 0.8rem;
+    line-height: 0.8;
+
+    color: $color-neutral-200;
+  }
+}

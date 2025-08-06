@@ -1,0 +1,47 @@
+@use './colors' as c;
+
+$btn-bg: c.$color-neutral-1100;
+$btn-cl: c.$color-neutral-500;
+
+@mixin base-button($bg: $btn-bg, $cl: $btn-cl) {
+  display: grid;
+  place-items: center;
+
+  width: fit-content;
+  padding: 0.52rem 0.8rem 0.64rem;
+  border-radius: 0.28rem;
+  border: none;
+
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 0.8;
+
+  background-color: $bg;
+  color: $cl;
+
+  &:hover {
+    filter: brightness(1.12);
+    cursor: pointer;
+  }
+}
+
+//
+
+@mixin truncate-text($lines: 2) {
+  display: -webkit-box;
+  overflow: hidden;
+  line-clamp: $lines;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+}
+
+//
+
+@mixin flex($direction: row, $justify: auto, $align: auto, $gap: 0) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  gap: $gap;
+}

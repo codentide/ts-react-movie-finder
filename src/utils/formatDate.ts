@@ -3,8 +3,8 @@ export function formatDate(date: string | Date, lang?: string): string {
 
   const options: Intl.DateTimeFormatOptions = {
     year: 'numeric',
-    month: 'long',
+    month: 'short',
     day: 'numeric',
   }
-  return date.toLocaleDateString(lang, options)
+  return date.toLocaleDateString(lang, options) || 'Invalid Date'
 }

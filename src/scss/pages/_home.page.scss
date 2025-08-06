@@ -1,0 +1,67 @@
+@use '../base' as *;
+
+.home-page {
+  @include flex(column);
+  padding: 0 16%;
+
+  &__hero-background {
+    position: absolute;
+    z-index: -10;
+    top: 0;
+    left: 0;
+
+    height: 92vh;
+
+    img {
+      filter: grayscale(20%) blur(0rem) brightness(1.2) contrast(1.2);
+    }
+  }
+
+  &__loading-spinner {
+    position: absolute;
+    top: 28rem;
+    left: 50%;
+    z-index: 1000;
+
+    transform: translateX(-50%) !important;
+  }
+
+  .home-hero {
+    @include flex(column, flex-end, auto, 2rem);
+
+    width: 100%;
+    height: calc(100svh - 65px);
+    padding-bottom: 1.6rem;
+  }
+
+  .movie-listing-container {
+    @include flex(column, $gap: 1.2rem);
+    padding: 4rem 0;
+
+    .movie-listing {
+      @include flex(column, $gap: 0.4rem);
+
+      .title {
+        font-size: 1.2rem;
+        font-weight: 300;
+        color: $color-neutral-500;
+      }
+
+      .movie-carousel__wrapper {
+        padding-top: 0;
+      }
+    }
+  }
+
+  @include media-query($breakpoint-xl) {
+    padding: 0 12%;
+  }
+
+  @include media-query($breakpoint-lg) {
+    padding: 0 8%;
+  }
+
+  @include media-query($breakpoint-sm) {
+    padding: 0 4%;
+  }
+}

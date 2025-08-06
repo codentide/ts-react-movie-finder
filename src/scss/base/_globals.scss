@@ -1,0 +1,22 @@
+@use './colors' as c;
+@use './typography' as t;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100vh;
+  font-family: t.$font-primary, monospace;
+  color-scheme: dark;
+  accent-color: hsl(c.$hue-primary, 80%, 50%);
+}
+
+body {
+  position: relative;
+  background-color: c.$color-neutral-1300;
+}

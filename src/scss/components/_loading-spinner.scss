@@ -1,0 +1,25 @@
+@use '../base' as *;
+
+.loading-spinner {
+  display: grid;
+  place-items: center;
+
+  width: fit-content;
+  opacity: 0;
+
+  animation: appear 0.4s 0.4s ease forwards;
+
+  .spinner {
+    width: 4em;
+    height: 4rem;
+
+    filter: drop-shadow(0 0 1.6rem $color-primary-400);
+
+    animation: spin 2s linear infinite, pulse 2s linear alternate infinite;
+
+    @include media-query($breakpoint-sm) {
+      width: 5.6rem;
+      height: 5.6rem;
+    }
+  }
+}

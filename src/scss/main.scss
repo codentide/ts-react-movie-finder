@@ -1,90 +1,27 @@
-@use './base/colors' as c;
-@use './base/typography' as t;
+// GLOBALS
+@use './base/globals';
 
-@use './components/BackdropContainer.scss' as *;
-@use './components/LoadingSpinner.scss' as *;
-@use './components/ScoreBadge.scss' as *;
+// COMPONENTS
+@use './components/input';
+@use './components/hero';
+@use './components/movie-card';
+@use './components/author-info';
+@use './components/search-input';
+@use './components/loading-spinner';
+@use './components/hero-movie-info';
+@use './components/genre-list';
+@use './components/score-badge';
+@use './components/runtime';
 
-@use './pages/DefaultPage.scss' as *;
-@use './pages/HomePage.scss' as *;
-@use './pages/MovieDetailPage.scss' as *;
+// CONTAINERS
+@use './layouts/header';
+@use './layouts/sort-list';
+@use './layouts/movie-grid';
+@use './layouts/movie-carousel';
+@use './layouts/backdrop-container';
 
-@use './components/Header.scss' as *;
-@use './components/Hero.scss' as *;
-@use './components/MovieGrid.scss' as *;
-@use './components/MovieCard.scss' as *;
-@use './components/SortList.scss' as *;
-@use './components/AuthorInfo.scss' as *;
-@use './components/SearchInput.scss' as *;
-
-* {
-  padding: 0;
-  margin: 0;
-
-  box-sizing: border-box;
-}
-
-html,
-body {
-  width: 100%;
-  min-height: 100vh;
-
-  font-family: t.$font-primary, monospace;
-  color-scheme: dark;
-  accent-color: hsl(c.$hue-primary, 80%, 50%);
-}
-
-body {
-  overflow-y: scroll;
-}
-
-/*  */
-
-.super-container {
-  display: flex;
-  flex-direction: column;
-}
-
-/*  */
-
-@keyframes appear {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes disappear {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-
-@keyframes spin {
-  0% {
-    rotate: 0deg;
-  }
-
-  100% {
-    rotate: 180deg;
-  }
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.2);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
+// PAGES
+@use './pages/default.page';
+@use './pages/home.page';
+@use './pages/search.page';
+@use './pages/movie-detail.page';

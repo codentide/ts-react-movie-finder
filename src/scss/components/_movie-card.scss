@@ -1,0 +1,117 @@
+@use '../base' as *;
+
+$movie-title-color: $color-neutral-200;
+$movie-date-color: $color-neutral-800;
+
+$gradient-value-1: transparent;
+$gradient-value-2: $color-neutral-1350;
+
+a:has(.movie-card) {
+  text-decoration: none;
+}
+
+.movie-card {
+  position: relative;
+  @include flex(column, end);
+
+  aspect-ratio: 1/1.5;
+  width: 100%;
+  // padding: 1rem;
+  border-radius: 0.32rem;
+
+  overflow: hidden;
+  isolation: isolate;
+  cursor: pointer;
+
+  &__average {
+    @include flex(column, end, center);
+  }
+
+  &__info {
+    @include flex(column, end, start, 0.1rem);
+    padding: 1rem 1rem;
+
+    height: 100%;
+
+    background: linear-gradient(
+      to bottom,
+      $gradient-value-1 20%,
+      $gradient-value-2 90%
+    );
+
+    @include media-query($breakpoint-lg) {
+      padding: 3rem 0.72rem 0.72rem;
+    }
+
+    h3 {
+      font-size: 1rem;
+      line-height: 1.2;
+      text-transform: capitalize;
+      font-weight: 500;
+
+      color: $movie-title-color;
+
+      @include truncate-text(2);
+
+      @include media-query($breakpoint-sm) {
+        font-size: 1.32rem;
+        line-height: 1.2;
+      }
+    }
+
+    time {
+      display: inline-block;
+      font-size: 0.8rem;
+
+      color: $movie-date-color;
+
+      @include media-query($breakpoint-sm) {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  &:hover .movie-card__poster {
+    transform: scale(1.1);
+  }
+
+  &__poster {
+    position: absolute;
+    inset: 0;
+    z-index: -20;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    user-select: none;
+
+    transition: transform 1s ease;
+  }
+
+  // oculta la info y deja solo el poster
+  &.no-info {
+    &::before {
+      background: none;
+    }
+
+    *:not(img) {
+      display: none;
+    }
+  }
+
+  @include media-query($breakpoint-sm) {
+    .score-badge {
+      gap: 0.32rem;
+
+      &__icon {
+        width: 1rem;
+        height: 1rem;
+      }
+
+      &__score {
+        font-size: 1rem;
+      }
+    }
+  }
+}

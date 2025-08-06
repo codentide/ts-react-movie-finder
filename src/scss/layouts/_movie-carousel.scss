@@ -1,0 +1,150 @@
+@use '../base' as *;
+
+$no-movies-color: $color-neutral-1200;
+
+.message_no-movies {
+  display: block;
+  width: 100%;
+  padding-top: 4rem;
+
+  font-size: 2.4rem;
+  font-weight: 600;
+  text-align: center;
+
+  opacity: 0;
+  animation: appear 0.8s 1s ease forwards;
+  color: $no-movies-color;
+}
+
+.movie-carousel {
+  position: relative;
+
+  &__button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+
+    @include base-button(transparent, $color-neutral-800);
+
+    height: 8rem;
+    padding-inline: 0.2rem 0.24rem;
+    font-size: 1.6rem;
+
+    transition: background-color 0.2s ease;
+
+    &.--left {
+      left: -2.8rem;
+    }
+
+    &.--right {
+      right: -2.8rem;
+    }
+
+    &:hover {
+      background-color: hsl(0, 0%, 8%, 0.4);
+      filter: none;
+    }
+
+    @include media-query($breakpoint-sm) {
+      display: none;
+    }
+  }
+
+  &__wrapper {
+    $gap: 1rem;
+    $columns: 5;
+
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: calc(
+      (100% / #{$columns}) - (#{$gap} * (#{$columns} - 1) / #{$columns})
+    );
+    gap: $gap;
+
+    width: 100%;
+    padding-top: 1.6rem;
+
+    list-style: none;
+    opacity: 0;
+
+    overflow-x: hidden;
+    scroll-snap-type: x mandatory;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    animation: appear 0.4s 0.2s ease forwards;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    @include media-query($breakpoint-md) {
+      $gap: 1rem;
+      $columns: 4;
+
+      grid-auto-columns: calc(
+        (100% / #{$columns}) - (#{$gap} * (#{$columns} - 1) / #{$columns})
+      );
+      gap: $gap;
+    }
+
+    @include media-query($breakpoint-sm) {
+      $gap: 0.4rem;
+      $columns: 2;
+
+      grid-auto-columns: calc(
+        (100% / #{$columns}) - (#{$gap} * (#{$columns} - 1) / #{$columns})
+      );
+      gap: $gap;
+
+      overflow-x: scroll;
+    }
+
+    li {
+      scroll-snap-align: start;
+
+      transition: all 0.32s ease-in-out;
+
+      &.active {
+        transform: translateY(-1.6rem);
+
+        @include media-query($breakpoint-sm) {
+          transform: none;
+        }
+      }
+    }
+  }
+
+  @include media-query($breakpoint-sm) {
+    &.controlled {
+      padding-inline: 2rem;
+      // background-color: red;
+
+      .movie-carousel__wrapper {
+        padding-top: 0;
+        overflow-x: hidden !important;
+      }
+
+      .movie-carousel__button {
+        @include base-button(transparent, $color-neutral-800);
+
+        height: 100%;
+        width: 1.6rem;
+
+        padding-inline: 0rem;
+        font-size: 1rem;
+
+        background-color: hsl(0, 0%, 4%, 0.8);
+
+        &.--left {
+          left: 0;
+        }
+
+        &.--right {
+          right: 0;
+        }
+      }
+    }
+  }
+}

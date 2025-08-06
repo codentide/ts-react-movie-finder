@@ -1,32 +1,29 @@
-# Movie Finder App
+<div align="center">
 
-Una aplicación web moderna para descubrir y explorar películas consumidas desde el API de TMDB, construida con React 19, TypeScript y React Router.
+  <a href="https://ts-react-movie-finder.netlify.app" target="_blank">
+    <img src="./public/screenshots/home_screenshot.png" style="border-radius:12px;"/> 
+  </a>
+  <h3 style="font-size:32px;"><strong>TS/React Movie Finder</strong></h3>
+  <p>Una aplicación web moderna para descubrir y explorar películas consumidas desde el API de TMDB, construida con React 19, TypeScript y React Router.</p>
+  <a href="https://ts-react-movie-finder.netlify.app" target="_blank">Live Demo</a>
 
-## Screenshots
+  <div align="center">
 
-| Página Principal                                  | Página de Detalle                                     | Búsqueda                                              |
-| ------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| ![Home Page](./public/screenshots/home-page.webp) | ![Movie Detail](./public/screenshots/movie-page.webp) | ![Search Page](./public/screenshots/search-page.webp) |
+[![React](https://img.shields.io/badge/React-323232?style=for-the-badge&logo=react&logoColor=2361DAFB)](https://es.react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![SCSS](https://img.shields.io/badge/SCSS-CC6699?style=for-the-badge&logo=sass&logoColor=white)](https://sass-lang.com/)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white)](https://eslint.org/)
 
-## Características Principales
+  </div>
 
-### Búsqueda Inteligente
+</div>
 
-- Búsqueda en tiempo real con debounce optimizado
-- Persistencia de búsquedas en URL mediante query parameters
-- Integración con React Router para navegación fluida
+## 🧪 Funcionalidades principales
 
-### Páginas de Detalle
-
-- Vista detallada de cada película con información completa
-- Navegación entre páginas con React Router
-- Diseño responsive con imágenes de fondo dinámicas
-
-### Sistema de Ordenación
-
-- Ordenación por título (A-Z, Z-A)
-- Ordenación por fecha (más recientes/antiguas)
-- Estado persistente durante la navegación
+- **Búsqueda Inteligente**: Búsqueda en tiempo real con debounce optimizada, persistencia de búsquedas en URL mediante query parameters
+- **Paginas de Detalle**: Vista detallada de cada película con información completa, diseño responsive con imágenes de fondo dinámicas
+- **Sistema de Ordenación**: Ordenación por título (A-Z, Z-A) y por fecha (más recientes/antiguas)
 
 ### Interfaz Moderna
 
@@ -108,12 +105,6 @@ Hook para detalles de película individual:
 
 ## Mejoras Implementadas
 
-### Arquitectura
-
-- **Eliminación de prop drilling**: Los hooks manejan el estado localmente
-- **Separación de responsabilidades**: Cada página maneja su propio estado
-- **Componentes más pequeños**: Mayor reutilización y mantenibilidad
-
 ### Navegación
 
 - **React Router 7**: Navegación moderna con URL state
@@ -156,12 +147,6 @@ VITE_BASE_URL=https://api.themoviedb.org/3
 VITE_IMG_BASE_URL=https://image.tmdb.org/t/p/w500
 VITE_API_KEY=tu_api_key_aqui
 ```
-
-## Características de Diseño
-
-- **CSS Grid/Flexbox**: Layout moderno y flexible
-- **Sass Variables**: Colores y tipografía consistentes
-- **Component-based CSS**: Estilos organizados por componente
 
 ## 📄 Licencia
 
